@@ -1,0 +1,17 @@
+<%= form_for @user do |user| %>
+<%= hidden_field_tag 'detail_form', true%>
+<ul>
+	<li>
+		<%= user.label :first_rating, "Rate yourself" %>
+		<%= user.select :first_rating, (1..5) %>
+	</li>
+	<li>
+		<%= user.label :zip, "Your location" %>
+		<%= user.text_field :zip, :placeholder => "zip code" %>
+	</li>
+	<li>
+		<%= user.submit 'Done' %>
+	</li>
+	
+</ul>
+<% end %>

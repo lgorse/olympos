@@ -1,0 +1,84 @@
+require 'spec_helper'
+
+describe SessionsController do
+	render_views
+
+	describe 'GET "New"' do
+		describe "if there is no session" do
+			it "should be successful" do
+				get :new
+				response.should be_successful
+			end
+
+		end
+
+		describe "if there is a session" do
+			pending "implementation of session"
+
+		end
+
+
+	end
+
+	
+	describe 'POST "Create"' do
+
+		describe "if there is a user" do
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+				@attr = {:email => @user.email, :password => @user.password}
+				post :create, :session => @attr
+			end
+
+			it "should redirect to the index page" do
+				response.should redirect_to users_path
+			end
+
+			it 'should create a session with the user id' do
+				session[:user_id].should == @user.id
+			end
+
+		end
+
+		describe 'if there is no user' do
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+				bad_email = @user.email << "n"
+				@attr = {:email => bad_email, :password => @user.password}
+				post :create, :session => @attr
+
+			end
+
+			it 'should render the new session view' do
+				response.should render_template 'new'
+
+			end
+
+			it 'should not create a session id' do
+				session[:user_id].should == nil
+
+			end
+
+		end
+
+	end
+
+	describe "DELETE 'Destroy'" do
+		before(:each) do
+			@user = FactoryGirl.create(:user)
+			test_sign_in(@user)
+			delete :destroy
+		end
+
+		it "should redirect to the root path" do
+			response.should redirect_to root_path
+
+		end
+
+		it "should destroy the session" do
+			session[:user_id].should be_nil
+
+		end
+
+	end
+end

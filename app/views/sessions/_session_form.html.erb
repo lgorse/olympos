@@ -1,0 +1,14 @@
+<%= form_for(:session, :url => :sessions) do |session|%>
+<%= render 'layouts/flash', :flash => flash %>
+<ul>
+	<li>
+<%= session.text_field :email, :placeholder => 'email' %>
+</li>
+<li>
+<%= session.password_field :password, :placeholder => 'password'%>
+</li>
+<li>
+	<%= session.submit 'Log in' %>
+</li>
+</ul>
+<% end %>

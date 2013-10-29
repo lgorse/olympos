@@ -11,6 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20131029075514) do
+
+  create_table "users", :force => true do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "password_digest"
+    t.integer  "fb_id"
+    t.date     "birthdate"
+    t.integer  "zip"
+    t.float    "lat"
+    t.float    "long"
+    t.string   "fb_pic_small"
+    t.string   "fb_pic_large"
+    t.integer  "gender"
+    t.integer  "first_rating"
+    t.boolean  "has_played",      :default => false
+    t.text     "available_times"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "email"
+  end
+
+  add_index "users", ["fb_id"], :name => "index_users_on_fb_id"
 
 end
