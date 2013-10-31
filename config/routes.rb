@@ -7,6 +7,7 @@ resources :users do
 		get :details
 		get :home
 	end
+	get 'fb', on: :new
 end
 
 resources :sessions

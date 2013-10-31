@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	include UsersHelper
 
 	before_filter :authenticate, :only => [:home, :details]
 
@@ -6,17 +7,18 @@ class UsersController < ApplicationController
 		@user = User.new
 	end
 
+	def fb
+		@user = User.new
+	end
+
+
 	def create
 		if params[:user]
 			@user = User.new(params[:user].merge(:signup_method => EMAIL))
+			save_manual_user
 		elsif params['signed_request']
 			@user = new_user_from_FB
-		end
-		if @user.save
-			sign_in_user(@user)
-			redirect_to details_user_path(@user)
-		else
-			render 'new'
+			save_fb_user
 		end
 	end
 
