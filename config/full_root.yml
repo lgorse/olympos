@@ -1,0 +1,5 @@
+test: "http://0.0.0.0:8080/"
+
+development: "http://0.0.0.0:8080/"
+
+production: "http://olympos.herokuapp.com/"
