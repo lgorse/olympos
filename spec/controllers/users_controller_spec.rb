@@ -6,7 +6,7 @@ describe UsersController do
 
 	end
 
-	describe 'POST "create"' do
+	describe 'POST "create" BY EMAIL' do
 		before(:each) do
 			@attr = {:firstname => "test", :lastname => "tester", 
 				:email => "test@test.com", :password => "gobbledygook",
@@ -56,7 +56,8 @@ describe UsersController do
 			end
 
 
-		end
+	end
+
 
 		describe 'PUT "Update"' do
 			before(:each) do

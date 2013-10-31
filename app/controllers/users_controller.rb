@@ -8,17 +8,17 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		encoded_signed_request = params['signed_request']
-		@signed_request =  decode_data(encoded_signed_request)
-		print @signed_request
-		print 'A'*35
-		# @user = User.new(params[:user])
-		# if @user.save
-		# 	sign_in_user(@user)
-		# 	redirect_to details_user_path(@user)
-		# else
-		# 	render 'new'
-		# end
+		if params[:user]
+			@user = User.new(params[:user])
+		elsif params['signed_request']
+			@user = new_user_from_FB
+		end
+		if @user.save
+			sign_in_user(@user)
+			redirect_to details_user_path(@user)
+		else
+			render 'new'
+		end
 	end
 
 	def index

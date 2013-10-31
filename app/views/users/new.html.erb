@@ -8,29 +8,7 @@
 
 <fb:registration
              redirect_uri="<%= FULL_ROOT.to_s %>users"
-             fields="[{'name':'name'},{'name':'birthday','type':'date','description':'Birthday'},
-                     {'name':'email','type':'text','description':'E-mail'},
-                     {'name':'first_name'},{'name':'last_name'},{'name':'gender'}]"
+             fields="name,first_name,last_name,birthday,gender,email"
              width="530"
              onvalidate="validate">
 </fb:registration>
-
-<script>
-    function validate(form){
-        var today = new Date();
-        var thirteen_years_today = today.setYear(today.getFullYear()-13);
-        var my_array = form.birthday.split("/")
-        birthdate = new Date(my_array[2], my_array[0], my_array[1]);
-        console.log("thirteen"+thirteen_years_today);
-        console.log("me"+birthdate.valueOf());
-        errors = {};
-        if (/^([\w!.%+\-])+@([\w\-])+(?:\.[\w\-]+)+$/.test(form.email) == false){
-            errors.email = "invalid e-mail";
-        }
-        if (thirteen_years_today < birthdate.valueOf()){
-            errors.birthday = "you must be 13 or older";
-        }
-       
-        return errors;
-}
-</script>
