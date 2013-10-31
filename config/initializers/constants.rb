@@ -10,6 +10,9 @@ INTERMEDIATE = 3
 ADVANCED = 4
 EXPERT = 5
 
+EMAIL = 0
+FACEBOOK = 1
+
 
 VALID_EMAIL = /[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 FACEBOOK_VALID_EMAIL = /^([\w!.%+\-])+@([\w\-])+(?:\.[\w\-]+)+$/

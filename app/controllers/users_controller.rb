@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
 	def create
 		if params[:user]
-			@user = User.new(params[:user])
+			@user = User.new(params[:user].merge(:signup_method => EMAIL))
 		elsif params['signed_request']
 			@user = new_user_from_FB
 		end

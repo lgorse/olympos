@@ -20,12 +20,13 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  email           :string(255)
+#  signup_method   :integer
 #
 
 class User < ActiveRecord::Base
   attr_accessible :available, :birthdate, :fb_pic_large, :fb_pic_small, :first_rating, 
   				  :firstname, :gender, :has_played, :lastname, :location, :password_digest, 
-  				  :password, :email, :zip, :fb_id
+  				  :password, :email, :zip, :fb_id, :signup_method
   has_secure_password
 
 

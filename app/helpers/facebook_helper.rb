@@ -15,12 +15,13 @@ module FacebookHelper
 		print params['signed_request']
 		signed_request =  decode_data(params['signed_request'])
 		fb_attr = signed_request['registration']
-		print signed_request
+		print fb_attr
 		@attr = {:firstname => fb_attr['first_name'], :lastname => fb_attr['last_name'],
 				:email => fb_attr['email'], :gender => fb_attr['gender'],
-				:birthdate => fb_attr['birthday'], :fb_id => signed_request['user_id'],
+				:birthdate => Date.strptime(fb_attr['birthday'], "%m/%d/%Y"), :fb_id => signed_request['user_id'],
 				:password => 'randompassword'}
-		User.new(@attr)
+		print @attr
+		User.new(@attr.merge(:signup_method => FACEBOOK))
 	end
 
 end
