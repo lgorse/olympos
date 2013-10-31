@@ -25,9 +25,9 @@
 class User < ActiveRecord::Base
   attr_accessible :available, :birthdate, :fb_pic_large, :fb_pic_small, :first_rating, 
   				  :firstname, :gender, :has_played, :lastname, :location, :password_digest, 
-  				  :password, :email, :zip
-
+  				  :password, :email, :zip, :fb_id
   has_secure_password
+
 
   validates :firstname, :presence => true
   validates :lastname, :presence => true

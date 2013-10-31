@@ -25,6 +25,7 @@ group :test do
 	gem 'factory_girl_rails' 
 	gem 'timecop'
 	gem 'database_cleaner'
+	gem 'selenium-webdriver', '~>2.37.0'
 end
 
 

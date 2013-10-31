@@ -14,10 +14,12 @@ module FacebookHelper
 	def new_user_from_FB
 		print params['signed_request']
 		signed_request =  decode_data(params['signed_request'])
-		fb_att = signed_request['registration']
+		fb_attr = signed_request['registration']
+		print signed_request
 		@attr = {:firstname => fb_attr['first_name'], :lastname => fb_attr['last_name'],
-				:email => fb_attr['last_name'], :gender => fb_attr['gender'],
-				:birthdate => fb_attr['birthday'], :fb_id => signed_request['user_id']}
+				:email => fb_attr['email'], :gender => fb_attr['gender'],
+				:birthdate => fb_attr['birthday'], :fb_id => signed_request['user_id'],
+				:password => 'randompassword'}
 		User.new(@attr)
 	end
 
