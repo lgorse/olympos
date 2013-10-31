@@ -13,7 +13,15 @@ describe SessionsController do
 		end
 
 		describe "if there is a session" do
-			pending "implementation of session"
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+				test_sign_in(@user)
+			end
+
+			it "should redirect the user to his home page" do
+				get :new
+				response.should redirect_to home_user_path(@user)
+			end
 
 		end
 
@@ -31,7 +39,7 @@ describe SessionsController do
 			end
 
 			it "should redirect to the index page" do
-				response.should redirect_to users_path
+				response.should redirect_to home_user_path(@user)
 			end
 
 			it 'should create a session with the user id' do

@@ -29,6 +29,7 @@ GEM
     activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.3.4)
     annotate (2.5.0)
       rake
     arel (3.0.2)
@@ -78,6 +79,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     kgio (2.8.1)
+    launchy (2.1.2)
+      addressable (~> 2.3)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -174,6 +177,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   jquery-rails
+  launchy
   pg
   rails (= 3.2.11)
   rspec-rails

@@ -76,10 +76,10 @@ describe UsersController do
 
 				describe "if from the detail form" do
 
-					it "should redirect to the recommendation page" do
+					it "should redirect to the home page" do
 						@origin = true
 						put :update, :id => @user.id, :user => @attr, :detail_form => @origin
-						response.should redirect_to users_path
+						response.should redirect_to home_user_path(@user)
 					end
 				end
 
@@ -126,7 +126,7 @@ describe UsersController do
 
 		end
 
-		describe "GET 'index'" do
+		describe "GET 'home'" do
 
 			describe "authentication" do
 				before(:each) do
@@ -138,7 +138,7 @@ describe UsersController do
 
 					it 'should be successful' do
 						test_sign_in(@user)
-						get :index
+						get :home, :id => @user
 						response.should be_successful
 					end
 
@@ -147,7 +147,7 @@ describe UsersController do
 				describe 'if failed' do
 
 					it "should redirect to root" do
-						get :index
+						get :home, :id => @user
 						response.should redirect_to root_path
 
 					end

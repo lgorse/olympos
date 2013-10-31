@@ -26,6 +26,7 @@ group :test do
 	gem 'timecop'
 	gem 'database_cleaner'
 	gem 'selenium-webdriver', '~>2.37.0'
+	gem 'launchy'
 end
 
 

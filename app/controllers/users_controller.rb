@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	before_filter :authenticate, :only => [:index, :details]
+	before_filter :authenticate, :only => [:home, :details]
 
 	def new
 		@user = User.new
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def index
+	def home
 
 	end
 
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		if @user.update_attributes(params[:user])
-			redirect_to users_path if params{:details_form}
+			redirect_to home_user_path(@user) if params{:details_form}
 		else
 			
 		end

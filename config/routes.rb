@@ -5,6 +5,7 @@ root :to => 'sessions#new'
 resources :users do
 	member do
 		get :details
+		get :home
 	end
 end
 

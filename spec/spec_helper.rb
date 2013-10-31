@@ -38,9 +38,12 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  #  Capybara.register_driver :selenium do |app|
-  #   Capybara::Selenium::Driver.new(app, :browser => :chrome)
-  # end
+ 
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  end
+
+  #Capybara.default_wait_time = 5
 
   def test_sign_in(user)
     session[:user_id] = user.id
