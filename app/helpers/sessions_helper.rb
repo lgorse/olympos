@@ -1,7 +1,13 @@
 module SessionsHelper
+	include LoginHelper
 
 	def sign_in_user(user)
 		session[:user_id] = user.id
+	end
+
+	def valid_user_signin
+		sign_in_user(@user)
+		redirect_to home_user_path(@user)
 	end
 
 	def signed_in?
@@ -19,7 +25,6 @@ module SessionsHelper
 		rescue
 			sign_out_user
 		end
-
 	end
 
 

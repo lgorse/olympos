@@ -40,7 +40,9 @@ class User < ActiveRecord::Base
   before_validation :downcase_email
 
 
-
+def facebook?
+  self.signup_method == FACEBOOK
+end
 
 
 private

@@ -26,6 +26,10 @@ class UsersController < ApplicationController
 
 	end
 
+	def index
+	
+	end
+
 	def details
 		@user = @current_user
 	end
