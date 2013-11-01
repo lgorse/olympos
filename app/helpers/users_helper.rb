@@ -10,6 +10,7 @@ module UsersHelper
 
 	def save_fb_user
 		if @user.save
+			@access_token = @signed_request['access_token']
 			save_user_success
 		else
 			render 'fb'

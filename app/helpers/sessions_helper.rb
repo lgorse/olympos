@@ -19,6 +19,15 @@ module SessionsHelper
 		redirect_to root_path and return
 	end
 
+	def just_auth
+		begin
+			@current_user = User.find(session[:user_id])
+			
+		rescue
+			sign_out_user
+		end
+	end
+
 	def authenticate
 		begin
 			@current_user = User.find(session[:user_id])

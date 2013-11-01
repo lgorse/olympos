@@ -12,4 +12,8 @@
  *= require_tree .
  */
 
+ .not_fb_user{
+ 	font-size: 75%;
+ }
+
 

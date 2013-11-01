@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 	include UsersHelper
 
 	before_filter :authenticate, :only => [:home, :details]
+	
 
 	def new
 		@user = User.new
@@ -23,6 +24,7 @@ class UsersController < ApplicationController
 	end
 
 	def home
+		
 
 	end
 

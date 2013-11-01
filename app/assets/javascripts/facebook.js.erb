@@ -1,59 +1,81 @@
 $(document).ready(function(){
 	$.ajaxSetup({ cache: true });
-  $.getScript('//connect.facebook.net/en_UK/all.js', function(){
-	    FB.init({
-	      appId: '<%= FACEBOOK_CONFIG["app_id"] %>',
-	      channelUrl: '<%= FULL_ROOT %>channel.html',
+	$.getScript('//connect.facebook.net/en_UK/all.js', function(){
+		FB.init({
+			appId: '<%= FACEBOOK_CONFIG["app_id"] %>',
+			channelUrl: '<%= FULL_ROOT %>channel.html',
 	      status     : true, // check login status
 		  cookie     : true, // enable cookies to allow the server to access the session
 		  xfbml      : true  // parse XFBML
-	    });     
+		}); 
 
-	    $("#fb_logout").click(function(){
-	    	fb_logout();
-	    });
-	    fb_login();
-	    
-  
-  	});
+		
+
+		$("#fb_logout").click(function(){
+			fb_logout();
+		});  
+
+		if (document.location.pathname == "/"){
+			fb_login();
+		}
+		
+
+
+	});
 });
 
 function fb_login(){
-	FB.Event.subscribe('auth.authResponseChange', function(response) {
-		    // Here we specify what we do with the response anytime this event occurs. 
+	FB.getLoginStatus(function(response) {
+		console.log(response.status);
 		    if (response.status === 'connected') {
 		    	//We're handling the situation where they 
 		      // have logged in to the app.
-		      
-		    	if (document.location.pathname == "/"){
-		    		fb_signed_in_user_redirect(response);
-		  }
-		    } else if (response.status === 'not_authorized') {
+		      connected_fb_user(response);
+		  } else if (response.status === 'not_authorized') {
 		      // In this case, the person is logged into Facebook, but not into the app, so we call
 		      // FB.login() to prompt them to do so. 
-		      FB.login();
-		    } else {
+		     // FB.login();
+		    
+		  } else {
 		      // In this case, the person is not logged into Facebook, so we call the login() 
-		      FB.login();
-		    }
-  		});
+		      //FB.login();
+		     		      
+		  }
+	});
+
+}
+
+function connected_fb_user(response){
+	FB.api('me?fields=picture.type(square),name', function(api_response){
+		img_url = api_response.picture.data.url;
+		name = api_response.name;
+		$(".custom_login").replaceWith('<a href="#" id="special_link"><img src="'+img_url+'"/></a>');
+		$("#special_link").after('<a href="/logout" id="fb_logout" class = "not_fb_user" onclick = "fb_logout()">Not '+name+'?</a>');
+		//$(".fb_signup").hide();
+		$("#special_link").click(function(e){
+			fb_signed_in_user_redirect(response);
+		});
+
+	});
 
 }
 
 function fb_signed_in_user_redirect(response){
 	var input = document.createElement('input');
-		      input.type = 'hidden';
-		      input.name = 'signed_request';
-		      input.value = response.authResponse['signedRequest'];
-		      var form = document.createElement('form');
-		      form.method = 'post';
-		      form.action = '<%= FULL_ROOT %>sessions';
-		      form.appendChild(input);
-		      form.submit();
+	input.type = 'hidden';
+	input.name = 'signed_request';
+	input.value = response.authResponse['signedRequest'];
+	var form = document.createElement('form');
+	form.method = 'post';
+	form.action = '<%= FULL_ROOT %>sessions';
+	form.appendChild(input);
+	form.submit();
+
 }
 
 function fb_logout(){
 	FB.logout(function(response) {
-        
-    });
+
+	});
 }
+
