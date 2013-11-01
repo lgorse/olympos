@@ -8,6 +8,7 @@ gem 'rails', '3.2.11'
 gem 'pg'
 gem 'unicorn'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'koala'
 
 group :development do
 	gem 'rspec-rails'
