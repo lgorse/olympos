@@ -24,6 +24,7 @@ function fb_login(){
 		    if (response.status === 'connected') {
 		    	//We're handling the situation where they 
 		      // have logged in to the app.
+		      
 		    	if (document.location.pathname == "/"){
 		    		fb_signed_in_user_redirect(response);
 		  }
@@ -46,7 +47,7 @@ function fb_signed_in_user_redirect(response){
 		      input.value = response.authResponse['signedRequest'];
 		      var form = document.createElement('form');
 		      form.method = 'post';
-		      form.action = '<%= FULL_ROOT %>/sessions';
+		      form.action = '<%= FULL_ROOT %>sessions';
 		      form.appendChild(input);
 		      form.submit();
 }

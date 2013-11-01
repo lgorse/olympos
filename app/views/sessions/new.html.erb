@@ -5,6 +5,6 @@
 
 
 <%= render 'session_form' %>
-<%= link_to 'Sign up!', new_user_path %>
+<%= link_to 'Sign up with Email', new_user_path %>
 <p>or</p>
-<%= link_to 'Sign up with Facebook', fb_new_user_path %>
+<%= render 'fb_scripts/fb_signup' %>

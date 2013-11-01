@@ -17,8 +17,7 @@ module LoginHelper
 		if @user
 			valid_user_signin
 		else
-			render 'sessions/new'
-			flash.now[:error] = "invalid user"
+			redirect_to fb_new_user_path
 		end
 
 	end
