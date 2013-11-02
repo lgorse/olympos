@@ -23,21 +23,20 @@ $(document).ready(function(){
 
 function fb_login(){
 	FB.getLoginStatus(function(response) {
+		console.log(response.status);
 		if (response.status === 'connected') {
 		    	//We're handling the situation where they 
 		      // have logged in to the app.
-		      if (document.location.pathname == "/"){
+		      if ($("#session_signup").length){
 		      	connected_fb_user(response);
 		      }
 		  } else if (response.status === 'not_authorized') {
 		      // In this case, the person is logged into Facebook, but not into the app, so we call
 		      // FB.login() to prompt them to do so. 
-		     
-		     $("#session_data").fb_logger_redirect(response);
-          
-		 } else {
-		      // In this case, the person is not logged into Facebook, so we call the login()      
-		      $("#session_data").fb_logger_redirect(response);
+		      signup_user_to_app(response);
+		  } else {
+		      // In this case, the person is not logged into Facebook, so we call the login()
+		      log_user_into_fb(response);
 		  }
 		});
 }
@@ -47,25 +46,25 @@ function fb_login(){
 $.fn.fb_logger_redirect = function(response){
 	if ($(this).length){
 		session_data = $(this);
-		     	logged_in = to_bool(session_data.attr("data-logged"));
-		     	fb = to_bool(session_data.attr("data-fb"));
-		     	console.log("found it");
-		     	if (logged_in==true && fb==true){
+		logged_in = to_bool(session_data.attr("data-logged"));
+		fb = to_bool(session_data.attr("data-fb"));
 
-		     		$.ajax({
-		     			type: "DELETE",
-		     			url: '/logout',
-		     			success: function(){
-		     				window.location.replace("/");
-		     			}
+		if (logged_in==true && fb==true){
 
-		     		}).fail(function(){
-		     			console.log("error");
-		     		});
+			$.ajax({
+				type: "DELETE",
+				url: '/logout',
+				success: function(){
+					window.location.replace("/");
+				}
 
-		     	}		     	
+			}).fail(function(){
+				console.log("error");
+			});
 
-		     }	
+		}		     	
+
+	}	
 
 }
 
@@ -75,9 +74,13 @@ function connected_fb_user(response){
 		name = api_response.name;
 		$(".custom_login").replaceWith('<a href="#" id="special_link"><img src="'+img_url+'"/></a>');
 		$("#special_link").after('<a href="/logout" id="fb_logout" class = "not_fb_user" onclick = "fb_logout()">Not '+name+'?</a>');
-		//$(".fb_signup").hide();
 		$("#special_link").click(function(e){
 			connected_fb_user_login(response);
+		});
+		$("#fb_signup").click(function(e){
+			e.preventDefault();
+			connected_fb_user_login(response);
+
 		});
 
 	});
@@ -94,6 +97,35 @@ function connected_fb_user_login(response){
 	form.action = '<%= FULL_ROOT %>sessions';
 	form.appendChild(input);
 	form.submit();
+}
+
+function signup_user_to_app(response){
+	if ($("#session_signup").length){
+		$("#fb_signup").click(function(e){
+			e.preventDefault();
+			window.location.replace("/users/new/fb");
+		});
+	}else{
+		$("#session_data").fb_logger_redirect(response);
+	}
+}
+
+
+function log_user_into_fb(response){
+	if ($("#session_signup").length){
+		$("#fb_signup").click(function(e){
+			e.preventDefault();
+			FB.login(function(response){
+				if (response.status == 'not_authorized'){
+					window.location.replace("/users/new/fb");
+				}else if (response.status == 'connected') {
+					connected_fb_user_login(response);
+				}
+			});
+		});
+	}else{
+		$("#session_data").fb_logger_redirect(response);
+	}
 
 }
 
