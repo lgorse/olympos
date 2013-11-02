@@ -16,11 +16,5 @@
  	font-size: 75%;
  }
 
- .rounded-corner{
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    box-shadow: 0px;
-}
 
 
