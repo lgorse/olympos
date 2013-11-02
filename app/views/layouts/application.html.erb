@@ -7,8 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div id="fb-root"></div>
 
 	<% if signed_in? %>
+	<div id = "session_data" data-logged="<%= signed_in? %>" data-fb="<%= @current_user.facebook? %>"></div>
 	<%= render 'layouts/header' %>
 	<% end %>
 

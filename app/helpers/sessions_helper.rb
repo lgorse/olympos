@@ -11,7 +11,7 @@ module SessionsHelper
 	end
 
 	def signed_in?
-		session[:user_id]
+		session[:user_id].present?
 	end
 
 	def sign_out_user
@@ -19,19 +19,11 @@ module SessionsHelper
 		redirect_to root_path and return
 	end
 
-	def just_auth
-		begin
-			@current_user = User.find(session[:user_id])
-			
-		rescue
-			sign_out_user
-		end
-	end
 
 	def authenticate
 		begin
 			@current_user = User.find(session[:user_id])
-			parse_facebook_cookies if @current_user.facebook?
+			#parse_facebook_cookies if @current_user.facebook?
 		rescue
 			sign_out_user
 		end

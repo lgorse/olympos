@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	include UsersHelper
 
-	before_filter :authenticate, :only => [:home, :details]
+	before_filter :authenticate, :only => [:home]
 	
 
 	def new
@@ -24,6 +24,8 @@ class UsersController < ApplicationController
 	end
 
 	def home
+		print session[:user_id]
+		
 		
 
 	end
@@ -33,6 +35,12 @@ class UsersController < ApplicationController
 	end
 
 	def details
+		begin
+			@current_user = User.find(session[:user_id])
+			#parse_facebook_cookies if @current_user.facebook?
+		rescue
+			sign_out_user
+		end
 		@user = @current_user
 	end
 
