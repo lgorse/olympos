@@ -10,7 +10,7 @@ $(document).ready(function(){
 		  xfbml      : true  // parse XFBML
 		}); 
 
-
+		
 		$("#fb_logout").click(function(){
 			fb_logout();
 		});
@@ -24,6 +24,8 @@ $(document).ready(function(){
 function fb_login(){
 	FB.getLoginStatus(function(response) {
 		console.log(response.status);
+		
+
 		if (response.status === 'connected') {
 		    	//We're handling the situation where they 
 		      // have logged in to the app.

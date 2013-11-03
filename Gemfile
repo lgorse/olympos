@@ -9,6 +9,10 @@ gem 'pg'
 gem 'unicorn'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'koala'
+gem 'timecop'
+gem 'database_cleaner'
+gem 'selenium-webdriver', '~>2.37.0'
+gem 'launchy'
 
 group :development do
 	gem 'rspec-rails'
@@ -24,10 +28,7 @@ group :test do
 	gem 'rspec-rails'
 	gem 'capybara'
 	gem 'factory_girl_rails' 
-	gem 'timecop'
-	gem 'database_cleaner'
-	gem 'selenium-webdriver', '~>2.37.0'
-	gem 'launchy'
+	
 end
 
 
