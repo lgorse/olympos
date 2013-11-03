@@ -11,38 +11,33 @@ module FacebookHelper
 		data = ActiveSupport::JSON.decode base64_url_decode(payload)
 	end
 
-	
-	def set_fb_access_token
-		begin
-			@facebook_cookies ||= Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
-			facebook_id = @facebook_cookies['user_id'].to_i
-			@access_token = @facebook_cookies["access_token"]
-			expiration_time = Time.at(@facebook_cookies["issued_at"].to_i+@facebook_cookies["expires"].to_i)
-			cookies["fbtk"] = {:value => @access_token, :expires => expiration_time}
-			return facebook_id
-		rescue Exception => e
-			print "ERROR #{e.message}"
-		end
-	end
-
-
-
-	def parse_facebook_cookies
+	def fb_graph
 		if @current_user.facebook?
-
+			begin
+				if cookies["fbsr_#{FACEBOOK_CONFIG["app_id"]}"]
+					parse_fb_cookie
+				elsif params['signed_request']
+					parse_fb_request
+				end
+			rescue
+				print "ERROR #{e.message}"
+			end
 		end
 
-		@facebook_cookies ||= Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
-		facebook_id = @facebook_cookies['user_id'].to_i
-		if user.fb_id == facebook_id
-			print "A"*50
-			
-			#expires = @facebook_cookies["expires"]
-			#issued = @facebook_cookies["issued"]
-			@graph = Koala::Facebook::GraphAPI.new(@access_token)
-		else
-			sign_out_user
-		end		
 	end
+
+	
+	def parse_fb_cookie
+		@facebook_cookies ||= Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
+		@access_token = @facebook_cookies["access_token"]
+		@graph = Koala::Facebook::GraphAPI.new(@access_token)		
+	end
+
+
+	def parse_fb_request
+		@signed_request =  Koala::Facebook::OAuth.new.parse_signed_request(params['signed_request'])
+		@graph = Koala::Facebook::GraphAPI.new(@signed_request['oauth_token'])	
+	end
+
 
 end

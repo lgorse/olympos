@@ -24,12 +24,12 @@ describe UsersController do
 
 				it "should redirect to the index page" do
 					post :create, :user => @attr
-					response.should redirect_to details_user_path(assigns(:user))
+					response.should render_template('details')
 				end
 
 				it "should create a session" do
 					post :create, :user => @attr
-					session[:user_id].should == assigns(:user).id
+					session[:user_id].should == assigns(:current_user).id
 				end
 			end
 

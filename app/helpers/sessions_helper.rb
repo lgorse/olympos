@@ -2,13 +2,13 @@ module SessionsHelper
 	include LoginHelper, FacebookHelper
 
 	def sign_in_user
-		session[:user_id] = @user.id
-		set_fb_access_token if @user.facebook?
+		session[:user_id] = @current_user.id
+		
 	end
 
 	def valid_user_signin
 		sign_in_user
-		redirect_to home_user_path(@user)
+		redirect_to home_user_path(@current_user)
 	end
 
 	def signed_in?
@@ -25,15 +25,15 @@ module SessionsHelper
 	def authenticate
 		begin
 			@current_user = User.find(session[:user_id])
-			
+			fb_graph
 		rescue
 			sign_out_user
 		end
 	end
 
 	def login_manual_user
-		@user = User.find_by_email(params[:session][:email].downcase)
-		if @user && @user.authenticate(params[:session][:password])
+		@current_user = User.find_by_email(params[:session][:email].downcase)
+		if @current_user && @current_user.authenticate(params[:session][:password])
 			valid_user_signin
 		else
 			render 'sessions/new'
@@ -42,9 +42,9 @@ module SessionsHelper
 	end
 
 	def login_fb_user
-		request = decode_data(params['signed_request'])		
-		@user = User.find_by_fb_id(request['user_id'])
-		if @user&&@user.facebook?
+		parse_fb_request		
+		@current_user = User.find_by_fb_id(@signed_request['user_id'])
+		if @current_user&&@current_user.facebook?
 			valid_user_signin
 		else
 			redirect_to fb_new_user_path
