@@ -16,6 +16,7 @@ module UsersHelper
 			:birthdate => Date.strptime(fb_attr['birthday'], "%m/%d/%Y"), :fb_id => @signed_request['user_id'],
 			:password => 'randompassword'}
 			User.where(:fb_id => @signed_request['user_id']).first_or_initialize(@attr.merge(:signup_method => FACEBOOK))
+		save_fb_user
 	end
 
 	def save_fb_user
@@ -31,7 +32,7 @@ module UsersHelper
 	end
 
 	def save_user_success
-		sign_in_user(@user)
+		sign_in_user
 		redirect_to details_user_path(@user)
 	end
 end

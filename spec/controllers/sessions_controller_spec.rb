@@ -85,6 +85,10 @@ describe SessionsController do
 
 		it "should destroy the session" do
 			session[:user_id].should be_nil
+		end
+
+		it "should destroy all cookies" do
+			cookies.each {|crunchy| crunchy.should be_nil}
 
 		end
 

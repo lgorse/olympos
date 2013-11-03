@@ -18,8 +18,7 @@ class UsersController < ApplicationController
 			@user = User.new(params[:user].merge(:signup_method => EMAIL))
 			save_manual_user
 		elsif params['signed_request']
-			@user = new_user_from_FB
-			save_fb_user
+			new_user_from_FB
 		end
 	end
 
