@@ -32,10 +32,11 @@ module FacebookHelper
 
 
 	def parse_fb_request
-		@signed_request =  Koala::Facebook::OAuth.new.parse_signed_request(params['signed_request'])
-		@access_token = @signed_request['oauth_token']
-		create_fb_cookie(@access_token, Time.at(@signed_request["expires"].to_i))
-		@graph = Koala::Facebook::GraphAPI.new(@access_token)		
+		@oauth = Koala::Facebook::OAuth.new
+		@signed_request =  @oauth.parse_signed_request(params['signed_request'])
+		@access_token = @oauth.get_access_token_info(@signed_request['code'])		
+		create_fb_cookie(@access_token["access_token"], Time.at(@signed_request["issued_at"].to_i+ @access_token["expires"].to_i))
+		@graph = Koala::Facebook::GraphAPI.new(@access_token["access_token"])		
 	end
 
 	def create_fb_cookie(access_token, expiration)
@@ -47,8 +48,7 @@ module FacebookHelper
 			@access_token = cookies[:fb_access]
 			@graph = Koala::Facebook::GraphAPI.new(@access_token)
 		else
-			@new_access = Koala::Facebook::OAuth.new.exchange_access_token(cookies[:fb_access])
-			@graph = Koala::Facebook::GraphAPI.new(@new_access)
+			parse_fb_cookie
 		end
 	end
 

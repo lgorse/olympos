@@ -9,16 +9,13 @@ module UsersHelper
 	end
 
 	def new_user_from_FB
-		parse_fb_request
-		fb_attr = @signed_request['registration']
-		
-		@attr = {:firstname => fb_attr['first_name'], :lastname => fb_attr['last_name'],
-			:email => fb_attr['email'], :gender => fb_attr['gender'],
-			:birthdate => Date.strptime(fb_attr['birthday'], "%m/%d/%Y"), :fb_id => @signed_request['user_id'],
+		my_fb = @graph.get_object("me")
+		@attr = {:firstname => my_fb['first_name'], :lastname => my_fb['last_name'],
+			:email => my_fb['email'], :gender => my_fb['gender'],
+			:birthdate => Date.strptime(my_fb['birthday'], "%m/%d/%Y"), :fb_id => my_fb['id'],
 			:password => 'randompassword'}
-
 		@current_user = User.where(:fb_id => @signed_request['user_id']).first_or_initialize(@attr.merge(:signup_method => FACEBOOK))
-
+		save_fb_user
 	end
 
 	def save_fb_user

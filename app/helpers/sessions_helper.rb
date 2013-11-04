@@ -1,5 +1,5 @@
 module SessionsHelper
-	include LoginHelper, FacebookHelper
+	include LoginHelper, FacebookHelper, UsersHelper
 
 	def sign_in_user
 		session[:user_id] = @current_user.id
@@ -8,7 +8,7 @@ module SessionsHelper
 
 	def valid_user_signin
 		sign_in_user
-		parse_fb_cookie
+		
 		redirect_to home_user_path(@current_user)
 	end
 
@@ -28,7 +28,8 @@ module SessionsHelper
 			@current_user = User.find(session[:user_id])
 			fb_graph
 			@current_user.set_fb_square_pic(@graph)
-		rescue
+		rescue => e
+			print "ERROR #{e.message}"
 			sign_out_user
 		end
 	end
@@ -44,12 +45,12 @@ module SessionsHelper
 	end
 
 	def login_fb_user
-		parse_fb_cookie
-		@current_user = User.find_by_fb_id(@facebook_cookies['user_id'])
+		parse_fb_request
+		@current_user = User.find_by_fb_id(@signed_request['user_id'])
 		if @current_user&&@current_user.facebook?
 			valid_user_signin
 		else
-			redirect_to fb_new_user_path
+			new_user_from_FB
 		end
 
 	end

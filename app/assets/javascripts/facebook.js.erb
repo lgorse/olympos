@@ -35,7 +35,8 @@ function fb_login(){
 		  } else if (response.status === 'not_authorized') {
 		      // In this case, the person is logged into Facebook, but not into the app, so we call
 		      // FB.login() to prompt them to do so. 
-		      signup_user_to_app(response);
+		      //signup_user_to_app(response);
+		      log_user_into_fb(response);
 		  } else {
 		      // In this case, the person is not logged into Facebook, so we call the login()
 		      log_user_into_fb(response);
@@ -117,13 +118,13 @@ function log_user_into_fb(response){
 	if ($("#session_signup").length){
 		$("#fb_signup").click(function(e){
 			e.preventDefault();
-			FB.login(function(response){
-				if (response.status == 'not_authorized'){
-					window.location.replace("/users/new/fb");
-				}else if (response.status == 'connected') {
-					connected_fb_user_login(response);
+			FB.login(function(login_response){
+				if (login_response.status == 'not_authorized'){
+					window.location.replace("/");
+				}else if (login_response.status == 'connected') {
+					connected_fb_user_login(login_response);
 				}
-			});
+			},{scope: 'email, user_birthday'});
 		});
 	}else{
 		$("#session_data").fb_logger_redirect(response);
