@@ -22,9 +22,9 @@ describe UsersController do
 					end.should change(User, :count).by(1)
 				end
 
-				it "should redirect to the index page" do
+				it "should redirect to the details page" do
 					post :create, :user => @attr
-					response.should render_template('details')
+					response.should redirect_to details_user_path(assigns(:current_user))
 				end
 
 				it "should create a session" do

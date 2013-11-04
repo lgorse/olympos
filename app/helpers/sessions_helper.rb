@@ -27,9 +27,8 @@ module SessionsHelper
 		begin
 			@current_user = User.find(session[:user_id])
 			fb_graph
-			@current_user.set_fb_square_pic(@graph)
+			@current_user.set_fb_square_pic(@graph) if @graph
 		rescue => e
-			print "ERROR #{e.message}"
 			sign_out_user
 		end
 	end
