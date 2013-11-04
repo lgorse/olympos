@@ -1,3 +1,17 @@
+
+<div class = "user_profile round_soft">
+<div class = "user_picture">
 <% if @user.facebook? %>
-<%= image_tag @user.fb_pic_large, :class => "user_profile_pic" %>
+<%= image_tag @user.fb_pic_large, :class => "user_profile_pic round" %>
 <% end %>
+</div>
+<div class = "user_info">
+<div class = "main_user_name">
+<%= @full_name %>
+</div>
+</div>
+<div class = "user_location">
+	
+</div>
+
+</div>

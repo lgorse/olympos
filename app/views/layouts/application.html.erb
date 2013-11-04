@@ -12,9 +12,18 @@
 	<% if signed_in? %>
 	<div id = "session_data" data-logged="<%= signed_in? %>" data-fb="<%= @current_user.facebook? %>"></div>
 	<%= render 'layouts/header' %>
-	<% end %>
+	
+	<div class = "main_container">
+		<div class = "nag"></div>
+		<div class = "main_activity">
 
 <%= yield %>
+</div>
+
+<% else %>
+<%= yield %>
+<% end %>
+</div>
 
 </body>
 </html>

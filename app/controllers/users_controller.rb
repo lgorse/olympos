@@ -53,7 +53,8 @@ class UsersController < ApplicationController
 		else
 			@user = User.find(params[:id])
 		end
-		@user.set_fb_large_pic(@graph)
+		@user.set_fb_large_pic(@graph) if @graph
+		@full_name = @user.firstname + " " +  @user.lastname
 	end
 
 end

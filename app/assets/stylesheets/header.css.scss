@@ -1,0 +1,56 @@
+.header{
+ 	height: 45px;
+ 	border-bottom: 1px solid #C2C2CF;
+ 	
+
+ 	a{
+ 		vertical-align: middle;
+ 	}
+
+ 	.container{
+ 		min-width: 950px;
+ 		height: 100%;
+
+ 		padding: 10px 150px 0px 50px;
+ 		margin: 0px auto;
+
+ 	}
+
+ 	nav{
+ 		display: inline-block;
+ 	}
+
+ 	.header_left{
+ 		margin-left: 50px;
+ 		float: left;
+ 		display: inline-block;
+
+ 		a{
+ 			font-size: 120%;
+ 			vertical-align: middle;
+
+ 		}
+ 	}
+
+ 	.header_right{
+ 		
+ 		float: right;
+ 		margin-right: 50px;
+
+ 		.my_profile_button{
+ 			vertical-align: middle;
+ 			margin-right: 5px;
+ 		}
+
+
+ 		
+ 	}
+
+
+ }
+
+ .nag{
+ 	height: 50px;
+
+ }
+

@@ -46,11 +46,11 @@ def facebook?
 end
 
 def set_fb_square_pic(graph)
-  self.fb_pic_square = graph.get_picture(self.fb_id, :type => "square", :height => 20, :width => 20)
+  self.fb_pic_square = graph.get_picture(self.fb_id, :type => "square", :height => 30, :width => 30)
 end
 
 def set_fb_large_pic(graph)
-  self.fb_pic_large = graph.get_picture(self.fb_id, :type => "normal")
+  self.fb_pic_large = graph.get_picture(self.fb_id, :type => "large")
 
 end
 
