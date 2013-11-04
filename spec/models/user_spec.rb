@@ -21,6 +21,7 @@
 #  updated_at      :datetime         not null
 #  email           :string(255)
 #  signup_method   :integer
+#  fb_pic_square   :string(255)
 #
 
 require 'spec_helper'

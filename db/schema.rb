@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031082151) do
+ActiveRecord::Schema.define(:version => 20131103233411) do
 
   create_table "users", :force => true do |t|
     t.string   "firstname"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20131031082151) do
     t.datetime "updated_at",                                      :null => false
     t.string   "email"
     t.integer  "signup_method"
+    t.string   "fb_pic_square"
   end
 
   add_index "users", ["fb_id"], :name => "index_users_on_fb_id"

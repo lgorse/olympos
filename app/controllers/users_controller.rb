@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	include UsersHelper
 
-	before_filter :authenticate, :only => [:home]
+	before_filter :authenticate, :only => [:home, :show, :details]
 	
 
 	def new
@@ -35,12 +35,7 @@ class UsersController < ApplicationController
 	end
 
 	def details
-		begin
-			@current_user = User.find(session[:user_id])
-		rescue
-			sign_out_user
-		end
-		
+
 	end
 
 	def update
@@ -50,6 +45,15 @@ class UsersController < ApplicationController
 		else
 			
 		end
+	end
+
+	def show
+		if params[:id] == @current_user.id
+			@user = @current_user
+		else
+			@user = User.find(params[:id])
+		end
+		@user.set_fb_large_pic(@graph)
 	end
 
 end

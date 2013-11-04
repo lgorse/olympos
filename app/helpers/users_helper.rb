@@ -18,6 +18,7 @@ module UsersHelper
 			:password => 'randompassword'}
 
 		@current_user = User.where(:fb_id => @signed_request['user_id']).first_or_initialize(@attr.merge(:signup_method => FACEBOOK))
+
 	end
 
 	def save_fb_user
@@ -30,6 +31,6 @@ module UsersHelper
 
 	def new_user_success
 		sign_in_user
-		render 'users/details'
+		redirect_to details_user_path(@current_user)
 	end
 end

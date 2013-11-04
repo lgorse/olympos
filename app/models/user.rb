@@ -21,6 +21,7 @@
 #  updated_at      :datetime         not null
 #  email           :string(255)
 #  signup_method   :integer
+#  fb_pic_square   :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -43,6 +44,17 @@ class User < ActiveRecord::Base
 def facebook?
   self.signup_method == FACEBOOK
 end
+
+def set_fb_square_pic(graph)
+  self.fb_pic_square = graph.get_picture(self.fb_id, :type => "square", :height => 20, :width => 20)
+end
+
+def set_fb_large_pic(graph)
+  self.fb_pic_large = graph.get_picture(self.fb_id, :type => "normal")
+
+end
+
+
 
 
 private
