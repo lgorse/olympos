@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.remotipart
 //= require jquery.ui.dialog
 //= require jquery.ui.progressbar
 //= require_tree .
