@@ -1,0 +1,10 @@
+<div class = "user_picture">
+		<% if @user.facebook? %>
+			<%= image_tag @user.fb_pic_large, :class => "user_profile_pic round" %>
+		<% else %>
+			<%= image_tag @user.photo.url(:large), :class => "user_profile_pic round"  %>
+			<% if current_user? %>
+				<%= button_to "Change photo", {action: "change_picture", :id => @current_user.id}, :method => :get, :remote => true, :form_class => "change_photo" %>
+			<% end %>
+		<% end %>
+	</div>

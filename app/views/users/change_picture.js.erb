@@ -1,11 +1,14 @@
-$("#photo_form").html("<%= escape_javascript(render 'photo_form') %>");
-var my_dialog = $("#dialog").dialog({
-	modal: true
+$(".photo_form").html("<%= escape_javascript(render 'users/user_photo_partials/photo_form') %>");
+var my_dialog = $(".dialog_photo_upload").dialog({
+	modal: true,
+	width: 375,
+	height: 100
 });
 $(".edit_user").submit(function(e){
 	
 	$(".edit_user").hide();
-	$("#photo_form").append("<div>Uploading...</div>");
+	var uploading = $("<div>Uploading. This takes a while, sorry!..</div>").css("margin-top", 2);
+	$(".photo_form").append(uploading);
 	$("#progressbar").progressbar({
 		value: false
 	});

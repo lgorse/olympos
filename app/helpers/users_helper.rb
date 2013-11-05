@@ -30,4 +30,9 @@ module UsersHelper
 		sign_in_user
 		redirect_to details_user_path(@current_user)
 	end
+
+	def current_user?
+		@user == @current_user
+	end
+
 end
