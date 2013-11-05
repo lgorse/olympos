@@ -1,20 +1,23 @@
 
 <div class = "user_profile round_soft">
-<div class = "user_picture">
-<% if @user.facebook? %>
-<%= image_tag @user.fb_pic_large, :class => "user_profile_pic round" %>
-<% else @user.photo? %>
-<%= image_tag @user.photo.url(:large), :class => "user_profile_pic round"  %>
-<%= button_tag "Change photo", :class => "change_photo" %>
-<% end %>
-</div>
-<div class = "user_info">
-<div class = "main_user_name">
-<%= @full_name %>
-</div>
-</div>
-<div class = "user_location">
-	
+	<div class = "user_picture">
+		<% if @user.facebook? %>
+		<%= image_tag @user.fb_pic_large, :class => "user_profile_pic round" %>
+		<% else @user.photo? %>
+		<%= image_tag @user.photo.url(:large), :class => "user_profile_pic round"  %>
+		<%= button_to "Change photo", {action: "change_picture", :id => @current_user.id}, :method => :get, :remote => true, :form_class => "change_photo" %>
+		<% end %>
+	</div>
+	<div class = "user_info">
+		<div class = "main_user_name">
+			<%= @full_name %>
+		</div>
+	</div>
+	<div class = "user_location">
+
+	</div>
+
 </div>
 
+<div id = "dialog"><div id = "photo_form"></div>
 </div>

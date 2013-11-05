@@ -1,6 +1,7 @@
-<%= form_for @user do |user| %>
-<div class="field">
-  <%= user.label :photo %><br />
-  <%= user.file_field :photo %>
-</div>
+<%= form_for @current_user do |user| %>
+  <%= user.file_field :photo, :class => "photo_upload" %></br>
+  <%= user.submit "Submit" %>
 <% end %>
+
+<div id = "progressbar">
+</div>

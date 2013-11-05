@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	include UsersHelper
 
-	before_filter :authenticate, :only => [:home, :show, :details]
+	before_filter :authenticate, :only => [:home, :show, :details, :change_picture]
 	
 
 	def new
@@ -24,32 +24,42 @@ class UsersController < ApplicationController
 	end
 
 	def home
-		print session[:user_id]
-		
 		
 
 	end
 
 	def index
-	
+
 	end
 
 	def details
 
 	end
 
+	def change_picture
+		@user = params[:id]
+
+
+	end
+
 	def update
-		@user = User.find(params[:id])
-		if @user.update_attributes(params[:user])
-			redirect_to home_user_path(@user) if params{:details_form}
-		else
-			
+		@current_user = User.find(params[:id])
+		if @current_user.update_attributes(params[:user])
+			respond_to do |format|
+				format.html{
+					if params[:details_form]
+						redirect_to home_user_path(@current_user) 
+					else
+						redirect_to @current_user
+					end
+				}
+				format.js
+			end						
 		end
+
 	end
 
 	def show
-print "A"*50
-		print S3_BUCKET_NAME
 		if params[:id] == @current_user.id
 			@user = @current_user
 		else

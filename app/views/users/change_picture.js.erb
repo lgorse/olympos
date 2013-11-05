@@ -1,0 +1,14 @@
+$("#photo_form").html("<%= escape_javascript(render 'photo_form') %>");
+var my_dialog = $("#dialog").dialog({
+	modal: true
+});
+$(".edit_user").submit(function(e){
+	
+	$(".edit_user").hide();
+	$("#photo_form").append("<div>Uploading...</div>");
+	$("#progressbar").progressbar({
+		value: false
+	});
+});
+
+
