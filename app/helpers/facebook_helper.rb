@@ -18,8 +18,16 @@ module FacebookHelper
 			rescue => e
 				print "ERROR #{e.message}"
 			end
+		else
+			get_graph_from_app
 		end
 
+	end
+
+	def get_graph_from_app
+		@access_token = Koala::Facebook::OAuth.new.get_app_access_token
+		@graph = Koala::Facebook::GraphAPI.new(@access_token)		
+		
 	end
 
 	
