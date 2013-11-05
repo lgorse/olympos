@@ -1,0 +1,6 @@
+<%= form_for @user do |user| %>
+<div class="field">
+  <%= user.label :photo %><br />
+  <%= user.file_field :photo %>
+</div>
+<% end %>

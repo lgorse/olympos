@@ -2,26 +2,30 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  firstname       :string(255)
-#  lastname        :string(255)
-#  password_digest :string(255)
-#  fb_id           :integer
-#  birthdate       :date
-#  zip             :integer
-#  lat             :float
-#  long            :float
-#  fb_pic_small    :string(255)
-#  fb_pic_large    :string(255)
-#  gender          :integer
-#  first_rating    :integer
-#  has_played      :boolean          default(FALSE)
-#  available_times :text
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  email           :string(255)
-#  signup_method   :integer
-#  fb_pic_square   :string(255)
+#  id                 :integer          not null, primary key
+#  firstname          :string(255)
+#  lastname           :string(255)
+#  password_digest    :string(255)
+#  fb_id              :integer
+#  birthdate          :date
+#  zip                :integer
+#  lat                :float
+#  long               :float
+#  fb_pic_small       :string(255)
+#  fb_pic_large       :string(255)
+#  gender             :integer
+#  first_rating       :integer
+#  has_played         :boolean          default(FALSE)
+#  available_times    :text
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  email              :string(255)
+#  signup_method      :integer
+#  fb_pic_square      :string(255)
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
 #
 
 require 'spec_helper'

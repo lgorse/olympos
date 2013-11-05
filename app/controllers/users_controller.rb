@@ -48,6 +48,8 @@ class UsersController < ApplicationController
 	end
 
 	def show
+print "A"*50
+		print S3_BUCKET_NAME
 		if params[:id] == @current_user.id
 			@user = @current_user
 		else

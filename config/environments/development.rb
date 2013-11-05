@@ -27,7 +27,7 @@ Olympos::Application.configure do
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
-  config.active_record.auto_explain_threshold_in_seconds = 0.5
+config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Do not compress assets
   config.assets.compress = false
@@ -36,8 +36,14 @@ Olympos::Application.configure do
   config.assets.debug = true
 
   config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger.const_get(
-    ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG'
-  )
+  config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+  :s3_credentials => 
+    YAML.load_file("#{Rails.root}/config/s3_config.yml")[Rails.env]
+  
+  }
+
   
 end

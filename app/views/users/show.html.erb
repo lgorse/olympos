@@ -3,6 +3,9 @@
 <div class = "user_picture">
 <% if @user.facebook? %>
 <%= image_tag @user.fb_pic_large, :class => "user_profile_pic round" %>
+<% else @user.photo? %>
+<%= image_tag @user.photo.url(:large), :class => "user_profile_pic round"  %>
+<%= button_tag "Change photo", :class => "change_photo" %>
 <% end %>
 </div>
 <div class = "user_info">

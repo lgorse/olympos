@@ -14,12 +14,33 @@
 		float: left;
 		width: 160px;
 		height: 100%;
+
+		.change_photo{
+			display: block;
+			position: relative;
+			width: 100px;
+			margin: 0px auto;
+			top: -27px;
+			visibility: hidden;
+		}
+
+		.change_photo:hover{
+			visibility: visible;
+		}
+
+		
 		
 
 		.user_profile_pic{
 			max-height: 200px;
 			max-width: 150px;
+			display: inline;
+			margin: 0px auto;
 
+		}
+
+		.user_profile_pic:hover + .change_photo {			
+				visibility: visible;			
 		}
 
 	}
