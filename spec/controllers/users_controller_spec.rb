@@ -79,6 +79,7 @@ describe UsersController do
 					it "should redirect to the home page" do
 						@origin = true
 						put :update, :id => @user.id, :user => @attr, :detail_form => @origin
+						
 						response.should redirect_to home_user_path(@user)
 					end
 				end

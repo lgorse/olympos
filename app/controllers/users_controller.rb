@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 		if @current_user.update_attributes(params[:user])
 			respond_to do |format|
 				format.html{
-					if params[:details_form]
+					if params[:detail_form]
 						redirect_to home_user_path(@current_user) 
 					else
 						redirect_to @current_user
