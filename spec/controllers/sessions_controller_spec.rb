@@ -29,7 +29,7 @@ describe SessionsController do
 	end
 
 	
-	describe 'POST "Create"' do
+	describe 'POST "Create" by email' do
 
 		describe "if there is a user" do
 			before(:each) do

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
+	render_views
 
 	describe 'GET "new"' do
 
@@ -143,6 +144,9 @@ describe UsersController do
 						response.should be_successful
 					end
 
+					
+
+					
 				end
 
 				describe 'if failed' do
