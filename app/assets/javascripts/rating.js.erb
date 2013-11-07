@@ -1,0 +1,91 @@
+$(function(){
+	star_ratings();
+});
+
+function star_ratings(){
+	$(".rate_skill").each(function(){
+		$(this).ratings(5);
+	});
+
+}
+
+function ajax_function(data){
+	path = data.form.attr("action");
+	$.ajax({
+		type: 'PUT',
+		url: path,
+		data: data.form.serialize();
+	});
+
+}
+
+$.fn.ratings = function(stars){
+	
+	var review_field = $(this).find("#user_first_rating");
+	var initial_rating = review_field.attr("value");
+
+	if (!initial_rating){
+		initial_rating = 0;
+	}
+	
+
+	return this.each(function(){
+		var container = $(this);
+		container.css('overflow', 'auto');		
+		container.rating = initial_rating;
+		
+		var starsCollection = Array();
+
+		
+		for(var x = 0; x < stars; x++){
+			
+			var star = document.createElement('div');
+			star.rating = x + 1
+			$(star).addClass('input_stars');
+
+			if (x < container.rating){
+				$(star).addClass('full');
+
+			}
+
+			container.append(star);
+			starsCollection.push($(star));
+
+			$(star).click(function(){
+				$(review_field).attr("value", this.rating);
+				container.rating = review_field.attr("value");
+				
+				container.triggerHandler('ratingchanged', {rating: this.rating, form: review_field.closest("form")});
+
+			});
+
+			$(star).mouseenter(function(){
+
+				for (var i = 0; i <this.rating; i++){
+					starsCollection[i].addClass('full');
+				}
+
+				for (var i = this.rating; i < stars; i++){
+					starsCollection[i].removeClass('full');
+				}
+
+				container.mouseleave(function(){
+					for (var i = 0; i <container.rating; i++){
+						starsCollection[i].addClass('full');
+					}
+
+					for (var i = container.rating; i < stars; i++){
+						starsCollection[i].removeClass('full');
+					}
+
+
+				});
+
+
+
+			});
+
+		}
+
+	});
+}

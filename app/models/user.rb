@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     small: '50x50>',
     large: '150x300>'
   },
-  :default_url => "/images/profile/:gender/:style/missing.png"
+  :default_url => "/assets/profile/:gender/:style/missing.png"
 
   validates :firstname, :presence => true
   validates :lastname, :presence => true

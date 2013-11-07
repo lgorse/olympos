@@ -1,0 +1,59 @@
+
+
+$starWidth: 25px;
+$starOffset: 0 -43px;
+$numStars: 5;
+$steps: 1;
+$total: $numStars * $steps;
+
+@mixin filled($n: 0){
+	width: ($starWidth / $steps) * $n;
+}
+
+@mixin stars_values{
+	height: 25px;
+	background-size: $starWidth;
+	vertical-align: middle;
+	padding: 0px;
+	margin-left: 0px;
+	position: relative;
+	float: left;
+	
+}
+
+.stars{
+	
+
+	&.empty{
+		background-position: $starOffset;
+		width: $numStars * $starWidth;
+		background: url(/assets/rating/star_empty.png) repeat-x top left;
+		@include stars_values;
+	}
+
+	
+	
+	
+
+	@for $i from 0 through ($total){
+		&.filled_#{$i} {@include filled($i);
+			background: url(/assets/rating/star_full.png) repeat-x top left;
+			@include stars_values;
+
+			}
+	}
+}
+
+.input_stars{
+	@include stars_values;
+	margin: 0px;
+	width: $starWidth;
+	background-image: url(/assets/rating/star_empty.png);
+	background-repeat: no-repeat;
+
+	&.full{
+	background-image: url(/assets/rating/star_full.png);
+}
+	
+}
+
