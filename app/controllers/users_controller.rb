@@ -49,6 +49,7 @@ class UsersController < ApplicationController
 		if @current_user.update_attributes(params[:user])
 			respond_to do |format|
 				format.html{
+					print "A"*1000
 					if params[:redirect_url]
 						redirect_to params[:redirect_url]
 					else

@@ -4,17 +4,23 @@ $(function(){
 
 function star_ratings(){
 	$(".rate_skill").each(function(){
-		$(this).ratings(5);
+		$(this).ratings(5).bind('ratingchanged', function(event, data){
+			update_rating(data);
+		});
 	});
 
 }
 
-function ajax_function(data){
+function update_rating(data){
 	path = data.form.attr("action");
 	$.ajax({
 		type: 'PUT',
 		url: path,
-		data: data.form.serialize()
+		data: data.form.serialize(),
+		beforeSend: function(xhr, settings) {
+    xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script);
+  }
+
 	});
 
 }
