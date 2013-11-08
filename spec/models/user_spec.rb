@@ -37,7 +37,7 @@ describe User do
 			@attr = {:firstname => "test", :lastname => "tester",
 				:password => "gobbldygook", 
 				:birthdate => Date.strptime("8/24/70", '%m/%d/%Y'),
-				:email => "test@tester.com"}
+				:email => "test@tester.com", :gender => MALE}
 
 			end
 
@@ -114,6 +114,16 @@ describe User do
 					@user = User.new(@attr.merge(:password => "super"))
 					@user.should_not be_valid
 				end
+			end
+
+			describe "gender" do
+
+				it "should be required" do
+					@user = User.new(@attr.merge(:gender => ''))
+					@user.should_not be_valid
+
+				end
+
 			end
 
 		end

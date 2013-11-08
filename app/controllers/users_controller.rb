@@ -33,6 +33,7 @@ class UsersController < ApplicationController
 	end
 
 	def details
+		@user = @current_user
 
 	end
 
@@ -43,14 +44,15 @@ class UsersController < ApplicationController
 	end
 
 	def update
+		print params
 		@current_user = User.find(params[:id])
 		if @current_user.update_attributes(params[:user])
 			respond_to do |format|
 				format.html{
 					if params[:detail_form]
 						redirect_to home_user_path(@current_user) 
-					else
-						redirect_to @current_user
+					# else
+					# 	redirect_to @current_user
 					end
 				}
 				format.js

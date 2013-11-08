@@ -25,5 +25,17 @@ module IntegrationHelper
 
   end
 
+  def signup_success
+    visit root_path
+        page.find("a[href='/users/new']").click
+        fill_in 'user_firstname', :with => "Tester"
+        fill_in 'user_lastname', :with => "Testaroo"
+        fill_in 'user_email', :with => "test@test.com"
+        fill_in 'user_password', :with => "testpassword"
+        select '1979', :from => 'user_birthdate_1i'
+        choose 'user_gender_1'
+        click_button 'Sign up'
+  end
+
 
 end

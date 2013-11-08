@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, :format => {:with => VALID_EMAIL}, :uniqueness => {:case_sensitive => false}
   validates :password, :length => {:minimum => 6}, :on => :create
   validates :birthdate, :presence => true
+  validates :gender, :presence =>  true
   validate :age_above_13, :unless => "birthdate.nil?"
 
   before_validation :downcase_email

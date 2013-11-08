@@ -19,6 +19,52 @@ describe "Users" do
 
   end
 
+  describe "user CREATE" do
+
+    describe "if successful" do
+
+      describe "successful login" do
+
+      it "should add a user" do
+        lambda do
+          signup_success
+        end.should change(User, :count).by(1)
+
+      end
+
+    end
+
+      describe "details redirect" do
+        before(:all) do
+          signup_success
+        end
+
+
+        it "should show details" do 
+        @user = assigns[:current_user]
+          current_path.should == "/users/#{@user.id}/details"
+          #expect(page).to have_css('h1')
+          #expect(page).to have_link('Olympos')
+        end
+
+        it "should show the user rating input" do
+          expect(page).to have_css('#user_first_rating')
+        end
+
+        it "should show the user zip input" do
+          expect(page).to have_css('#user_zip')
+        end
+
+      end
+
+
+
+    end
+
+    
+
+  end
+
   describe "GET /Users/home" do
 
     describe "if user is logged through email" do

@@ -19,6 +19,13 @@
 	<p>You must be 13 or older to sign up</p>
 </li>
 <li>
+	<%= user.label :gender %>
+	<%= user.radio_button :gender, MALE %>
+	<%= user.label :gender, 'Male', :value => MALE %>
+	<%= user.radio_button :gender, FEMALE %>
+	<%= user.label :gender, 'Female', :value => FEMALE %>
+</li>
+<li>
 	<%= user.submit 'Sign up' %>
 </li>
 </ul>

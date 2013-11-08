@@ -10,17 +10,14 @@
 	margin: 0px auto;
 	padding: 20px;
 
+
+
 	.user_picture{
 		float: left;
 		width: 160px;
 		height: 100%;
 
 		.change_photo{
-			display: block;
-			position: relative;
-			width: 100px;
-			margin: 0px auto;
-			top: -27px;
 			visibility: hidden;
 		}
 
@@ -40,7 +37,7 @@
 		}
 
 		.user_profile_pic:hover + .change_photo {			
-				visibility: visible;			
+			visibility: visible;			
 		}
 
 	}
@@ -65,6 +62,15 @@
 	
 }
 
+.change_photo{
+			display: block;
+			position: relative;
+			width: 100px;
+			margin: 0px auto;
+			top: -27px;
+			
+		}
+
 .dialog_photo_upload{
 	border: 1px solid black;
 	display: none;
@@ -74,7 +80,29 @@
 	
 
 	.edit_user{
-	display: inline;
+		display: inline;
+	}
+
 }
+
+.user_details{
+
+	.user_picture{
+		max-height: 200px;
+		width: 150px;
+		
+		.user_profile_pic{
+		max-height: 200px;
+		max-width: 150px;
+			display: inline;
+			margin: 0px auto;
+
+		}
+
+	}
+
+	
+
+
 
 }

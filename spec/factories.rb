@@ -5,6 +5,7 @@ FactoryGirl.define do
 		email	{generate(:email)}
 		password	"Supercool"
 		birthdate	15.years.ago.to_date
+		gender	MALE
 	end
 end
 

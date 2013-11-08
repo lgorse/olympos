@@ -48,7 +48,7 @@ RSpec.configure do |config|
 
   Capybara.app_host = "#{FULL_ROOT}"
 
-  #Capybara.default_wait_time = 5
+  Capybara.default_wait_time = 5
 
 
   def test_sign_in(user)

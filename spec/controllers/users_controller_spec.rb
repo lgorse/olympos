@@ -11,7 +11,7 @@ describe UsersController do
 		before(:each) do
 			@attr = {:firstname => "test", :lastname => "tester", 
 				:email => "test@test.com", :password => "gobbledygook",
-				:birthdate => 14.years.ago.to_date}
+				:birthdate => 14.years.ago.to_date, :gender => MALE}
 			end
 
 			describe 'if successful' do
