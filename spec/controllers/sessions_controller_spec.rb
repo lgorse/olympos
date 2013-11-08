@@ -20,7 +20,7 @@ describe SessionsController do
 
 			it "should redirect the user to his home page" do
 				get :new
-				response.should redirect_to home_user_path(@user)
+				response.should redirect_to home_users_path
 			end
 
 		end
@@ -39,7 +39,7 @@ describe SessionsController do
 			end
 
 			it "should redirect to the index page" do
-				response.should redirect_to home_user_path(@user)
+				response.should redirect_to home_users_path
 			end
 
 			it 'should create a session with the user id' do

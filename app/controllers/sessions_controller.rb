@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
 
 	def new
-		redirect_to home_user_path(session[:user_id]) if session[:user_id]
+		redirect_to home_users_path if session[:user_id]
 	end
 
 	def create

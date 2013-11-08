@@ -8,8 +8,7 @@ module SessionsHelper
 
 	def valid_user_signin
 		sign_in_user
-		
-		redirect_to home_user_path(@current_user)
+		redirect_to home_users_path
 	end
 
 	def signed_in?
