@@ -1,6 +1,8 @@
 .header{
  	height: 45px;
+ 	width: 100%;
  	border-bottom: 1px solid #C2C2CF;
+ 	position: fixed;
  	
 
  	a{
@@ -33,15 +35,52 @@
  	}
 
  	.header_right{
- 		
+ 		height: 100%;
  		float: right;
  		margin-right: 50px;
 
  		.my_profile_button{
  			vertical-align: middle;
- 			margin-right: 5px;
+ 			margin: 0px auto;
  		}
 
+ 		.user_settings{
+ 			height: 100%;
+ 			width: 40px;
+ 			
+ 		}
+
+ 		.nav_menu{
+ 			display: none;
+ 			position: relative;
+ 			top: 5px;
+ 			left: -45px;
+ 			width: 75px;
+ 			
+ 			background: white;
+ 			border: black 1px solid;
+
+ 			li{
+ 				
+ 				height: 25px;
+ 				border-bottom: 1px solid black;
+ 				text-align: center;
+ 				
+
+ 				a{
+ 					padding-top: 5px;
+ 					display: block;
+
+ 				}
+ 			}
+
+ 			li.logout{
+ 				border-bottom: 0px;
+ 			}
+
+
+
+ 		}
 
  		
  	}
