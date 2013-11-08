@@ -45,14 +45,12 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		print params
 		@current_user = User.find(params[:id])
 		if @current_user.update_attributes(params[:user])
 			respond_to do |format|
 				format.html{
-					case params[:from_url]
-					when details_user_path(@current_user)
-						redirect_to home_user_path(@current_user)
+					if params[:redirect_url]
+						redirect_to params[:redirect_url]
 					else
 						redirect_to @current_user
 					end

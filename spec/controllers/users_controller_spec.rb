@@ -75,15 +75,13 @@ describe UsersController do
 					User.find(@user).zip.should == @attr[:zip]
 				end
 
-				describe "if from the detail form" do
-
-					it "should redirect to the home page" do
-						@origin = true
-						put :update, :id => @user.id, :user => @attr, :detail_form => @origin
-						
-						response.should redirect_to home_user_path(@user)
-					end
+			
+				it "should redirect to the address in the redirect_url" do
+					
+					put :update, :id => @user.id, :user => @attr, :redirect_url => details_user_path(@user)
+					response.should redirect_to details_user_path
 				end
+				
 
 
 

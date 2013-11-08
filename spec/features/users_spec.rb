@@ -8,16 +8,8 @@ describe "Users" do
     #   fb_login
     # end
 
-    describe "GET /users/details" do
-
-      it "should feature the user image" do
-
-
-      end
-
-    end
-
   end
+
 
   describe "user CREATE" do
 
