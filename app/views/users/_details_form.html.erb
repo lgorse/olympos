@@ -6,9 +6,7 @@
 <ul>
 	 <% if @current_user.first_rating.blank? %>
 	<li>
-		<div class = "rate_skill" id = "<%= @current_user.first_rating %>">
-			<%= user.hidden_field :first_rating, :value => @current_user.first_rating %>
-		</div>
+		<%= render 'layouts/ratings/first_rating', :user => user %>
 
 	</li>
 	 <% end %>

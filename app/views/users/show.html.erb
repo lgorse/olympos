@@ -2,12 +2,8 @@
 <div class = "user_profile round_soft">
 	<%= render 'users/user_photo_partials/user_profile_picture' %>
 	<div class = "user_info">
-		<div class = "main_user_name">
-			<%= @full_name %>
-		</div>
-		<div class = "rating">
-			<div class = "stars empty"><div class = "stars filled_<%= @user.first_rating %>"></div></div>
-		</div>
+		<%= render 'users/user_profile_partials/user_info' %>
+		
 	</div>
 	<div class = "user_location">
 

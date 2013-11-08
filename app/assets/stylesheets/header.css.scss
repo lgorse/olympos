@@ -46,7 +46,15 @@
 
  		.user_settings{
  			height: 100%;
- 			width: 40px;
+ 			width: 100%;
+
+ 			a{
+ 				display: inline;
+
+ 				img{
+ 					margin-right: 5px;
+ 				}
+ 			}
  			
  		}
 
@@ -54,8 +62,7 @@
  			display: none;
  			position: relative;
  			top: 5px;
- 			left: -45px;
- 			width: 75px;
+ 			width: 100%;
  			
  			background: white;
  			border: black 1px solid;

@@ -1,0 +1,10 @@
+<ul class = "user_settings">
+		
+		<%= render 'users/user_photo_partials/small_user_photo' %>
+	
+	<ul class = "nav_menu round">
+		
+		<li class = "nav_menu_line settings"><%= link_to "Settings", edit_user_path(@current_user) %></li>
+		<li class = "nav_menu_line logout"><%= link_to "Log out", logout_path %></li>
+	</ul>
+</ul>
