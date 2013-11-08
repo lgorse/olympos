@@ -39,6 +39,7 @@ class UsersController < ApplicationController
 
 	def change_picture
 		@user = params[:id]
+		print params[:from_url]
 
 
 	end
@@ -49,10 +50,11 @@ class UsersController < ApplicationController
 		if @current_user.update_attributes(params[:user])
 			respond_to do |format|
 				format.html{
-					if params[:detail_form]
-						redirect_to home_user_path(@current_user) 
-					# else
-					# 	redirect_to @current_user
+					case params[:from_url]
+					when details_user_path(@current_user)
+						redirect_to home_user_path(@current_user)
+					else
+						redirect_to @current_user
 					end
 				}
 				format.js
