@@ -33,11 +33,11 @@ require 'spec_helper'
 describe User do
 
 	describe "validations" do
-		before(:each) do
-			@attr = {:firstname => "test", :lastname => "tester",
-				:password => "gobbldygook", 
-				:birthdate => Date.strptime("8/24/70", '%m/%d/%Y'),
-				:email => "test@tester.com", :gender => MALE}
+			before(:each) do
+				@attr = {:firstname => "test", :lastname => "tester",
+					:password => "gobbldygook", 
+					:birthdate => Date.strptime("8/24/70", '%m/%d/%Y'),
+					:email => "test@tester.com", :gender => MALE}
 
 			end
 
@@ -121,6 +121,70 @@ describe User do
 				it "should be required" do
 					@user = User.new(@attr.merge(:gender => ''))
 					@user.should_not be_valid
+
+				end
+
+			end
+
+		end
+
+		describe "attributes" do
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+			end
+
+			describe "invitations" do
+
+			it "should respond to invitations attribute" do
+				@user.should respond_to(:invitations)
+			end
+
+		end
+
+		describe "invitees" do
+
+			it "should respond to invitees attributes" do
+				@user.should respond_to(:invitees)
+			end
+
+			it "should include a user the User has invited" do
+				pending "need to think about invitee method"
+			end
+
+		end
+
+		describe "inviters" do
+
+			it "should respond to inviters attribute" do
+				@user.should respond_to(:inviters)
+			end
+
+			it "should include the user who has invited the User" do
+				pending "need to think about invitee method"
+			end
+
+		end
+
+		end
+
+		describe "methods" do
+
+			describe 'invite' do
+				before(:each) do
+					@user = FactoryGirl.create(:user)
+				end
+
+				
+				it 'should respond to the invite method' do
+					@user.should respond_to (:invite)
+
+				end
+
+				it "should create an invitation" do
+					email = "test@new.testaroo"
+					lambda do
+						@user.invite(email, EMAIL)
+					end.should change(Invitation, :count).by(1)
 
 				end
 

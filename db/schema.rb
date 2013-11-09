@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131104195043) do
+ActiveRecord::Schema.define(:version => 20131109073336) do
+
+  create_table "invitations", :force => true do |t|
+    t.integer  "inviter_id"
+    t.integer  "invitee_id"
+    t.boolean  "accepted"
+    t.text     "message"
+    t.string   "email"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.integer  "method"
+    t.integer  "fb_id",      :limit => 8
+  end
+
+  add_index "invitations", ["email"], :name => "index_invitations_on_email"
+  add_index "invitations", ["fb_id"], :name => "index_invitations_on_fb_id"
+  add_index "invitations", ["invitee_id"], :name => "index_invitations_on_invitee_id"
 
   create_table "users", :force => true do |t|
     t.string   "firstname"

@@ -51,6 +51,12 @@ class User < ActiveRecord::Base
 
   before_validation :downcase_email
 
+  has_many :invitations, :foreign_key => "inviter_id"
+  has_many :reverse_invitations, :foreign_key => "invitee_id", :class_name => "Invitation"
+
+  has_many :invitees, :through => :invitations, :source => :invitee
+  has_many :inviters, :through => :reverse_invitations, :source => :inviter
+
 
 def facebook?
   self.signup_method == FACEBOOK
@@ -63,6 +69,11 @@ end
 def set_fb_large_pic(graph)
   self.fb_pic_large = graph.get_picture(self.fb_id, :type => "large")
 
+end
+
+def invite(email,  method)
+  invitation = Invitation.new(:inviter_id => self.id, :email => email, :method => method)
+  invitation.save
 end
 
 
