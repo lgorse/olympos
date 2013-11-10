@@ -1,9 +1,42 @@
 require 'spec_helper'
 
 describe InvitationsController do
+	render_views
+
+	describe 'GET /new' do
+		before(:each) do
+			@user = FactoryGirl.create(:user)
+			test_sign_in(@user)
+		end
+
+
+		it "should be successful" do
+			get :new
+			response.should be_success
+
+		end
+
+		it "should have an invite form" do
+			get :new
+			response.body.should have_field(:invitation_email)
+
+		end
+
+		it "should authenticate" do
+			session[:user_id] = ''
+			get :new
+			response.should redirect_to root_path
+
+		end
+
+
+
+	end
 
 	describe "GET 'show'" do
 		before(:each) do
+			@user = FactoryGirl.create(:user)
+			test_sign_in(@user)
 			@invitation = FactoryGirl.create(:email_invitation, :clicked => false)
 		end
 
@@ -41,6 +74,7 @@ describe InvitationsController do
 	describe 'POST "create"' do
 		before(:each) do
 				@user = FactoryGirl.create(:user)
+				test_sign_in(@user)
 				@email = "testrandom@test.test"
 				@attr = {:inviter_id => @user.id, :email => @email, :invite_method => EMAIL}
 			end

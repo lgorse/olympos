@@ -1,20 +1,28 @@
 class InvitationsController < ApplicationController
 
+	before_filter :authenticate, :only => [:new, :create]
+
 	def show
 		@invitation = Invitation.find(params[:id])
 		 if @invitation.email == params[:email]
 		 	@invitation.clicked  = true
 		 	@invitation.save
-		 	redirect_to root_path
+		 	sign_out_user
 		 else
-		 	redirect_to root_path
-
+		 	sign_out_user
 		 end
 	end
 
 	def create
 		@invitation = Invitation.new(params[:invitation])
-		@invitation.save
+		if @invitation.save
+			@invitation = Invitation.new
+		end
 		render 'new'
+	end
+
+	def new
+		@invitation = Invitation.new
+
 	end
 end

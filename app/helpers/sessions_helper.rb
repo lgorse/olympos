@@ -2,8 +2,7 @@ module SessionsHelper
 	include LoginHelper, FacebookHelper, UsersHelper
 
 	def sign_in_user
-		session[:user_id] = @current_user.id
-		
+		session[:user_id] = @current_user.id	
 	end
 
 	def valid_user_signin
