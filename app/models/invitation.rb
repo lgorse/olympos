@@ -27,7 +27,7 @@ class Invitation < ActiveRecord::Base
 	belongs_to :inviter, :foreign_key => "inviter_id",  :class_name => "User"
 	belongs_to :invitee, :foreign_key => "invitee_id", :class_name => "User"
 
-	before_validation :downcase_email
+	before_validation :downcase_email, :if => :requires_email?
 
 	after_create :send_email, :if => :requires_email?
 
@@ -55,10 +55,16 @@ class Invitation < ActiveRecord::Base
 	end
 
 	def invitee_has_joined
-		existing_user = User.find_by_email(self.email.downcase)
-		if existing_user
-			errors.add(:email, "has already received an invitation")
-
+		if self.invite_method == EMAIL
+			existing_user = User.find_by_email(self.email.downcase)
+			if existing_user
+				errors.add(:email, "has already received an invitation")
+			end
+		else
+			existing_user = User.find_by_fb_id(self.fb_id)
+			if existing_user
+				errors.add(:fb_id, "has already received an invitation")
+			end
 		end
 	end
 

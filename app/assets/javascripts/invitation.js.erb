@@ -38,11 +38,23 @@ function fb_invitation_autocomplete(friends){
 				link: '<%= FULL_ROOT %>',
 				to: ui.item.value
 			},
-			function(response){
-				if (response == 'success'){
-					//ENTER CALLBACK FOR NEW INVITATION HERE
+			(function(item){
+			return function(response){
+				if (response.success == true){
+					var form = $(".new_invitation_fb");
+					var inviter_id = form.find("#invitation_inviter_id").val();
+					var invite_method = "<%= FACEBOOK %>";
+					var fb_id = item.value;
+					var data = {'invitation': {'inviter_id': inviter_id, 'invite_method': invite_method, 'fb_id': fb_id}}
+					console.log(data);
+					$.ajax({
+						type: 'post',
+						url: '/invitations',
+						data: data
+					});
 				}
 			}
+		})(ui.item)
 			);
 
 			return false;

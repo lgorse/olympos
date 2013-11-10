@@ -88,6 +88,13 @@ describe Invitation do
 				invitation.should be_valid
 			end
 
+			it "should check if a user has joined" do
+				@user2 = FactoryGirl.create(:user, :fb_id =>(@user.id+1))
+				invitation = Invitation.new(@attr.merge(:invite_method => FACEBOOK, :fb_id => @user2.fb_id, :email => ''))
+				invitation.should_not be_valid
+
+			end
+
 		end
 
 	end

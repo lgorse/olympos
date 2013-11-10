@@ -1,4 +1,4 @@
-<%= form_for@invitation, :html => {:class => 'new_invitation_fb'} do |invite| %>
+<%= form_for @invitation, :html => {:class => 'new_invitation_fb', :id => 'new_invitation_fb'} do |invite| %>
 <%= render 'layouts/error_messages', :object => invite.object %>
 <%= invite.hidden_field :inviter_id, :value => @current_user.id %>
 <%= invite.hidden_field :invite_method, :value => FACEBOOK %>
