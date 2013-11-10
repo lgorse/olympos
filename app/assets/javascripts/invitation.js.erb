@@ -39,27 +39,25 @@ function fb_invitation_autocomplete(friends){
 				to: ui.item.value
 			},
 			(function(item){
-			return function(response){
-				if (response.success == true){
-					var form = $(".new_invitation_fb");
-					var inviter_id = form.find("#invitation_inviter_id").val();
-					var invite_method = "<%= FACEBOOK %>";
-					var fb_id = item.value;
-					var data = {'invitation': {'inviter_id': inviter_id, 'invite_method': invite_method, 'fb_id': fb_id}}
-					console.log(data);
-					$.ajax({
-						type: 'post',
-						url: '/invitations',
-						data: data
-					});
+				return function(response){
+					if (response.success == true){
+						var form = $(".new_invitation_fb");
+						var inviter_id = form.find("#invitation_inviter_id").val();
+						var invite_method = "<%= FACEBOOK %>";
+						var fb_id = item.value;
+						var data = {'invitation': {'inviter_id': inviter_id, 'invite_method': invite_method, 'fb_id': fb_id}}
+						console.log(data);
+						$.ajax({
+							type: 'post',
+							url: '/invitations',
+							data: data
+						});
+					}
 				}
-			}
-		})(ui.item)
+			})(ui.item)
 			);
-
 			return false;
 		},
 		minLength: 2
-
 	});
 }

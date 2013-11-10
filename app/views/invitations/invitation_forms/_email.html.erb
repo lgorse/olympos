@@ -1,7 +1,8 @@
 <%= form_for @invitation do |invite| %>
 <%= render 'layouts/error_messages', :object => invite.object %>
+<%= label_tag "E-mail" %>
 <%= invite.hidden_field :inviter_id, :value => @current_user.id %>
 <%= invite.hidden_field :invite_method, :value => EMAIL %>
-<%= invite.text_field :email, :placeholder => "Enter email" %>
+<%= invite.text_field :email, :placeholder => "Enter friend's e-mail" %>
 <%= invite.submit "Invite" %>
 <% end %>
