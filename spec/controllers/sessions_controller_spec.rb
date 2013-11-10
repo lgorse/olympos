@@ -54,7 +54,6 @@ describe SessionsController do
 				bad_email = @user.email << "n"
 				@attr = {:email => bad_email, :password => @user.password}
 				post :create, :session => @attr
-
 			end
 
 			it 'should render the new session view' do

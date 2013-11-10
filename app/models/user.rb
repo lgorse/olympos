@@ -72,7 +72,7 @@ def set_fb_large_pic(graph)
 end
 
 def invite(email,  method)
-  invitation = Invitation.new(:inviter_id => self.id, :email => email, :method => method)
+  invitation = Invitation.new(:inviter_id => self.id, :email => email, :invite_method => method)
   invitation.save
 end
 

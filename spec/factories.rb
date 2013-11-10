@@ -15,3 +15,22 @@ FactoryGirl.define do
 	end
 end
 
+FactoryGirl.define do
+	factory :invitation do
+		association :inviter, factory: :user
+
+		factory :email_invitation, parent: :invitation do
+			email 	{generate(:email)}
+			invite_method	EMAIL
+		end
+
+		factory :fb_invitation do
+			fb_id 	2
+			invite_method	FACEBOOK
+		end
+	end
+
+end
+
+
+

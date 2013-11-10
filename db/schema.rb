@@ -19,10 +19,11 @@ ActiveRecord::Schema.define(:version => 20131109073336) do
     t.boolean  "accepted"
     t.text     "message"
     t.string   "email"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
-    t.integer  "method"
-    t.integer  "fb_id",      :limit => 8
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "invite_method"
+    t.integer  "fb_id",         :limit => 8
+    t.boolean  "clicked"
   end
 
   add_index "invitations", ["email"], :name => "index_invitations_on_email"

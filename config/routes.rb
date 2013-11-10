@@ -13,7 +13,7 @@ resources :users do
 	end
 end
 
-resources :sessions
+resources :sessions, :invitations
 	
 
 match '/logout' => 'sessions#destroy'

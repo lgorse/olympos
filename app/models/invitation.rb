@@ -2,42 +2,48 @@
 #
 # Table name: invitations
 #
-#  id         :integer          not null, primary key
-#  inviter_id :integer
-#  invitee_id :integer
-#  accepted   :boolean
-#  message    :text
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  method     :integer
-#  fb_id      :integer
+#  id            :integer          not null, primary key
+#  inviter_id    :integer
+#  invitee_id    :integer
+#  accepted      :boolean
+#  message       :text
+#  email         :string(255)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  invite_method :integer
+#  fb_id         :integer
+#  clicked       :boolean
 #
 
 class Invitation < ActiveRecord::Base
-	attr_accessible :accepted, :email, :invitee_id, :inviter_id, :message, :method, :fb_id
+	attr_accessible :accepted, :email, :invitee_id, :inviter_id, :message, :invite_method, :fb_id, :clicked
 
 	validates :inviter_id, :presence => true
 	validates :email, :presence => true, :format => {:with => VALID_EMAIL}, :if => :requires_email?
 	validates :fb_id, :presence => true, :if => :facebook_method?
 	validate :invitee_has_joined, :if => :new_invitation?
-	validates :method, :presence => true
+	validates :invite_method, :presence => true
 
 	belongs_to :inviter, :foreign_key => "inviter_id",  :class_name => "User"
 	belongs_to :invitee, :foreign_key => "invitee_id", :class_name => "User"
 
 	before_validation :downcase_email
 
+	after_create :send_email, :if => :requires_email?
 
+
+	def send_email
+		InviteMailer.invite_email(self).deliver
+	end
 
 	private
 
 	def requires_email?
-		self.method == EMAIL
+		self.invite_method == EMAIL
 	end
 
 	def facebook_method?
-		self.method == FACEBOOK
+		self.invite_method == FACEBOOK
 	end
 
 	def new_invitation?
@@ -51,7 +57,7 @@ class Invitation < ActiveRecord::Base
 	def invitee_has_joined
 		existing_user = User.find_by_email(self.email.downcase)
 		if existing_user
-			errors.add(:email, "has already received an invitation for this community")
+			errors.add(:email, "has already received an invitation")
 
 		end
 	end

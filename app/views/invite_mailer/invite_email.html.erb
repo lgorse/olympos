@@ -1,0 +1,14 @@
+<h1>Hello invitation</h1>
+<h2><%= "#{@inviter.firstname} wants you to join him on #{APP_NAME}" %></h2>
+<h3><%= "Join #{APP_NAME} now and find hundreds of other squash players like you in your area" %></h3>
+<%= image_tag @inviter.photo.url(:large), :class => "user_profile_pic custom round"  %>
+
+	<%# link_to 'join now', invitation_url(@invitation, :host => Addressable::URI.parse(FULL_ROOT).host, :clicked => true)  %>
+	<%= link_to 'Join now', invitation_url(@invitation, :email => @invitation.email, :host => @host)  %>
+	
+
+<ul>
+	<li><%= "Find people with a similar background to yours" %></li>
+	<li><%= "Play at the right level for you" %></li>
+	<li><%= "Keep track of your matches - #{APP_NAME} will analyze your results to improve your game!" %></li>
+</ul>
