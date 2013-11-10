@@ -1,0 +1,56 @@
+$(document).ready(function(){
+
+	if (".new_invitation_fb"){
+		access_token = $.cookie("fb_access");
+		
+		fb_invitation(access_token);
+	}
+
+});
+
+function fb_invitation(access_token){
+	
+	var fb_url = "https://graph.facebook.com/me/friends?access_token=" + access_token
+	$.ajax({
+		url: fb_url,
+		dataType: "jsonp",
+		success: function(friends){
+			fb_invitation_autocomplete(friends);
+		}
+
+	});
+
+
+}
+
+function fb_invitation_autocomplete(friends){
+	var formatted = [];
+	for(var i = 0; i< friends.data.length; i++) {
+		if (friends.data[i].name.toLowerCase().indexOf($('#fb_name').val().toLowerCase()) >= 0){
+			formatted.push({
+				label: friends.data[i].name,
+				value: friends.data[i].id
+			});
+		}
+
+	}
+		$("#fb_name").autocomplete({
+			source: function(request, response){
+				var matches = $.map(formatted, function(tag){
+					if (tag.label.toUpperCase().indexOf(request.term.toUpperCase()) === 0){
+						return tag;
+					}
+				});
+				response(matches);
+			},
+			select: function(event, ui) {
+						
+						$('#fb_name').val(ui.item.label)
+						$('#invitation_fb_id').val(ui.item.value)
+						// Prevent the value from being inserted in "#name"
+						return false;
+					},
+					minLength: 2
+
+				});
+	}

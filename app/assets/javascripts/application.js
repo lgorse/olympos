@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require jquery.ui.dialog
 //= require jquery.ui.progressbar
+//= require jquery.cookie.js
+//= require jquery.ui.autocomplete
 //= require_tree .
