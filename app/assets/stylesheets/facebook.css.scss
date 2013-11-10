@@ -1,0 +1,12 @@
+.fb{
+	border: 1px #062C50 solid;	
+	color: white;
+	font-weight: bold;
+	background: -webkit-linear-gradient(rgb(79, 128, 181) 0px, rgb(50, 92, 153) 70%) ; /* For Safari */
+	background: -o-linear-gradient(rgb(79, 128, 181) 0px, rgb(50, 92, 153) 70%); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(rgb(79, 128, 181) 0px, rgb(50, 92, 153) 70%); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(rgb(79, 128, 181) 0px, rgb(50, 92, 153) 70%); /* Standard syntax */
+	text-decoration: none;
+	vertical-align: middle;
+	display: inline-block;
+}
