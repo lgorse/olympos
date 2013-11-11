@@ -38,21 +38,32 @@
  		height: 100%;
  		float: right;
  		margin-right: 50px;
+ 		display: inline-block;
 
- 		.my_profile_button{
- 			vertical-align: middle;
- 			margin: 0px auto;
+ 		.invite_new_users{
+ 			margin-right: 10px;
  		}
 
  		.user_settings{
  			height: 100%;
  			width: 100%;
+ 			display: inline;
+
+ 			.my_profile_button{
+ 			vertical-align: middle;
+ 			margin: 0px auto;
+ 			display: inline-block;
+ 			margin-right: 5px;
+ 		}
+
 
  			a{
  				display: inline;
 
  				img{
  					margin-right: 5px;
+ 					display: inline;
+ 					
  				}
  			}
  			

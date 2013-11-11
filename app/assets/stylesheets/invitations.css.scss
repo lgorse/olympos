@@ -2,22 +2,47 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.new_invitations{
+	border: 1px solid #C2C2CF;
+	width: 500px;
+	height: 150px;
+	margin: 0px auto;
+	padding: 20px;
 
-.new_invitation_fb{
-
-	display: inline-block;
-
-	.invite_fb_img{
-		vertical-align: middle;
+	li.invite_method{
+		margin-top: 10px;
 	}
 
+	form {
+		label{
+			display: inline-block;
+			width: 50px;
+		}
+
+		input[type=text]{
+			width: 300px;
+		}
+
+		img{
+			vertical-align: middle;
+		}
+
 }
+}
+
+
+
+
 
 .us_squash_invite{
 	vertical-align: middle;
+	display: inline-block;
+	margin: 10px auto auto 10px;
 
 	img{
 		vertical-align: middle;
+		margin-right: 3px;
+
 	}
 
 
