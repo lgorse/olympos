@@ -46,11 +46,16 @@ function fb_invitation_autocomplete(friends){
 						var invite_method = "<%= FACEBOOK %>";
 						var fb_id = item.value;
 						var data = {'invitation': {'inviter_id': inviter_id, 'invite_method': invite_method, 'fb_id': fb_id}}
-						console.log(data);
+						
 						$.ajax({
 							type: 'post',
 							url: '/invitations',
 							data: data
+						}).done(function(data){
+								$("#fb_name").val('');
+								if ($(".error_explanation")){
+									$(".error_explanation").empty();
+								}
 						});
 					}
 				}

@@ -2,7 +2,7 @@
 <%= invite.hidden_field :inviter_id, :value => @current_user.id %>
 <%= invite.hidden_field :invite_method, :value => FACEBOOK %>
 <%= invite.hidden_field :fb_id %>
-<%= image_tag 'FB_logo_blue_29.png', :class => "invite_fb_img" %>
+<%= image_tag 'FB_logo_blue_29.png', :class => "invite_fb_img"%>
 <%= text_field_tag :fb_name, nil, :placeholder => "Enter Facebook friend" %>
 <%= invite.submit 'Invite', :class => "fb_invite_submit round fb" %>
 <% end %>

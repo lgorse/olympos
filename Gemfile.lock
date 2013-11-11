@@ -82,6 +82,7 @@ GEM
       multipart-post (~> 1.2.0)
     ffi (1.9.3)
     hike (1.2.3)
+    httpclient (2.3.4.1)
     i18n (0.6.5)
     journey (1.0.4)
     jquery-rails (3.0.4)
@@ -200,10 +201,12 @@ DEPENDENCIES
   debugger
   factory_girl_rails
   faker
+  httpclient
   jquery-rails
   jquery-ui-rails
   koala
   launchy
+  nokogiri
   paperclip (~> 3.0)
   pg
   rails (= 3.2.11)

@@ -13,7 +13,14 @@ resources :users do
 	end
 end
 
-resources :sessions, :invitations
+resources :sessions
+
+resources :invitations do
+	collection do
+		get :ussquash
+	end
+
+end
 	
 
 match '/logout' => 'sessions#destroy'
