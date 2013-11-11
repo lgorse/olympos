@@ -11,14 +11,18 @@ $total: $numStars * $steps;
 }
 
 @mixin stars_values{
-	height: 25px;
-	background-size: $starWidth;
+	
 	vertical-align: middle;
 	padding: 0px;
 	margin-left: 0px;
 	position: relative;
-	float: left;
-	
+	float: left;	
+}
+
+@mixin large_stars{
+	height: $starWidth;
+	background-size: $starWidth;
+
 }
 
 .stars{
@@ -29,6 +33,7 @@ $total: $numStars * $steps;
 		width: $numStars * $starWidth;
 		background: url(/assets/rating/star_empty.png) repeat-x top left;
 		@include stars_values;
+		@include large_stars;
 	}
 
 	
@@ -39,21 +44,59 @@ $total: $numStars * $steps;
 		&.filled_#{$i} {@include filled($i);
 			background: url(/assets/rating/star_full.png) repeat-x top left;
 			@include stars_values;
-
-			}
+			@include large_stars;
+		}
 	}
 }
 
 .input_stars{
 	@include stars_values;
+	@include large_stars;
 	margin: 0px;
 	width: $starWidth;
 	background-image: url(/assets/rating/star_empty.png);
 	background-repeat: no-repeat;
 
 	&.full{
-	background-image: url(/assets/rating/star_full.png);
-}
+		background-image: url(/assets/rating/star_full.png);
+	}
 	
 }
 
+$small_star: 20px;
+
+
+@mixin small_filled($n: 0){
+	width: ($small_star / $steps) * $n;
+}
+
+@mixin small_stars{
+	height: $small_star;
+	background-size: $small_star;	
+}
+
+.small_stars{
+	
+
+	&.empty{
+		background-position: $starOffset;
+		width: $numStars * $small_star;
+		background: url(/assets/rating/star_empty.png) repeat-x top left;
+		@include stars_values;
+		@include small_stars
+
+	}
+
+	
+	
+	
+
+	@for $i from 0 through ($total){
+		&.filled_#{$i} {@include filled($i);
+			background: url(/assets/rating/star_full.png) repeat-x top left;
+			@include stars_values;
+			@include small_stars;
+
+		}
+	}
+}

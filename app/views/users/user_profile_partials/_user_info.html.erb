@@ -6,8 +6,6 @@
 		<%= render 'layouts/ratings/first_rating', :user => user %>
 	<% end %>
 <% else %>
-	<div class = "rating">
-		<div class = "stars empty"><div class = "stars filled_<%= @user.first_rating %>"></div></div>
-	</div>
+	<%= render 'layouts/ratings/user_rating', :star_size => "stars", :user => @user %>
 <% end %>
 

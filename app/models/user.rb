@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :photo, styles: {
     square: '30x30>',
-    small: '50x50>',
+    small: '75x75>',
     large: '150x300>'
   },
   :default_url => "/assets/profile/:gender/:style/missing.png"
@@ -68,7 +68,10 @@ end
 
 def set_fb_large_pic(graph)
   self.fb_pic_large = graph.get_picture(self.fb_id, :type => "large")
+end
 
+def set_fb_small_pic(graph)
+  self.fb_pic_small = graph.get_picture(self.fb_id, :type => "small")
 end
 
 def invite(email,  method)
