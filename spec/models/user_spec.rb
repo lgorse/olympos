@@ -53,6 +53,13 @@ describe User do
 					@user.should_not be_valid
 				end
 
+				it 'should create a full name from first and last' do
+					@user = User.new(@attr)
+					@user.save
+					@user.fullname.should == "#{@user.firstname} #{@user.lastname}"
+
+				end
+
 			end
 
 			describe "birthdate" do

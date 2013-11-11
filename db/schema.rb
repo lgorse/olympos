@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109073336) do
+ActiveRecord::Schema.define(:version => 20131111195944) do
 
   create_table "invitations", :force => true do |t|
     t.integer  "inviter_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20131109073336) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "fullname"
   end
 
   add_index "users", ["fb_id"], :name => "index_users_on_fb_id"

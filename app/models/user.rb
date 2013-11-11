@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   validates :gender, :presence =>  true
   validate :age_above_13, :unless => "birthdate.nil?"
 
-  before_validation :downcase_email
+  before_validation :downcase_email, :set_full_name
 
   has_many :invitations, :foreign_key => "inviter_id"
   has_many :reverse_invitations, :foreign_key => "invitee_id", :class_name => "Invitation"
@@ -88,6 +88,10 @@ private
 
   def downcase_email
   	self.email = self.email.downcase
+  end
+
+  def set_full_name
+    self.fullname = "#{self.firstname} #{self.lastname}"
   end
 
 end
