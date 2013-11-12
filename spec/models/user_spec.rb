@@ -26,6 +26,7 @@
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  fullname           :string(255)
 #
 
 require 'spec_helper'
@@ -33,11 +34,11 @@ require 'spec_helper'
 describe User do
 
 	describe "validations" do
-			before(:each) do
-				@attr = {:firstname => "test", :lastname => "tester",
-					:password => "gobbldygook", 
-					:birthdate => Date.strptime("8/24/70", '%m/%d/%Y'),
-					:email => "test@tester.com", :gender => MALE}
+		before(:each) do
+			@attr = {:firstname => "test", :lastname => "tester",
+				:password => "gobbldygook", 
+				:birthdate => Date.strptime("8/24/70", '%m/%d/%Y'),
+				:email => "test@tester.com", :gender => MALE}
 
 			end
 
@@ -140,37 +141,184 @@ describe User do
 				@user = FactoryGirl.create(:user)
 			end
 
+
+
 			describe "invitations" do
 
-			it "should respond to invitations attribute" do
-				@user.should respond_to(:invitations)
+				it "should respond to invitations attribute" do
+					@user.should respond_to(:invitations)
+				end
+
+
+
+				describe "invitees" do
+
+					it "should respond to invitees attributes" do
+						@user.should respond_to(:invitees)
+					end
+
+					it "should include a user the User has invited" do
+						pending "need to think about invitee method"
+					end
+
+				end
+
+				describe "inviters" do
+
+					it "should respond to inviters attribute" do
+						@user.should respond_to(:inviters)
+					end
+
+					it "should include the user who has invited the User" do
+						pending "need to think about invitee method"
+					end
+
+				end
+
 			end
 
-		end
+			describe "friendships" do
 
-		describe "invitees" do
+				describe "friendships" do
 
-			it "should respond to invitees attributes" do
-				@user.should respond_to(:invitees)
+					it "should respond to a friendships method" do
+						@user.should respond_to(:friendships)
+					end
+
+					it 'should respond to a frienders method' do
+						@user.should respond_to(:frienders)
+
+					end
+
+					it "should respond to a friendees method" do
+						@user.should respond_to(:friendees)
+					end
+
+					describe "friend method" do
+						before(:each) do
+							@user2 = FactoryGirl.create(:user)
+						end
+
+						it "should respond to a friend method" do
+							@user.should respond_to(:friend)
+
+						end
+
+						it "should create a new friendship" do
+							lambda do
+								@user.friend(@user2)
+							end.should change(Friendship, :count).by(1)
+
+						end
+
+					end
+
+					describe "accept method" do
+						before(:each) do
+							@user2 = FactoryGirl.create(:user)
+							@friendship = Friendship.create(:friender_id => @user.id, :friended_id => @user2.id)
+						end
+
+						it 'should have an accept method' do
+							@user.should respond_to(:accept)
+
+						end
+
+						it 'should create the reverse relationship' do
+							@user2.accept(@user)
+							Friendship.find_by_friender_id_and_friended_id(@user.id, @user2.id).mutual?.should == true
+						end
+
+					end
+
+					describe "unfriend method" do
+						before(:each) do
+							@user2 = FactoryGirl.create(:user)
+							@friendship = Friendship.create(:friender_id => @user.id, :friended_id => @user2.id)
+						end
+
+						it "should respond to a friend method" do
+							@user.should respond_to(:unfriend)
+
+						end
+
+						it "should destroy the friendship" do
+							@user.unfriend(@user2)
+							@user.friendships.where(:friended_id => @user2.id).should be_blank
+						end
+
+						it "should destroy the reverse friendship if mutual" do
+							@user2.accept(@user)
+							@user.unfriend(@user2)
+							@user2.friendships.where(:friender_id => @user2.id).should be_blank
+
+						end
+
+					end
+
+					describe "friend? method" do
+						before(:each) do
+							@user2 = FactoryGirl.create(:user)
+						end
+
+						it "should respond to a friend? method" do
+							@user.should respond_to(:friend?)
+
+						end
+
+						it "should return false if the user is not friends" do
+							@user.friend?(@user2).should == false
+
+						end
+
+						it 'should return false if the user has not accepted' do
+							@user.friend(@user2)
+							@user.friend?(@user2).should == false
+
+						end
+
+						it "should return true if the friendship is mutual" do
+							@user.friend(@user2)
+							@user2.accept(@user)
+							@user.friend?(@user2).should == true
+
+						end
+
+
+
+					end
+
+					describe 'friends' do
+						before(:each) do
+							@friend = FactoryGirl.create(:user)
+						end
+
+
+
+						it "should respond to a friends method" do
+							@user.should respond_to(:friends)
+
+						end
+
+						it "should return users who have responded to the request" do
+							@user.friend(@friend)
+							@friend.accept(@user)
+							@user.friends.should include(@friend)
+						end
+
+						it "should not return users who have not responded to the request" do
+							@user.friend(@friend)
+							@user.friends.should_not include(@friend)
+
+						end
+
+					end
+
+				end
+
+
+
 			end
-
-			it "should include a user the User has invited" do
-				pending "need to think about invitee method"
-			end
-
-		end
-
-		describe "inviters" do
-
-			it "should respond to inviters attribute" do
-				@user.should respond_to(:inviters)
-			end
-
-			it "should include the user who has invited the User" do
-				pending "need to think about invitee method"
-			end
-
-		end
 
 		end
 

@@ -26,67 +26,100 @@
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  fullname           :string(255)
 #
 
 class User < ActiveRecord::Base
   attr_accessible :available, :birthdate, :fb_pic_large, :fb_pic_small, :first_rating, 
-  				  :firstname, :gender, :has_played, :lastname, :location, :password_digest, 
-  				  :password, :email, :zip, :fb_id, :signup_method, :photo
+  :firstname, :gender, :has_played, :lastname, :location, :password_digest, 
+  :password, :email, :zip, :fb_id, :signup_method, :photo
   has_secure_password
 
   has_attached_file :photo, styles: {
     square: '30x30>',
     small: '75x75>',
     large: '150x300>'
-  },
-  :default_url => "/assets/profile/:gender/:style/missing.png"
+    },
+    :default_url => "/assets/profile/:gender/:style/missing.png"
 
-  validates :firstname, :presence => true
-  validates :lastname, :presence => true
-  validates :email, :presence => true, :format => {:with => VALID_EMAIL}, :uniqueness => {:case_sensitive => false}
-  validates :password, :length => {:minimum => 6}, :on => :create
-  validates :birthdate, :presence => true
-  validates :gender, :presence =>  true
-  validate :age_above_13, :unless => "birthdate.nil?"
+    validates :firstname, :presence => true
+    validates :lastname, :presence => true
+    validates :email, :presence => true, :format => {:with => VALID_EMAIL}, :uniqueness => {:case_sensitive => false}
+    validates :password, :length => {:minimum => 6}, :on => :create
+    validates :birthdate, :presence => true
+    validates :gender, :presence =>  true
+    validate :age_above_13, :unless => "birthdate.nil?"
 
-  before_validation :downcase_email, :set_full_name
+    before_validation :downcase_email, :set_full_name
 
-  has_many :invitations, :foreign_key => "inviter_id"
-  has_many :reverse_invitations, :foreign_key => "invitee_id", :class_name => "Invitation"
+    has_many :invitations, :foreign_key => "inviter_id"
+    has_many :reverse_invitations, :foreign_key => "invitee_id", :class_name => "Invitation"
 
-  has_many :invitees, :through => :invitations, :source => :invitee
-  has_many :inviters, :through => :reverse_invitations, :source => :inviter
+    has_many :invitees, :through => :invitations, :source => :invitee
+    has_many :inviters, :through => :reverse_invitations, :source => :inviter
 
-
-def facebook?
-  self.signup_method == FACEBOOK
-end
-
-def set_fb_square_pic(graph)
-  self.fb_pic_square = graph.get_picture(self.fb_id, :type => "square", :height => 30, :width => 30)
-end
-
-def set_fb_large_pic(graph)
-  self.fb_pic_large = graph.get_picture(self.fb_id, :type => "large")
-end
-
-def set_fb_small_pic(graph)
-  self.fb_pic_small = graph.get_picture(self.fb_id, :type => "small")
-end
-
-def invite(email,  method)
-  invitation = Invitation.new(:inviter_id => self.id, :email => email, :invite_method => method)
-  invitation.save
-end
+    has_many :friendships, :foreign_key => "friender_id", :dependent => :destroy
+    has_many :reverse_friendships, :foreign_key => "friended_id", :class_name => "Friendship", :dependent => :destroy
+    has_many :friendees, :through => :friendships, :source => :friended
+    has_many :frienders, :through => :friendships, :source => :friender
 
 
+    def facebook?
+      self.signup_method == FACEBOOK
+    end
+
+    def set_fb_square_pic(graph)
+      self.fb_pic_square = graph.get_picture(self.fb_id, :type => "square", :height => 30, :width => 30)
+    end
+
+    def set_fb_large_pic(graph)
+      self.fb_pic_large = graph.get_picture(self.fb_id, :type => "large")
+    end
+
+    def set_fb_small_pic(graph)
+      self.fb_pic_small = graph.get_picture(self.fb_id, :type => "small")
+    end
+
+    def invite(email,  method)
+      invitation = Invitation.new(:inviter_id => self.id, :email => email, :invite_method => method)
+      invitation.save
+    end
+
+    def friend(friendee)
+      self.friendships.create(:friended_id => friendee.id)
+    end
+
+    def accept(friender)
+      friendship = Friendship.find_by_friender_id_and_friended_id(friender.id, self.id)
+      friendship.make_mutual
+    end
+
+    def unfriend(friendee)
+      friendship = self.friendships.find_by_friended_id(friendee.id)
+      if friendship.mutual?
+        friendship.reverse.destroy
+      end
+      friendship.destroy
+    end
+
+    def friend?(friend)
+      friendship = Friendship.find_by_friender_id_and_friended_id(self.id, friend.id)
+      friendship ? friendship.mutual? : false
+    end
 
 
-private
-  def age_above_13
-  	if self.birthdate > 13.years.ago.to_date
-  		errors.add(:birthdate, "cannot be less than 13 years old")
-  	end
+    def friends
+      self.friendships.mutual.pluck(:friended_id).map{|id| User.find(id)}
+    end
+
+
+
+
+    private
+    def age_above_13
+     if self.birthdate > 13.years.ago.to_date
+      errors.add(:birthdate, "cannot be less than 13 years old")
+    end
   end
 
   def downcase_email
