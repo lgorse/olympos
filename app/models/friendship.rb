@@ -22,6 +22,7 @@ class Friendship < ActiveRecord::Base
   belongs_to :friended, :foreign_key => "friended_id", :class_name => "User"
 
   scope :mutual, -> {where(confirmed: true)}
+  scope :not_accepted, -> {where(confirmed: false)}
 
   def mutual?
   	self.confirmed

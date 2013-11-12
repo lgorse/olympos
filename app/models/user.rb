@@ -103,13 +103,26 @@ class User < ActiveRecord::Base
     end
 
     def friend?(friend)
-      friendship = Friendship.find_by_friender_id_and_friended_id(self.id, friend.id)
+      friendship = self.friendship(friend)
       friendship ? friendship.mutual? : false
+    end
+
+    def friendship(friend)
+      Friendship.find_by_friender_id_and_friended_id(self.id, friend.id)
     end
 
 
     def friends
       self.friendships.mutual.pluck(:friended_id).map{|id| User.find(id)}
+    end
+
+    def friend_requests
+      self.friendships.not_accepted.pluck(:friended_id).map{|id| User.find(id)}
+    end
+
+    def friends_pending
+      self.reverse_friendships.not_accepted.pluck(:friender_id).map{|id| User.find(id)}
+
     end
 
 
