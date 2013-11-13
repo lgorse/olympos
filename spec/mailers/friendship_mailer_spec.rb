@@ -40,7 +40,7 @@ describe FriendshipMailer do
 			end
 
 			it 'should have a link back to the friender profile' do
-				@mailer.body.should have_link("Visit #{@friendship.friender.firstname}\'s profile", :href => FULL_ROOT+ 'users/' +@friendship.friender.id.to_s)
+				@mailer.body.should have_link("Visit #{@friendship.friender.firstname}\'s profile", user_path(@friendship.friender, :redirect_url => user_path(@friendship.friender)))
 
 			end
 

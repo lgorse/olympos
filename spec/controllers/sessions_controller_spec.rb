@@ -68,6 +68,20 @@ describe SessionsController do
 
 		end
 
+		describe "if there is a redirect url" do
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+				@attr = {:email => @user.email, :password => @user.password}
+				post :create, :session => @attr, :redirect_url => user_path(@user)
+			end
+
+			it "should redirect to the redireect url" do
+				response.should redirect_to user_path(@user)
+
+			end
+
+		end
+
 	end
 
 	describe "DELETE 'Destroy'" do

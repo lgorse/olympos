@@ -1,6 +1,7 @@
 <%= form_for(:session, :url => :sessions) do |session|%>
 <%= render 'layouts/flash', :flash => flash %>
 <ul>
+	<%= hidden_field_tag :redirect_url, home_users_path%>
 	<li>
 <%= session.text_field :email, :placeholder => 'email' %>
 </li>

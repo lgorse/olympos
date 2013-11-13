@@ -76,6 +76,7 @@ $.fn.fb_logger_redirect = function(response){
 }
 
 function connected_fb_user(response){
+	
 	FB.api('me?fields=picture.type(square),name', function(api_response){
 		img_url = api_response.picture.data.url;
 		name = api_response.name;
@@ -94,16 +95,30 @@ function connected_fb_user(response){
 
 }
 
+
+
 function connected_fb_user_login(response){
+	var form = document.createElement('form');
+	form.method = 'post';
+	form.action = '<%= FULL_ROOT %>sessions';
+	
+	var redirect_url = getURLParameter("redirect_url");
+	if (redirect_url){
+		var redirect_input = document.createElement('input');
+		redirect_input.type = 'hidden';
+		redirect_input.name = 'redirect_url';
+		redirect_input.value = redirect_url;
+		form.appendChild(redirect_input);
+	}
+	
 	var input = document.createElement('input');
 	input.type = 'hidden';
 	input.name = 'signed_request';
 	input.value = response.authResponse['signedRequest'];
-	var form = document.createElement('form');
-	form.method = 'post';
-	form.action = '<%= FULL_ROOT %>sessions';
 	form.appendChild(input);
+
 	form.submit();
+	
 }
 
 function signup_user_to_app(response){

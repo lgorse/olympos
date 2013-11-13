@@ -1,5 +1,5 @@
 module SessionsHelper
-	include LoginHelper, FacebookHelper, UsersHelper
+	include FacebookHelper, UsersHelper
 
 	def sign_in_user
 		session[:user_id] = @current_user.id	
@@ -7,7 +7,11 @@ module SessionsHelper
 
 	def valid_user_signin
 		sign_in_user
+		if params[:redirect_url]
+			redirect_to params[:redirect_url]
+		else
 		redirect_to home_users_path
+	end
 	end
 
 	def signed_in?
@@ -17,7 +21,7 @@ module SessionsHelper
 	def sign_out_user
 		reset_session
 		cookies.clear
-		redirect_to root_path and return
+		redirect_to root_path(:redirect_url => params[:redirect_url]) and return
 	end
 
 

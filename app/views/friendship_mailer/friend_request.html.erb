@@ -7,4 +7,4 @@
 			<%= image_tag @friender.photo.url(:large), :class => "user_profile_pic custom round"  %>
 		<% end %>
 <h3><%= "#{@friender.fullname}" %></h3>
-<%= link_to "Visit #{@friender.firstname}\'s profile", user_url(@friender, :host => @host) %>
+<%= link_to "Visit #{@friender.firstname}\'s profile", user_url(@friender, :redirect_url => user_path(@friender), :host => @host) %>
