@@ -134,9 +134,22 @@ describe User do
 
 			end
 
+
 		end
 
 		describe "attributes" do
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+			end
+
+			it 'should have a friend request email ok attribute' do
+				@user.should respond_to(:friend_request_email)
+			end
+
+
+		end
+
+		describe "associations" do
 			before(:each) do
 				@user = FactoryGirl.create(:user)
 			end
@@ -408,3 +421,4 @@ describe User do
 
 		end
 	end
+

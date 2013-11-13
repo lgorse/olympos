@@ -17,3 +17,4 @@ FACEBOOK = 1
 VALID_EMAIL = /[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 FACEBOOK_VALID_EMAIL = /^([\w!.%+\-])+@([\w\-])+(?:\.[\w\-]+)+$/
 
+DEFAULT_FROM = "olympos.help@gmail.com"

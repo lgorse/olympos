@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131112074212) do
+ActiveRecord::Schema.define(:version => 20131113180929) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "friender_id"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20131112074212) do
     t.string   "firstname"
     t.string   "lastname"
     t.string   "password_digest"
-    t.integer  "fb_id",              :limit => 8
+    t.integer  "fb_id",                :limit => 8
     t.date     "birthdate"
     t.integer  "zip"
     t.float    "lat"
@@ -51,10 +51,10 @@ ActiveRecord::Schema.define(:version => 20131112074212) do
     t.string   "fb_pic_large"
     t.integer  "gender"
     t.integer  "first_rating"
-    t.boolean  "has_played",                      :default => false
+    t.boolean  "has_played",                        :default => false
     t.text     "available_times"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.string   "email"
     t.integer  "signup_method"
     t.string   "fb_pic_square"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20131112074212) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.string   "fullname"
+    t.boolean  "friend_request_email",              :default => true
   end
 
   add_index "users", ["fb_id"], :name => "index_users_on_fb_id"

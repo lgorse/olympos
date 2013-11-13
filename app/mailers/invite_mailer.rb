@@ -1,5 +1,5 @@
 class InviteMailer < ActionMailer::Base
-  default from: "olympos.help@gmail.com"
+  default from: DEFAULT_FROM
 
   def invite_email(invitation)
 	@invitation = invitation

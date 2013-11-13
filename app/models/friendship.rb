@@ -24,6 +24,8 @@ class Friendship < ActiveRecord::Base
   scope :mutual, -> {where(confirmed: true)}
   scope :not_accepted, -> {where(confirmed: false)}
 
+  after_create :email_request
+
   def mutual?
   	self.confirmed
   end
@@ -35,6 +37,11 @@ class Friendship < ActiveRecord::Base
 
   def reverse
   	Friendship.find_by_friender_id_and_friended_id(self.friended_id, self.friender_id)
+  end
+
+  private
+  def email_request
+    FriendshipMailer.friend_request(self).deliver
   end
 
 end
