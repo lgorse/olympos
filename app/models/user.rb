@@ -2,37 +2,39 @@
 #
 # Table name: users
 #
-#  id                 :integer          not null, primary key
-#  firstname          :string(255)
-#  lastname           :string(255)
-#  password_digest    :string(255)
-#  fb_id              :integer
-#  birthdate          :date
-#  zip                :integer
-#  lat                :float
-#  long               :float
-#  fb_pic_small       :string(255)
-#  fb_pic_large       :string(255)
-#  gender             :integer
-#  first_rating       :integer
-#  has_played         :boolean          default(FALSE)
-#  available_times    :text
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  email              :string(255)
-#  signup_method      :integer
-#  fb_pic_square      :string(255)
-#  photo_file_name    :string(255)
-#  photo_content_type :string(255)
-#  photo_file_size    :integer
-#  photo_updated_at   :datetime
-#  fullname           :string(255)
+#  id                   :integer          not null, primary key
+#  firstname            :string(255)
+#  lastname             :string(255)
+#  password_digest      :string(255)
+#  fb_id                :integer
+#  birthdate            :date
+#  zip                  :integer
+#  lat                  :float
+#  long                 :float
+#  fb_pic_small         :string(255)
+#  fb_pic_large         :string(255)
+#  gender               :integer
+#  first_rating         :integer
+#  has_played           :boolean          default(FALSE)
+#  available_times      :text
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  email                :string(255)
+#  signup_method        :integer
+#  fb_pic_square        :string(255)
+#  photo_file_name      :string(255)
+#  photo_content_type   :string(255)
+#  photo_file_size      :integer
+#  photo_updated_at     :datetime
+#  fullname             :string(255)
+#  friend_request_email :boolean          default(TRUE)
 #
 
 class User < ActiveRecord::Base
   attr_accessible :available, :birthdate, :fb_pic_large, :fb_pic_small, :first_rating, 
   :firstname, :gender, :has_played, :lastname, :location, :password_digest, 
-  :password, :email, :zip, :fb_id, :signup_method, :photo
+  :password, :email, :zip, :fb_id, :signup_method, :photo, :friend_request_email
+  
   has_secure_password
 
   has_attached_file :photo, styles: {
@@ -70,14 +72,17 @@ class User < ActiveRecord::Base
 
     def set_fb_square_pic(graph)
       self.fb_pic_square = graph.get_picture(self.fb_id, :type => "square", :height => 30, :width => 30)
+      self.save
     end
 
     def set_fb_large_pic(graph)
       self.fb_pic_large = graph.get_picture(self.fb_id, :type => "large")
+      self.save
     end
 
     def set_fb_small_pic(graph)
       self.fb_pic_small = graph.get_picture(self.fb_id, :type => "small")
+      self.save
     end
 
     def invite(email,  method)

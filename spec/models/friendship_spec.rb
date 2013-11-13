@@ -7,7 +7,7 @@
 #  friended_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  confirmed   :boolean
+#  confirmed   :boolean          default(FALSE)
 #
 
 require 'spec_helper'
@@ -156,8 +156,14 @@ describe Friendship do
 		end
 
 		describe "if the user doesn't want to get friendship e-mails" do
+			before(:each) do
+				@friended = FactoryGirl.create(:user, :friend_request_email => false)
+			end
 
 			it "should not send the email" do
+				lambda do
+					Friendship.create(:friender_id => @friender.id, :friended_id => @friended.id)
+				end.should_not change(ActionMailer::Base.deliveries, :count)
 
 			end
 

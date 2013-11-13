@@ -7,10 +7,12 @@
 #  friended_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  confirmed   :boolean
+#  confirmed   :boolean          default(FALSE)
 #
 
 class Friendship < ActiveRecord::Base
+  
+
   attr_accessible :friended_id, :friender_id, :confirmed
 
   validates :friender_id, :presence => true
@@ -41,7 +43,7 @@ class Friendship < ActiveRecord::Base
 
   private
   def email_request
-    FriendshipMailer.friend_request(self).deliver
+    FriendshipMailer.friend_request(self).deliver if self.friended.friend_request_email
   end
 
 end

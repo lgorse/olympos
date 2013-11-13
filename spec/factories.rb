@@ -32,5 +32,13 @@ FactoryGirl.define do
 
 end
 
+FactoryGirl.define do
+	factory :friendship do
+		association :friender, factory: :user
+		association :friended, factory: :user
+	end
+
+end
+
 
 

@@ -1,10 +1,12 @@
 class FriendshipsController < ApplicationController
+	
 
 	before_filter :authenticate
 
 	def create
 		@friendship = Friendship.new(params[:friendship])
 		if @friendship.save
+			
 		else
 		end
 	end

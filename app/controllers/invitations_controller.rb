@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
 	include InvitationsHelper
+	
 
 	before_filter :authenticate, :only => [:new, :create, :ussquash]
 

@@ -16,6 +16,8 @@
 #
 
 class Invitation < ActiveRecord::Base
+	
+
 	attr_accessible :accepted, :email, :invitee_id, :inviter_id, :message, :invite_method, :fb_id, :clicked
 
 	validates :inviter_id, :presence => true
