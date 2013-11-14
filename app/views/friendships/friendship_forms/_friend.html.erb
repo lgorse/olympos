@@ -1,4 +1,5 @@
-<%= form_for(@current_user.friendships.build(:friended_id => user.id), :remote => true) do |f|%>
+
+<%= form_for(@current_user.friendships.build(:friended_id => user.id), :remote => true, :html => {:class => "friend_button round"}) do |f|%>
 	<%= f.hidden_field :friended_id %>
-	<%= f.submit "Friend" %>
+	<%= f.submit "Friend", :class => "round" %>
 <% end %>
