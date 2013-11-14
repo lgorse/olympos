@@ -1,0 +1,3 @@
+$(function(){
+	$("#friend_button_<%= @user.id %>").html("<%= escape_javascript(render 'friendships/friendship_forms/friend', :user => @user) %>");
+});

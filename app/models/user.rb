@@ -97,6 +97,7 @@ class User < ActiveRecord::Base
     def accept(friender)
       friendship = Friendship.find_by_friender_id_and_friended_id(friender.id, self.id)
       friendship.make_mutual
+      friendship
     end
 
     def unfriend(friendee)
