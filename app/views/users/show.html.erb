@@ -1,5 +1,10 @@
 <div class = "user_profile round_soft">
+<div class = "user_basic">
 	<%= render 'users/user_photo_partials/user_profile_picture' %>
+	<% unless current_user?(@user) %>
+		<%= render 'friendships/simple_friend_button', :user => @user %>
+		<% end %>
+</div>
 	<div class = "user_info">
 		<%= render 'users/user_profile_partials/user_info' %>
 		

@@ -10,12 +10,17 @@
 	margin: 0px auto;
 	padding: 20px;
 
+	.user_basic{
+		height: 100%;
+		float: left;
+	}
+
 
 
 	.user_picture{
-		float: left;
+		
 		width: 160px;
-		height: 100%;
+		
 
 		.change_photo{
 			visibility: hidden;

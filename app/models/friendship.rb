@@ -33,8 +33,9 @@ class Friendship < ActiveRecord::Base
   end
 
   def make_mutual
-  	Friendship.create(:friender_id => self.friended_id, :friended_id => self.friender_id, :confirmed => true)
+  	reverse_friendship = Friendship.create(:friender_id => self.friended_id, :friended_id => self.friender_id, :confirmed => true)
     self.update_attributes(:confirmed => true)
+    reverse_friendship.update_attributes(:confirmed => true)
   end
 
   def reverse

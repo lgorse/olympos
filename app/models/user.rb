@@ -116,6 +116,18 @@ class User < ActiveRecord::Base
       Friendship.find_by_friender_id_and_friended_id(self.id, friend.id)
     end
 
+    def friendship_mutual(friend)
+      self.friendships.mutual.find_by_friended_id(friend.id)
+    end
+
+    def friendship_requested_by(friender)
+      self.reverse_friendships.not_accepted.find_by_friender_id(friender.id)
+    end
+
+    def friendship_requested_to(friend)
+      self.friendships.not_accepted.find_by_friender_id(self.id)
+    end
+
 
     def friends
       self.friendships.mutual.pluck(:friended_id).map{|id| User.find(id)}
@@ -127,7 +139,6 @@ class User < ActiveRecord::Base
 
     def friends_pending
       self.reverse_friendships.not_accepted.pluck(:friender_id).map{|id| User.find(id)}
-
     end
 
 

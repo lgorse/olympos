@@ -31,8 +31,8 @@ module UsersHelper
 		redirect_to details_user_path(@current_user)
 	end
 
-	def current_user?
-		@user == @current_user
+	def current_user?(user)
+		user == @current_user
 	end
 
 end

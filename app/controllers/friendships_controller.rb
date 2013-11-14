@@ -4,11 +4,15 @@ class FriendshipsController < ApplicationController
 	before_filter :authenticate
 
 	def create
-		@friendship = Friendship.new(params[:friendship])
-		if @friendship.save
-			
+		@user = User.find(params[:friendship][:friended_id])
+		if @current_user.friend(@user)	
 		else
 		end
+	end
+
+	def accept
+		@user = User.find(params[:friendship][:friender_id])
+		@current_user.accept(@user)
 	end
 
 	def destroy

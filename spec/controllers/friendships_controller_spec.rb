@@ -55,7 +55,26 @@ describe FriendshipsController do
 				end.should change(Friendship, :count).by(1)
 			end
 
+
 		end	
+
+	end
+
+	describe "POST 'accept'" do
+
+		before(:each) do
+			@user = FactoryGirl.create(:user)
+			@friend = FactoryGirl.create(:user)
+			@friend.friend(@user)
+			@attr = {:friender_id => @friend.id, :friended_id => @user.id}
+			test_sign_in(@user)
+		end
+
+		it "should update the friendships to be confirmed" do
+			post :accept, :friendship => @attr
+			@user.friend?(@friend).should == true
+			@friend.friend?(@user).should == true
+		end
 
 	end
 

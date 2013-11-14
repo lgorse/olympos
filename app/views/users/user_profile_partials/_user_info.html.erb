@@ -1,7 +1,7 @@
 <div class = "main_user_name">
 	<%= @full_name %>
 </div>
-<% if @user == @current_user && @user.first_rating.blank? %>
+<% if current_user?(@user) && @user.first_rating.blank? %>
 	<%= form_for @user do |user| %>
 		<%= render 'layouts/ratings/first_rating', :user => user %>
 	<% end %>

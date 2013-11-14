@@ -1,0 +1,16 @@
+<% if friendship = @current_user.friendship(user) %>
+		<%= form_for friendship, :html => {:method => :delete}  do |f| %>
+			<%= f.submit 'Unfriend' %>
+		<% end %>
+<% elsif friend_request = @current_user.friendship_requested_by(user) %>
+	<%= form_for(@current_user.reverse_friendships.build(:friender_id => user.id), :url => accept_friendships_path) do |f| %>
+	<%= f.hidden_field :friender_id %>
+			<%= f.submit "Accept" %>
+	<% end %>
+<% else %>
+	
+		<%= form_for(@current_user.friendships.build(:friended_id => user.id)) do |f|%>
+		<%= f.hidden_field :friended_id %>
+		<%= f.submit "Friend" %>
+	<% end %>
+<% end %>
