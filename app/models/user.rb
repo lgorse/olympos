@@ -91,7 +91,9 @@ class User < ActiveRecord::Base
     end
 
     def friend(friendee)
-      self.friendships.create(:friended_id => friendee.id)
+      friendship = self.friendships.create(:friended_id => friendee.id)
+      friendship.email_request
+      friendship
     end
 
     def accept(friender)

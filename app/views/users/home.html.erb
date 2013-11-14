@@ -1,4 +1,4 @@
 <h1><%= "Hello home #{@current_user.firstname}" %></h1>
 <div class = "listing" >
-	<%= render :partial => "users/user_summary_partials/user_summary", :collection => User.all, :as => :user %>
+	<%= render :partial => "users/user_summary_partials/user_summary", :collection => User.all.reject{|user| user.id == @current_user.id}, :as => :user %>
 </div>

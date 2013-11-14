@@ -15,8 +15,18 @@
  *= require jquery.ui.autocomplete
  */
 
+ .main_container{
+ 	top: 45px;
+ }
+
 .main_activity, .main_container{
-	height: 100%;
+	min-height: 100%;
+	width: 100%;
+	margin: 0px;
+	
+	position: static;
+
+
 }
  .not_fb_user{
  	font-size: 75%;
@@ -25,8 +35,9 @@
  .listing{
  	padding: 10px;
  	margin: 0px auto;
- 	height: 100%;
+ 	min-height: 100%;
  	width: 800px;
+ 	overflow: hidden;
 
  }
 

@@ -244,6 +244,37 @@ describe User do
 						lambda do
 							@user.friend(@user2)
 						end.should change(Friendship, :count).by(1)
+					end
+
+					describe "email" do
+						
+						describe "if the user doesn't want to get friendship e-mails" do
+							before(:each) do
+								@friended = FactoryGirl.create(:user, :friend_request_email => false)
+							end
+
+							it "should not send the email" do
+								lambda do
+									@user.friend(@friended)
+								end.should_not change(ActionMailer::Base.deliveries, :count)
+
+							end
+
+						end
+
+						describe "if the user wants to get friendship emails" do
+							before(:each) do
+								@friended = FactoryGirl.create(:user)
+							end
+
+							it "should send the email" do
+								lambda do
+									@user.friend(@friended)
+								end.should change(ActionMailer::Base.deliveries, :count).by(1)
+
+							end
+
+						end
 
 					end
 
@@ -340,149 +371,149 @@ describe User do
 				end
 
 				describe "friendship_mutual" do
-				before(:each) do
-					@friend = FactoryGirl.create(:user)
-					@user.friend(@friend)
-					@friend.accept(@user)
-				end
+					before(:each) do
+						@friend = FactoryGirl.create(:user)
+						@user.friend(@friend)
+						@friend.accept(@user)
+					end
 
-				it "should find the mutual friendship" do
-					@user.friendship_mutual(@friend).should == @user.friendship(@friend)
+					it "should find the mutual friendship" do
+						@user.friendship_mutual(@friend).should == @user.friendship(@friend)
 
-				end
-
-			end
-
-			describe "friendship requested by" do
-				before(:each) do
-					@friend = FactoryGirl.create(:user)
-					@friend.friend(@user)
-				end
-
-				it "should return the friendship from the other user" do
-					@user.friendship_requested_by(@friend).should == @friend.friendship(@user)
-				end
-
-
-			end
-
-			describe "friendship requested to" do
-				before(:each) do
-					@friend = FactoryGirl.create(:user)
-					@user.friend(@friend)
-				end
-
-				it "should return the friendship requested to the other user" do
-					@user.friendship_requested_to(@friend).should == @user.friendship(@friend)
+					end
 
 				end
 
+				describe "friendship requested by" do
+					before(:each) do
+						@friend = FactoryGirl.create(:user)
+						@friend.friend(@user)
+					end
 
-			end
+					it "should return the friendship from the other user" do
+						@user.friendship_requested_by(@friend).should == @friend.friendship(@user)
+					end
 
-			describe 'friends' do
-				before(:each) do
-					@friend = FactoryGirl.create(:user)
-				end
-
-
-
-				it "should respond to a friends method" do
-					@user.should respond_to(:friends)
-
-				end
-
-				it "should return users who have responded to the request" do
-					@user.friend(@friend)
-					@friend.accept(@user)
-					@user.friends.should include(@friend)
-				end
-
-				it "should not return users who have not responded to the request" do
-					@user.friend(@friend)
-					@user.friends.should_not include(@friend)
 
 				end
 
-			end
+				describe "friendship requested to" do
+					before(:each) do
+						@friend = FactoryGirl.create(:user)
+						@user.friend(@friend)
+					end
 
-			describe "requested_friends" do
-				before(:each) do
-					@friend = FactoryGirl.create(:user)
-				end
+					it "should return the friendship requested to the other user" do
+						@user.friendship_requested_to(@friend).should == @user.friendship(@friend)
 
-				it 'should respond to a requested_friends method' do
-					@user.should respond_to(:friend_requests)
+					end
 
-				end
-
-				it "should returned friends who have been requested but not confirmed" do
-					@user.friend(@friend)
-					@user.friend_requests.should include(@friend)
-				end
-
-				it "should not return friends who have not confirmed request" do
-					@user.friend(@friend)
-					@friend.accept(@user)
-					@user.friend_requests.should_not include(@friend)
-				end
-
-				it "should not return users who have not been contacted" do
-					@user.friend_requests.should_not include(@friend)
-				end
-
-			end
-
-			describe "friend_requests" do
-				before(:each) do
-					@friend = FactoryGirl.create(:user)
-					@user.friend(@friend)
-				end
-
-				it "should respond to a friends_pending method" do
-					@friend.should respond_to(:friends_pending)
-				end
-
-				it "should return friends who have requested but are not accepted" do
-					@friend.friends_pending.should include(@user)
 
 				end
 
-				it "should not return friends whose friendship is not accepted" do
-					@friend.accept(@user)
-					@friend.friends_pending.should_not include(@user)
+				describe 'friends' do
+					before(:each) do
+						@friend = FactoryGirl.create(:user)
+					end
+
+
+
+					it "should respond to a friends method" do
+						@user.should respond_to(:friends)
+
+					end
+
+					it "should return users who have responded to the request" do
+						@user.friend(@friend)
+						@friend.accept(@user)
+						@user.friends.should include(@friend)
+					end
+
+					it "should not return users who have not responded to the request" do
+						@user.friend(@friend)
+						@user.friends.should_not include(@friend)
+
+					end
+
 				end
 
-			end
+				describe "requested_friends" do
+					before(:each) do
+						@friend = FactoryGirl.create(:user)
+					end
 
+					it 'should respond to a requested_friends method' do
+						@user.should respond_to(:friend_requests)
 
-		end
+					end
 
-	end
+					it "should returned friends who have been requested but not confirmed" do
+						@user.friend(@friend)
+						@user.friend_requests.should include(@friend)
+					end
 
-	describe "methods" do
+					it "should not return friends who have not confirmed request" do
+						@user.friend(@friend)
+						@friend.accept(@user)
+						@user.friend_requests.should_not include(@friend)
+					end
 
-		describe 'invite' do
-			before(:each) do
-				@user = FactoryGirl.create(:user)
-			end
+					it "should not return users who have not been contacted" do
+						@user.friend_requests.should_not include(@friend)
+					end
 
+				end
 
-			it 'should respond to the invite method' do
-				@user.should respond_to (:invite)
+				describe "friend_requests" do
+					before(:each) do
+						@friend = FactoryGirl.create(:user)
+						@user.friend(@friend)
+					end
 
-			end
+					it "should respond to a friends_pending method" do
+						@friend.should respond_to(:friends_pending)
+					end
 
-			it "should create an invitation" do
-				email = "test@new.testaroo"
-				lambda do
-					@user.invite(email, EMAIL)
-				end.should change(Invitation, :count).by(1)
+					it "should return friends who have requested but are not accepted" do
+						@friend.friends_pending.should include(@user)
+
+					end
+
+					it "should not return friends whose friendship is not accepted" do
+						@friend.accept(@user)
+						@friend.friends_pending.should_not include(@user)
+					end
+
+				end
+
 
 			end
 
 		end
 
+		describe "methods" do
+
+			describe 'invite' do
+				before(:each) do
+					@user = FactoryGirl.create(:user)
+				end
+
+
+				it 'should respond to the invite method' do
+					@user.should respond_to (:invite)
+
+				end
+
+				it "should create an invitation" do
+					email = "test@new.testaroo"
+					lambda do
+						@user.invite(email, EMAIL)
+					end.should change(Invitation, :count).by(1)
+
+				end
+
+			end
+
+		end
 	end
-end
 

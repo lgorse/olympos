@@ -4,12 +4,13 @@
  	border-bottom: 1px solid #C2C2CF;
  	position: fixed;
  	
+ 	
 
  	a{
  		vertical-align: middle;
  	}
 
- 	.container{
+ 	.header_container{
  		min-width: 950px;
  		height: 100%;
 
@@ -107,6 +108,8 @@
  }
 
  .nag{
+ 	position: relative;
+ 	width: 100%;
  	height: 50px;
 
  }

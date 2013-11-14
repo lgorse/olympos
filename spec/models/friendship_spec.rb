@@ -150,39 +150,6 @@ describe Friendship do
 
 	end
 
-	describe "email" do
-		before(:each) do
-			@friender = FactoryGirl.create(:user)
-		end
-
-		describe "if the user doesn't want to get friendship e-mails" do
-			before(:each) do
-				@friended = FactoryGirl.create(:user, :friend_request_email => false)
-			end
-
-			it "should not send the email" do
-				lambda do
-					Friendship.create(:friender_id => @friender.id, :friended_id => @friended.id)
-				end.should_not change(ActionMailer::Base.deliveries, :count)
-
-			end
-
-		end
-
-		describe "if the user wants to get friendship emails" do
-			before(:each) do
-				@friended = FactoryGirl.create(:user)
-			end
-
-			it "should send the email" do
-				lambda do
-					Friendship.create(:friender_id => @friender.id, :friended_id => @friended.id)
-				end.should change(ActionMailer::Base.deliveries, :count).by(1)
-
-			end
-
-		end
-
-	end
+	
 
 end
