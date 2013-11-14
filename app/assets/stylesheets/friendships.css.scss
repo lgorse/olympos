@@ -2,93 +2,96 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.user_profile{
+	.simple_friend_button{
+		margin: 0px auto;
+		width: 100%;
+		float: left;
+		margin: 5px auto;
 
-.simple_friend_button{
-	margin: 0px auto;
-	width: 100%;
-	float: left;
-	margin: 5px auto;
+		position: relative;
+		text-align: center;
 
-	position: relative;
-	text-align: center;
 
-	.friend_button, .unfriend_button, .accept_button{
-		input{
+
+
+	}
+}
+
+.friend_button, .unfriend_button, .accept_button{
+	input{
 		padding: 5px 15px;
-			font-size: 90%;
-			font-weight: bold;
-		}
+		font-size: 90%;
+		font-weight: bold;
+	}
 
-		input:hover{
-			cursor: pointer;
-
-		}
+	input:hover{
+		cursor: pointer;
 
 	}
 
-	.friend_button{
+}
 
-		input{
-			
-			
-			text-shadow: #2C803C 0px 1px 1px;
-			color: white;
-			border: 1px solid #83AB5E;
-			background: #47BC60;
-			background: -moz-linear-gradient(top, #47BC60 0%, #39A64E 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color(0%, #47BC60), color(100%, #39A64E));
-			background:-webkit-linear-gradient(top,#47BC60 0%,#39A64E 100%);
-			background:-o-linear-gradient(top,#47BC60 0%,#39A64E 100%);
-			background:-ms-linear-gradient(top,#47BC60 0%,#39A64E 100%);
-			background:linear-gradient(top,#47BC60 0%,#39A64E 100%);
-		}
+.friend_button{
 
-		input:hover{
-			border: 1px solid #6A8C4A;
-		}
+	input{
+
+
+		text-shadow: #2C803C 0px 1px 1px;
+		color: white;
+		border: 1px solid #83AB5E;
+		background: #47BC60;
+		background: -moz-linear-gradient(top, #47BC60 0%, #39A64E 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color(0%, #47BC60), color(100%, #39A64E));
+		background:-webkit-linear-gradient(top,#47BC60 0%,#39A64E 100%);
+		background:-o-linear-gradient(top,#47BC60 0%,#39A64E 100%);
+		background:-ms-linear-gradient(top,#47BC60 0%,#39A64E 100%);
+		background:linear-gradient(top,#47BC60 0%,#39A64E 100%);
 	}
 
-	.unfriend_button{
-		input{
-			color: #777;
-			border: 1px solid #C2C2C2;
-			
-			background: #F7F7F7;
-			background: -moz-linear-gradient(top, #F0F0F0 0%, #D5D7DE 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color(0%, #F0F0F0), color(100%, #D5D7DE));
-			background:-webkit-linear-gradient(top,#F0F0F0 0%,#D5D7DE 100%);
-			background:-o-linear-gradient(top,#F0F0F0 0%,#D5D7DE 100%);
-			background:-ms-linear-gradient(top,#F0F0F0 0%,#D5D7DE 100%);
-			background:linear-gradient(top,#F0F0F0 0%,#D5D7DE 100%);
-		}
+	input:hover{
+		border: 1px solid #6A8C4A;
+	}
+}
 
-		input:hover{
-			border: 1px solid #9B9DA3;
-		}
+.unfriend_button{
+	input{
+		color: #777;
+		border: 1px solid #C2C2C2;
 
+		background: #F7F7F7;
+		background: -moz-linear-gradient(top, #F0F0F0 0%, #D5D7DE 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color(0%, #F0F0F0), color(100%, #D5D7DE));
+		background:-webkit-linear-gradient(top,#F0F0F0 0%,#D5D7DE 100%);
+		background:-o-linear-gradient(top,#F0F0F0 0%,#D5D7DE 100%);
+		background:-ms-linear-gradient(top,#F0F0F0 0%,#D5D7DE 100%);
+		background:linear-gradient(top,#F0F0F0 0%,#D5D7DE 100%);
 	}
 
-	.accept_button{
-
-		input{
-			
-			
-			text-shadow: #2C803C 0px 1px 1px;
-			color: white;
-			border: 1px solid #1C5380;
-			background: #6F97B6;
-			background: -moz-linear-gradient(top, #6F97B6 0%, #3F729B 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color(0%, #6F97B6), color(100%, #3F729B));
-			background:-webkit-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
-			background:-o-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
-			background:-ms-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
-			background:linear-gradient(top,#6F97B6 0%,#3F729B 100%);
-		}
-
-		input:hover{
-			border: 1px solid #6F97B6;
-		}
+	input:hover{
+		border: 1px solid #9B9DA3;
 	}
 
+}
 
+.accept_button{
+
+	input{
+
+
+		text-shadow: #2C803C 0px 1px 1px;
+		color: white;
+		border: 1px solid #1C5380;
+		background: #6F97B6;
+		background: -moz-linear-gradient(top, #6F97B6 0%, #3F729B 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color(0%, #6F97B6), color(100%, #3F729B));
+		background:-webkit-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
+		background:-o-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
+		background:-ms-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
+		background:linear-gradient(top,#6F97B6 0%,#3F729B 100%);
+	}
+
+	input:hover{
+		border: 1px solid #6F97B6;
+	}
 }

@@ -1,0 +1,3 @@
+$(function(){
+	$(".pending_friendship_list").html("<%= escape_javascript(render 'friendships/friendship_partials/friendships_sent', :friendship_list => @friends_pending) %>");
+});

@@ -1,0 +1,10 @@
+<li class = "user_mini_summary">
+	<div class = "mini_summary_photo">
+	<%= render 'users/user_photo_partials/small_user_photo', :user => user, :name => user.fullname %>
+	</div>
+	<%= render 'layouts/ratings/user_rating', :user => user, :star_size => "small_stars" %>
+	<div class = "user_location">
+		<%= user.zip %>
+	</div>
+	<%= render 'friendships/simple_friend_button', :user => user %>
+</li>

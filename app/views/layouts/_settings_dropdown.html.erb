@@ -1,6 +1,6 @@
 <ul class = "user_settings">
 		
-		<%= render 'users/user_photo_partials/small_user_photo' %>
+		<%= render 'users/user_photo_partials/small_user_photo', :user => @current_user, :name => @current_user.firstname %>
 	
 	<ul class = "nav_menu round">
 		
