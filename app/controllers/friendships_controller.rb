@@ -22,7 +22,7 @@ class FriendshipsController < ApplicationController
 
 	def friendships
 		@user = User.find(params[:user_id])
-		@friendships = @user.friendships
+		@friendships = @user.friends
 	end
 
 	def requests

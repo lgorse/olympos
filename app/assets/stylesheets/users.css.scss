@@ -107,8 +107,39 @@
 
 	}
 
+}
+
+.user_buttons{
+	$user_button_height: 30px;
+	width: 800px;
+	margin: 10px auto;
+	border: 1px solid #C2C2CF;
+	height: $user_button_height;
+	position: relative;
 	
 
+	ul{
+		position: relative;
+		vertical-align: middle;
+		height: 100%;
+		
 
+		li{
+			text-align: center;
+			
+			vertical-align: middle;
+			border-right: 1px solid #C2C2CF;
+			height: 100%;
+			width: 92px;
+			display: inline-block;
 
+		}
+	}
+
+	a{
+		display: block;
+		line-height: $user_button_height;
+		vertical-align: middle;		
+
+	}
 }

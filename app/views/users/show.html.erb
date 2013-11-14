@@ -1,3 +1,4 @@
+
 <div class = "user_profile round_soft">
 <div class = "user_basic">
 	<%= render 'users/user_photo_partials/user_profile_picture' %>
@@ -13,5 +14,13 @@
 
 	</div>
 </div>
+<div class = "user_buttons round">
+	<ul>
+		<li>
+	<%= link_to pluralize(@user.friendships.count, "friend"), friendships_user_friendships_path(@user), :remote => true %>
+	</li>
+	</ul>
+</div>
+
 <div class = "listing" ></div>
 
