@@ -16,6 +16,8 @@ gem 'httpclient'
 gem 'paperclip', '~> 3.0'
 gem 'aws-sdk'
 
+gem 'mailboxer'
+
 group :development do
 	gem 'rspec-rails'
 	gem 'autotest'

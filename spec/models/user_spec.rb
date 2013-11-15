@@ -28,6 +28,7 @@
 #  photo_updated_at     :datetime
 #  fullname             :string(255)
 #  friend_request_email :boolean          default(TRUE)
+#  message_notify_email :boolean          default(TRUE)
 #
 
 require 'spec_helper'
@@ -152,6 +153,19 @@ describe User do
 				it 'should be true by default' do
 					@user.friend_request_email. should == true
 
+				end
+
+			end
+
+			describe "message notification email" do
+
+				it 'should have as attribute' do
+					@user.should respond_to(:message_notify_email)
+
+				end
+
+				it 'should be true by default' do
+					@user.message_notify_email.should == true
 				end
 
 			end
@@ -509,6 +523,38 @@ describe User do
 					lambda do
 						@user.invite(email, EMAIL)
 					end.should change(Invitation, :count).by(1)
+
+				end
+
+			end
+
+		end
+
+		describe "messaging" do
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+
+			end
+
+			describe "notify of message " do
+
+				describe 'if recipient wants to be notified' do
+					it "should return the recipient email" do
+						@user.message_notify.should == @user.email
+					end
+
+				end
+
+				describe 'if recipient does not want to be notified' do
+					before(:each) do
+						@user.update_attribute(:message_notify_email, false)
+
+					end
+					it "should return nil" do
+						@user.message_notify.should == nil
+					end
+
+
 
 				end
 

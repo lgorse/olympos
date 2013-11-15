@@ -113,7 +113,7 @@ describe FriendshipsController do
 
 		it "should show the user's friendships" do
 			get :friendships, :user_id => @user.id
-			assigns(:friendships).should == @user.friendships
+			assigns(:friendships).should == @user.friends
 
 		end
 

@@ -28,6 +28,7 @@
 #  photo_updated_at     :datetime
 #  fullname             :string(255)
 #  friend_request_email :boolean          default(TRUE)
+#  message_notify_email :boolean          default(TRUE)
 #
 
 class User < ActiveRecord::Base
@@ -36,6 +37,7 @@ class User < ActiveRecord::Base
   :password, :email, :zip, :fb_id, :signup_method, :photo, :friend_request_email
   
   has_secure_password
+  acts_as_messageable
 
   has_attached_file :photo, styles: {
     square: '30x30>',
@@ -142,6 +144,10 @@ class User < ActiveRecord::Base
 
     def friends_pending
       self.reverse_friendships.not_accepted.pluck(:friender_id).map{|id| User.find(id)}
+    end
+
+    def message_notify
+      self.message_notify_email ? self.email : nil
     end
 
 

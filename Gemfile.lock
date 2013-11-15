@@ -47,6 +47,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.9.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     climate_control (0.0.3)
@@ -81,6 +85,8 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     ffi (1.9.3)
+    foreigner (1.6.0)
+      activerecord (>= 3.0.0)
     hike (1.2.3)
     httpclient (2.3.4.1)
     i18n (0.6.5)
@@ -102,6 +108,10 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailboxer (0.11.0)
+      carrierwave (>= 0.5.8)
+      foreigner (>= 0.9.1)
+      rails (> 3.0.0)
     mime-types (1.25)
     mini_portile (0.5.2)
     multi_json (1.8.2)
@@ -206,6 +216,7 @@ DEPENDENCIES
   jquery-ui-rails
   koala
   launchy
+  mailboxer
   nokogiri
   paperclip (~> 3.0)
   pg
