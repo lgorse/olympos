@@ -42,7 +42,7 @@
  		margin-right: 50px;
  		display: inline-block;
 
- 		.invite_new_users{
+ 		a{
  			margin-right: 10px;
  		}
 
@@ -61,6 +61,7 @@
 
  			a{
  				display: inline;
+ 				margin-right: 10px;
 
  				img{
  					margin-right: 5px;
@@ -75,7 +76,8 @@
  			display: none;
  			position: relative;
  			top: 5px;
- 			width: 100%;
+ 			left: 65px;
+ 			width: 150px;
  			
  			background: white;
  			border: black 1px solid;

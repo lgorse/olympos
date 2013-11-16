@@ -1,3 +1,44 @@
 // Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.message_list{
+	.edit_conversation{
+		width: 400px;
+		height: 120px;
+
+		textarea{
+			width: 400px;
+			height: 75px;
+			resize: none;
+		}
+
+		input[name='commit']{
+			float: right;
+
+		}
+
+	}
+}
+
+.message{
+	width: 450px;
+	border-bottom: 1px solid #C2C2CF;
+	padding: 10px;
+	.participant_photo{
+		float: left;
+		width: 60px;
+
+		img{
+			max-height: 50px;
+			max-width: 50px;
+		}
+
+	}
+
+	.time_summary{
+		float: right;
+	}
+
+
+}

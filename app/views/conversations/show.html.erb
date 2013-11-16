@@ -1,6 +1,3 @@
-<% @conversation.messages.each do |message| %>
-<%= message.sender.firstname %>
-<%= message.body %>
-<p><%= @conversation.participants.map{|user| user.id} %></p>
-<% end %>
-<%= render 'conversations/conversation_form' %>
+<ul class = "message_list">
+<%= render 'messages/message_list' %>
+</ul>

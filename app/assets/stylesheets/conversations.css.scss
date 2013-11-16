@@ -1,3 +1,42 @@
 // Place all the styles related to the conversations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+ul.conversation_list{
+	margin-left: 30px;
+	.new_message{
+		margin-bottom: 15px;
+		padding-left: 20px;
+	}
+}
+.conversation_summary{
+	width: 350px;
+	height: 60px;
+	border-bottom: 1px solid #C2C2CF;
+	padding: 10px;
+
+	.participant_photo{
+		float: left;
+		width: 60px;
+
+		img{
+			max-height: 50px;
+			max-width: 50px;
+		}
+
+	}
+
+	.top_row{
+		
+		margin-bottom: 10px;
+
+		.time_summary{
+			float:right;
+
+		}
+
+	}
+
+}
+

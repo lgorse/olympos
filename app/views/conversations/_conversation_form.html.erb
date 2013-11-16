@@ -1,5 +1,5 @@
 <%= form_for @conversation do |conv| %>
 <%= render 'layouts/error_messages', :object => conv.object %>
 <%= text_area_tag :body %>
-<%= conv.submit "Send" %>
+<%= conv.submit "Reply" %>
 <% end %>
