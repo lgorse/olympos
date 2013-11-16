@@ -1,7 +1,7 @@
 Mailboxer.setup do |config|
 
   #Configures if you applications uses or no the email sending for Notifications and Messages
-  config.uses_emails = true
+  config.uses_emails = false
 
   #Configures the default from for the email sent for Messages and Notifications of Mailboxer
   config.default_from = DEFAULT_FROM
@@ -10,6 +10,10 @@ Mailboxer.setup do |config|
   #Configures the methods needed by mailboxer
   config.email_method = :message_notify
   config.name_method = :fullname
+
+  #Change Mailboxer default email configs
+  config.message_mailer = CustomMessageMailer
+  config.notification_mailer = CustomMessageMailer
 
   #Configures if you use or not a search engine and wich one are you using
   #Supported enignes: [:solr,:sphinx]

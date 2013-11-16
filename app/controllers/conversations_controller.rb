@@ -15,8 +15,10 @@ class ConversationsController < ApplicationController
 
 	def update
 		@conversation = Conversation.find(params[:id])
+		participant = @conversation.participants.reject{|user| user.id == @current_user.id}.first
 		@receipt = @current_user.reply_to_conversation(@conversation, params[:body])
 		if @receipt.errors.blank?
+			@current_user.message_email_notify(@receipt, participant)
 			redirect_to @conversation
 		else
 			render 'show'

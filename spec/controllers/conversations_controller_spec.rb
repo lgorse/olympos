@@ -68,21 +68,44 @@ describe ConversationsController do
 
 			it 'should create a new message' do
 				lambda do
-				put :update, :id => @conversation.id, :body => @attr[:body]
+					put :update, :id => @conversation.id, :body => @attr[:body]
 				end.should change(Message, :count).by(1)
+			end
+
+			describe "if recipient wants to receive e-mail" do
+
+				it "should send an email" do
+					lambda do
+						put :update, :id => @conversation.id, :body => @attr[:body]
+					end.should change(ActionMailer::Base.deliveries, :count).by(1)
+
+				end
+			end
+
+			describe 'if recipient does not want to receive an e-mail' do
+
+				it 'should not send an email' do
+					@recipient.update_attribute(:message_notify_email, false)
+					lambda do
+						put :update, :id => @conversation.id, :body => @attr[:body]
+					end.should_not change(ActionMailer::Base.deliveries, :count)
+
+				end
+
+
 			end
 
 		end
 
 		describe 'if failed' do
 			before(:each) do
-			@user = FactoryGirl.create(:user)
-			test_sign_in(@user)
-			@recipient = FactoryGirl.create(:user)
-			@first_message = @user.send_message(@recipient, "hi bro", "hi!")
-			@conversation = @first_message.conversation
-			@attr = {:body => ""}
-		end
+				@user = FactoryGirl.create(:user)
+				test_sign_in(@user)
+				@recipient = FactoryGirl.create(:user)
+				@first_message = @user.send_message(@recipient, "hi bro", "hi!")
+				@conversation = @first_message.conversation
+				@attr = {:body => ""}
+			end
 
 			it 'should render the show template' do
 				put :update, :id => @conversation.id, :body => @attr[:body]
