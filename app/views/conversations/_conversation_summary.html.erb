@@ -1,0 +1,3 @@
+<li>
+<%= link_to conversation.participants.reject{|user| user.id == @current_user.id}.first.fullname, conversation %>
+</li>

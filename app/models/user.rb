@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
       self.reverse_friendships.not_accepted.pluck(:friender_id).map{|id| User.find(id)}
     end
 
-    def message_notify
+    def message_notify(object)
       self.message_notify_email ? self.email : nil
     end
 

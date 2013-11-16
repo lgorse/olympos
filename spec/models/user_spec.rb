@@ -540,7 +540,7 @@ describe User do
 
 				describe 'if recipient wants to be notified' do
 					it "should return the recipient email" do
-						@user.message_notify.should == @user.email
+						@user.message_notify('hi').should == @user.email
 					end
 
 				end
@@ -551,7 +551,7 @@ describe User do
 
 					end
 					it "should return nil" do
-						@user.message_notify.should == nil
+						@user.message_notify('hi').should == nil
 					end
 
 

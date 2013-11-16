@@ -1,0 +1,5 @@
+<% @conversation.messages.each do |message| %>
+<%= message.sender.firstname %>
+<%= message.body %>
+<% end %>
+<%= render 'conversations/conversation_form' %>

@@ -20,7 +20,7 @@ Olympos::Application.routes.draw do
 
 	end
 
-	resources :sessions
+	resources :sessions, :conversations, :messages
 
 	resources :invitations do
 		collection do
