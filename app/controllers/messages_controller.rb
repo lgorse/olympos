@@ -10,14 +10,16 @@ class MessagesController < ApplicationController
 	end
 
 	def create
-		@recipient = User.find(params[:message][:recipient_id])
-		if @conversation = Conversation.participant(@current_user).participant(@recipient).first
+		@recipients = params[:message][:recipient_id].split(',').map{|id| User.find(id)}
+
+		if @conversation = conversation_already_exists
+
 			@receipt = @current_user.reply_to_conversation(@conversation, params[:message][:body])
 		else
-			@receipt = @current_user.send_message(@recipient, params[:message][:body], 'filler')
+			@receipt = @current_user.send_message(@recipients, params[:message][:body], 'filler')
 		end
 		if @receipt
-			@current_user.message_email_notify(@receipt, @recipient)
+			@current_user.message_email_notify(@receipt, @recipients)
 			redirect_to @receipt.conversation
 		else
 			render 'new'

@@ -150,8 +150,8 @@ class User < ActiveRecord::Base
       self.message_notify_email ? self.email : nil
     end
 
-   def message_email_notify(receipt, recipient)
-    CustomMessageMailer.send_email(receipt, recipient).deliver if recipient.message_notify_email
+   def message_email_notify(receipt, recipients)
+    recipients.each{|recipient| CustomMessageMailer.send_email(receipt, recipient).deliver if recipient.message_notify_email}
    end
 
 

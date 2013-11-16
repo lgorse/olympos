@@ -72,10 +72,26 @@ describe MessagesController do
 
 			end
 
-			it 'should create a new message' do
-				lambda do
-					post :create, :message => @attr
-				end.should change(Message, :count).by(1)
+			describe "if single recipient" do
+
+				it 'should create a new message' do
+					lambda do
+						post :create, :message => @attr
+					end.should change(Message, :count).by(1)
+
+				end
+
+			end
+
+			describe "if multiple recipients" do
+				before(:each) do
+					@other_friend = FactoryGirl.create(:user)
+				end
+
+				it "should create a message for each" do
+					post :create, :message => @attr.merge(:recipient_id => "#{@recipient.id}, #{@other_friend.id}")
+					Message.first.recipients.count.should == 3
+				end
 
 			end
 
@@ -83,7 +99,7 @@ describe MessagesController do
 
 		describe 'if a conversation already exists' do
 			before(:each) do
-				@user.send_message(@recipient, "Hi test", "test subject")
+				@user.send_message(@recipient, "Hi test", "test subject") 
 				@attr = {:recipient_id => @recipient.id, :body => "And another thing"}
 			end
 
