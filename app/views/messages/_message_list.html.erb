@@ -1,3 +1,4 @@
-
+<h2>Conversation between:</h2>
+<div class = "conversation_participants"><%= conversation_participant_list %></div>
 <%= render 'conversations/conversation_form' %>
 <%= render :partial => 'messages/message', :collection => @conversation.messages, :as => :message  %>

@@ -22,7 +22,16 @@ class FriendshipsController < ApplicationController
 
 	def friendships
 		@user = User.find(params[:user_id])
-		@friendships = @user.friends
+		friend_hash = []
+		@friendships = @user.friends.each do |friend|
+			friend_hash.push({:name => friend.fullname, :id => friend.id})
+			friend
+		end
+		
+		respond_to do |format| 
+			format.js {}
+			format.json {render :json => friend_hash}
+		end
 	end
 
 	def requests

@@ -2,7 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
 .message_list{
+
+	.conversation_participants{
+		margin-top: 10px;
+		min-height: 40px;
+		width: 400px;
+		
+		
+	}
+
 	.edit_conversation{
 		width: 400px;
 		height: 120px;

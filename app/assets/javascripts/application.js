@@ -16,4 +16,5 @@
 //= require jquery.ui.progressbar
 //= require jquery.cookie.js
 //= require jquery.ui.autocomplete
+//= require jquery.tokeninput
 //= require_tree .

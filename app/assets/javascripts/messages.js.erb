@@ -1,0 +1,22 @@
+$(function(){
+	$("#recipient_name").message_autocomplete();
+});
+
+$.fn.message_autocomplete = function(){
+	recipient_input = $(this);
+	
+		recipient_input.tokenInput(
+			'/users/30/friendships/friendships',
+			{minChars: 0,
+			 theme: 'facebook'
+			});
+	
+	$("form#new_message").submit(function(e){
+		var results = [];
+		$.each(recipient_input.tokenInput("get"), function(index, value){
+			results.push(value["id"]);
+		});
+		$("input#message_recipient_id").val(results.join());
+	});
+	
+}
