@@ -1,3 +1,9 @@
-<h1><%= "Hello world" %></h1>
+<h1><%= "Hello Message" %></h1>
+<h2><%= "#{@sender.firstname} has sent you a message on #{APP_NAME}" %></h2>
+<% if @sender.facebook? %>
+			<%= image_tag @sender.fb_pic_large, :class => "user_profile_pic fb round", :height => "200" %>
+		<% else %>
+			<%= image_tag @sender.photo.url(:large), :class => "user_profile_pic custom round"  %>
+		<% end %>
 <p><%= @message.body %></p>
-<p><%= @recipient %></p>
+<%= link_to "Respond to #{@sender.firstname}", conversation_url(@conversation, :redirect_url => conversation_path(@conversation.id), :host => @host) %>
