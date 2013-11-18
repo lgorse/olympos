@@ -65,3 +65,38 @@ form.new_message{
 
 
 }
+
+.message_button{
+	width: 75px;
+	margin: 5px 0px;
+	input{
+		padding: 5px 15px;
+		font-size: 80%;
+		font-weight: bold;
+		width: 100%;
+	}
+
+	input:hover{
+		cursor: pointer;
+
+	}
+
+	input{
+		//text-shadow: #6296cb 0px 1px 1px;
+		color: #3670ab;
+		border: 1px solid #6F97B6;
+		background: #C3DD82;
+		background: -moz-linear-gradient(top, #6F97B6 0%, #3F729B 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color(0%, #6F97B6), color(100%, #3F729B));
+		background:-webkit-linear-gradient(top,#CDE3F9 0%,#97c4f2 100%);
+		background:-o-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
+		background:-ms-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
+		background:linear-gradient(top,#6F97B6 0%,#3F729B 100%);
+	}
+
+	input:hover{
+		border: 1px solid #3670ab;
+	}
+
+}
+

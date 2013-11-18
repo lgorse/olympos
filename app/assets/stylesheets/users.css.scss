@@ -13,6 +13,21 @@
 	.user_basic{
 		height: 100%;
 		float: left;
+		width: 200px;
+
+		.profile_buttons{
+			width: 100%;
+
+			.message_button, .simple_friend_button{
+				margin: 5px 10px;
+				display: inline-block;
+				
+			}
+
+			
+
+			
+		}
 	}
 
 

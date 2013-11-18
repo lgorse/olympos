@@ -5,7 +5,7 @@
 .user_profile{
 	.simple_friend_button{
 		margin: 0px auto;
-		width: 100%;
+		width: 75px;
 		float: left;
 		margin: 5px auto;
 
@@ -19,10 +19,13 @@
 }
 
 .friend_button, .unfriend_button, .accept_button{
+	width: 100%;
+
 	input{
 		padding: 5px 15px;
-		font-size: 90%;
+		font-size: 80%;
 		font-weight: bold;
+		width: 100%;
 	}
 
 	input:hover{
@@ -35,8 +38,6 @@
 .friend_button{
 
 	input{
-
-
 		text-shadow: #2C803C 0px 1px 1px;
 		color: white;
 		border: 1px solid #83AB5E;
@@ -77,8 +78,6 @@
 .accept_button{
 
 	input{
-
-
 		text-shadow: #2C803C 0px 1px 1px;
 		color: white;
 		border: 1px solid #1C5380;
