@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	<div class = "user_summary_bottom">
-		<div class = "user_interact"></div>
+		<div class = "user_interact"><%= render 'friendships/message_friend_button', :user => user %></div>
 	<div class = 'user_location'>
 		<%= user.zip %>
 	</div>

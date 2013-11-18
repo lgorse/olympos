@@ -130,7 +130,7 @@ class User < ActiveRecord::Base
     end
 
     def friendship_requested_to(friend)
-      self.friendships.not_accepted.find_by_friender_id(self.id)
+      self.friendships.not_accepted.find_by_friended_id(friend.id)
     end
 
 

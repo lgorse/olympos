@@ -5,9 +5,7 @@ class FriendshipsController < ApplicationController
 	
 	def create
 		@user = User.find(params[:friendship][:friended_id])
-		if @friendship = @current_user.friend(@user)	
-		else
-		end
+		@friendship = @current_user.friend(@user)	
 	end
 
 	def accept

@@ -1,0 +1,5 @@
+<%= form_for(Message.new, :url => new_message_path, :html => {:method => :get}, :remote => true) do |message| %>
+<%= hidden_field_tag :recipient_id, user.id %>
+<%= hidden_field_tag :recipient_fullname, user.fullname %>
+<%= message.submit "Message" %>
+<% end %>
