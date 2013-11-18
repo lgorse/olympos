@@ -1,5 +1,8 @@
 <ul class = "conversation_list">
 	<div class = "new_message">
-	<%= link_to 'New Message', new_message_path, :class => "new_message" %></div>
+	<%= link_to 'New Message', new_message_path, :class => "new_message", :remote => true %>
+	<div class = "dialog_new_message">
+	<div class = "new_message_form"></div></div>
+</div>
 <%= render :partial => 'conversations/conversation_summary', :collection => @conversations, :as => :conversation %>
 </ul>

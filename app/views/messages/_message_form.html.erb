@@ -1,7 +1,10 @@
 <%= form_for @message do |msg| %>
 <%= render 'layouts/error_messages', :object => msg.object %>
+<div class = 'to_recipients'>
+<%= label_tag "To:" %>
 <%= text_field_tag :recipient_name %>
+</div>
 <%= msg.hidden_field :recipient_id, :value => params[:receiver] %>
-<%= msg.text_area :body %>
+<%= msg.text_area :body, :placeholder => "Write message here" %>
 <%= msg.submit "Send message" %>
 <% end %>

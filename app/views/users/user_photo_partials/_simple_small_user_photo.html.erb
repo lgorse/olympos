@@ -1,5 +1,5 @@
 <% if user.facebook? %>
-<%= link_to (image_tag user.fb_pic_square, :class => "my_profile_button round"), user %>
+<%= image_tag user.fb_pic_square, :class => "my_profile_button round" %>
 <% else %>
-<%= link_to image_tag(user.photo.url(:square), :class => "my_profile_button round"), user %>
+<%=  image_tag user.photo.url(:square), :class => "my_profile_button round" %>
 <% end %>

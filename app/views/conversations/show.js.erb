@@ -1,0 +1,10 @@
+$(function(){
+	$("li.conversation_summary").each(function(){
+		if ($(this).attr("id") == "conversation_<%= @conversation.id %>"){
+			$(this).addClass("selected");
+		}else{
+		$(this).removeClass("selected");
+	}
+	});
+	$('ul.message_list').html("<%= escape_javascript(render 'messages/message_list') %>");
+});

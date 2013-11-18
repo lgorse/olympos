@@ -1,4 +1,4 @@
-<%= form_for @conversation do |conv| %>
+<%= form_for @conversation, :remote => true do |conv| %>
 <%= render 'layouts/error_messages', :object => conv.object %>
 <%= text_area_tag :body %>
 <%= conv.submit "Reply" %>

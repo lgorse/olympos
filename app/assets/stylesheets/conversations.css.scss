@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.conversation_wrapper{
+	width: 1000px;
+	margin: 0px auto;
+	height: 100%;
+	overflow: hidden;
+}
+
+.conversation_show_column, .conversation_index_column{
+	height: 100%;
+	float: left;
+	padding: 15px;
+}
+
+.conversation_index_column{
+	border-right: 1px solid #C2C2CF;
+
+}
 
 ul.conversation_list{
 	margin-left: 30px;
@@ -14,7 +31,32 @@ ul.conversation_list{
 	width: 350px;
 	height: 60px;
 	border-bottom: 1px solid #C2C2CF;
-	padding: 10px;
+	padding: 10px 10px 0px 10px;
+
+	.conversation_link_wrapper{
+		height: 100%;
+		width: 100%;
+	}
+
+	a:hover{
+		text-decoration: none;
+		color: black;
+	}
+
+	a{
+		color: black;
+		height: 350px;
+		width: 60px;
+		display: inline;
+
+	}
+	
+
+	.conversation_participants{
+		font-weight: bold;
+
+
+	}
 
 	.participant_photo{
 		float: left;
@@ -33,9 +75,12 @@ ul.conversation_list{
 
 		.time_summary{
 			float:right;
-
 		}
 
+	}
+
+	&.selected{
+		background: #94B8FF;
 	}
 
 }

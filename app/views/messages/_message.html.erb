@@ -1,6 +1,6 @@
 <li class = "message">
 	<div class = "participant_photo">
-	<%= render 'users/user_photo_partials/simple_small_user_photo', :user => message.sender %>
+	<%= render 'users/user_photo_partials/simple_small_user_photo_link', :user => message.sender %>
 	</div>
 	<div class = "top_row">
 <%= link_to message.sender.firstname, message.sender %>
