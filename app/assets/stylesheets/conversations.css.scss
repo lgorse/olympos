@@ -61,6 +61,7 @@ ul.conversation_list{
 	.participant_photo{
 		float: left;
 		width: 60px;
+		height: 100%;
 
 		img{
 			max-height: 50px;
@@ -81,6 +82,11 @@ ul.conversation_list{
 
 	&.selected{
 		background: #94B8FF;
+	}
+
+	&.unread{
+		font-weight: bold;
+
 	}
 
 }

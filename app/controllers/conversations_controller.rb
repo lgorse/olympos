@@ -11,7 +11,7 @@ class ConversationsController < ApplicationController
 
 	def show
 		@conversation = Conversation.find(params[:id])
-
+		@conversation.mark_as_read @current_user
 	end
 
 	def update

@@ -1,7 +1,7 @@
 <% recipients = conversation.participants.reject{|user| user.id == @current_user.id} %>
 
 
-<li class = "conversation_summary <%= 'selected' if conversation == @conversations.first %>" id = "conversation_<%= conversation.id %>">
+<li class = "conversation_summary <%= 'selected' if conversation == @conversations.first %> <%= 'unread' if conversation.is_unread? @current_user %>" id = "conversation_<%= conversation.id %>">
 <%= link_to conversation, :remote => true do %>	
 <div class = "conversation_link_wrapper">
 	<div class = "participant_photo">
@@ -13,7 +13,7 @@
 <%= render 'layouts/date_summary', :object => conversation %>
 </div>
 <div class = "conversation_last_message">
-<%= truncate(conversation.messages.last.body, length: 40) %>
+<%= truncate(conversation.messages.last.body, length: 35) %>
 </div>
 </div>
 

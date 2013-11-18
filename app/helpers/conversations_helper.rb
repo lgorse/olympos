@@ -12,4 +12,5 @@ module ConversationsHelper
 		list = @conversation.participants.collect {|user| link_to user.firstname, user}.join(" , ")
 		simple_format word_wrap(list, :line_width => 70)
 	end
+
 end

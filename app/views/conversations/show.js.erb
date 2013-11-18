@@ -2,6 +2,7 @@ $(function(){
 	$("li.conversation_summary").each(function(){
 		if ($(this).attr("id") == "conversation_<%= @conversation.id %>"){
 			$(this).addClass("selected");
+			$(this).removeClass("unread")
 		}else{
 		$(this).removeClass("selected");
 	}
