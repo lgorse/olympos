@@ -9,7 +9,7 @@ class CustomMessageMailer < ActionMailer::Base
   	@recipient = recipient
   	@conversation = @message.conversation
   	@host = parse_host
-  	mail(:to => "olympos.help@gmail.com", :subject => "#{@sender.firstname} sent you a message on #{APP_NAME}")
+  	mail(:to => @recipient.email, :subject => "#{@sender.firstname} sent you a message on #{APP_NAME}")
   end
 
 
