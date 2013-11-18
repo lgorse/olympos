@@ -1,0 +1,4 @@
+<% current_user_unread_messages = @current_user.receipts.where(:is_read => false).count %>
+<% if  current_user_unread_messages > 0 %>
+		<div class = "unread_conversation notification round_very"><%= current_user_unread_messages  %></div>
+		<% end %>

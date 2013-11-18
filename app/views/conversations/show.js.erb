@@ -5,7 +5,8 @@ $(function(){
 			$(this).removeClass("unread")
 		}else{
 		$(this).removeClass("selected");
-	}
+		}
 	});
+	$('.message_notification_wrapper').html("<%= escape_javascript(render 'conversations/unread_conversation_count') %>");
 	$('ul.message_list').html("<%= escape_javascript(render 'messages/message_list') %>");
 });

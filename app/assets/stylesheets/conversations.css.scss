@@ -2,6 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+.notification{
+	position: absolute;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	padding: 3px;
+	font-size: 75%;
+}
+.unread_conversation{
+	top: 5px;
+	left: 990px;
+	
+}
 .conversation_wrapper{
 	width: 1000px;
 	margin: 0px auto;

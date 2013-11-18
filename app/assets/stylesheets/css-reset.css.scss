@@ -146,6 +146,14 @@ input, select {
     box-shadow: 10px;
 }
 
+.round_very{
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    box-shadow: 30px;
+
+}
+
 ::-webkit-input-placeholder { /* WebKit browsers */
     color:    #595959;
 }
