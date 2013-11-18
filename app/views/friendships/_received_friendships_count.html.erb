@@ -1,0 +1,4 @@
+<% current_user_received_friendships = @current_user.friends_pending.count %>
+<% if  current_user_received_friendships > 0 %>
+		<div class = "unread_friendship notification round_very"><%= current_user_received_friendships  %></div>
+		<% end %>

@@ -1,3 +1,4 @@
 $(function(){
 	$("#friend_button_<%= @user.id %>").html("<%= escape_javascript(render 'friendships/friendship_forms/unfriend', :friendship => @friendship.reverse) %>");
+	$('.friendship_notification_wrapper').html("<%= escape_javascript(render 'friendships/received_friendships_count') %>");
 });

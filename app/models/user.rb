@@ -93,9 +93,11 @@ class User < ActiveRecord::Base
     end
 
     def friend(friendee)
-      friendship = self.friendships.create(:friended_id => friendee.id)
-      friendship.email_request
-      friendship
+      unless self.id == friendee.id
+        friendship = self.friendships.create(:friended_id => friendee.id)
+        friendship.email_request
+        friendship
+      end
     end
 
     def accept(friender)
@@ -150,9 +152,9 @@ class User < ActiveRecord::Base
       self.message_notify_email ? self.email : nil
     end
 
-   def message_email_notify(receipt, recipients)
-    recipients.each{|recipient| CustomMessageMailer.send_email(receipt, recipient).deliver if recipient.message_notify_email}
-   end
+    def message_email_notify(receipt, recipients)
+      recipients.each{|recipient| CustomMessageMailer.send_email(receipt, recipient).deliver if recipient.message_notify_email}
+    end
 
 
 

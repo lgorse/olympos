@@ -2,20 +2,28 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.unread_friendship{
+	top: -5px;
+	left: 106px;
+	
+}
+
 .user_profile{
 	.simple_friend_button{
 		margin: 0px auto;
-		width: 75px;
+		
 		float: left;
 		margin: 5px auto;
 
 		position: relative;
-		text-align: center;
-
-
-
-
+		
 	}
+}
+
+.simple_friend_button{
+	width: 75px;
+	text-align: center;
+
 }
 
 .friend_button, .unfriend_button, .accept_button{

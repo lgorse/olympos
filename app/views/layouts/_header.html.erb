@@ -7,6 +7,9 @@
 		<div class = "message_notification_wrapper">
 		<%= render 'conversations/unread_conversation_count' %>
 		</div>
+		<div class = "friendship_notification_wrapper">
+			<%= render 'friendships/received_friendships_count' %>
+		</div>
 		<%= link_to 'Messages', conversations_path, :class => "message_users" %>
 		<%= link_to "Invite", new_invitation_path, :class => "invite_new_users" %>
 		<%= render 'layouts/settings_dropdown' %>
