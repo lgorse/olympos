@@ -64,5 +64,11 @@ module FacebookHelper
 		cookies[:fb_access]
 	end
 
+	def delete_user_facebook
+		response = @graph.graph_call("/me/permissions",{:access_token => @access_token}, :delete)
+		print response
+	end
+
+
 
 end

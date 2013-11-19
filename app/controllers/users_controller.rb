@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	include UsersHelper
 
-	before_filter :authenticate, :only => [:home, :show, :details, :change_picture, :edit]
+	before_filter :authenticate, :only => [:home, :show, :details, :change_picture, :edit, :destroy]
 	
 
 	def new
@@ -59,6 +59,7 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+
 	end
 
 	def show
@@ -69,6 +70,14 @@ class UsersController < ApplicationController
 		end
 		@user.set_fb_large_pic(@graph) if @user.facebook? && @graph
 		@full_name = @user.firstname + " " +  @user.lastname
+	end
+
+	def destroy
+		if @current_user.facebook?
+			delete_user_facebook
+		end
+		@current_user.destroy
+		sign_out_user
 	end
 
 end

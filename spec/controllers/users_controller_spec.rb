@@ -57,7 +57,7 @@ describe UsersController do
 			end
 
 
-	end
+		end
 
 
 		describe 'PUT "Update"' do
@@ -75,7 +75,7 @@ describe UsersController do
 					User.find(@user).zip.should == @attr[:zip]
 				end
 
-			
+
 				it "should redirect to the address in the redirect_url" do
 					
 					put :update, :id => @user.id, :user => @attr, :redirect_url => details_user_path(@user)
@@ -154,6 +154,89 @@ describe UsersController do
 						response.should redirect_to root_path
 
 					end
+
+				end
+
+			end
+
+		end
+
+		describe "GET 'edit'" do
+			
+
+			describe "authentication" do
+				before(:each) do
+					@user = FactoryGirl.create(:user)
+				end
+
+				describe "if successful" do
+
+					it 'should be successful' do
+						test_sign_in(@user)
+						get :edit, :id => @user
+						response.should be_successful
+					end
+
+					
+
+					
+				end
+
+				describe 'if failed' do
+
+					it "should redirect to root" do
+						get :edit, :id => @user
+						response.should redirect_to root_path
+
+					end
+
+				end
+
+			end
+
+		end
+
+		describe "DELETE 'destroy'" do
+			describe "authentication" do
+				before(:each) do
+					@user = FactoryGirl.create(:user)
+				end
+
+				describe "if successful" do
+
+					it 'should destroy the user' do
+						test_sign_in(@user)
+						lambda do
+						delete :destroy, :id => @user
+						end.should change(User, :count).by(-1)
+					end
+
+					
+
+					
+				end
+
+				describe 'if failed' do
+
+					it "should not destroy the user" do
+						lambda do
+						delete :destroy, :id => @user
+						end.should_not change(User, :count)
+					end
+
+				end
+
+			end
+
+			describe 'redirect' do
+				before(:each) do
+					@user = FactoryGirl.create(:user)
+					test_sign_in(@user)
+				end
+
+				it 'should redirect to the root path' do
+					delete :destroy, :id => @user.id
+					response.should redirect_to root_path
 
 				end
 

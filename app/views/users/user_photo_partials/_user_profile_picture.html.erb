@@ -1,9 +1,9 @@
 <div class = "user_picture">
-		<% if @user.facebook? %>
-			<%= image_tag @user.fb_pic_large, :class => "user_profile_pic fb round" %>
+		<% if user.facebook? %>
+			<%= image_tag user.fb_pic_large, :class => "user_profile_pic fb round" %>
 		<% else %>
-			<%= image_tag @user.photo.url(:large), :class => "user_profile_pic custom round"  %>
-			<% if current_user?(@user) %>
+			<%= image_tag user.photo.url(:large), :class => "user_profile_pic custom round"  %>
+			<% if current_user?(user) %>
 				<%= button_to "Change photo", {action: "change_picture", :id => @current_user.id, :redirect_url => request.env['PATH_INFO']}, :method => :get, :remote => true, :form_class => "change_photo" %>
 			<% end %>
 		<% end %>

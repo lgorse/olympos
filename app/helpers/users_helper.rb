@@ -26,6 +26,7 @@ module UsersHelper
 		end
 	end
 
+	
 	def new_user_success
 		sign_in_user
 		redirect_to details_user_path(@current_user)

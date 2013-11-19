@@ -1,0 +1,25 @@
+<%= form_for @current_user do |user| %>
+<ul>
+
+	<li>
+		<%= user.label :email %>
+		<%= user.text_field :email %>
+	</li>
+	<li>
+		<%= user.label :zip, "Your location" %>
+		<%= user.text_field :zip, :placeholder => "zip code" %>
+	</li>
+	<h3>E-mail Notifications</h3>
+	<li>
+		<%= user.label :friend_request_email, "For Friend Requests"  %>
+		<%= user.check_box :friend_request_email %>	
+	</li>
+	<li>
+		<%= user.label :message_notify_email, "For new Messages" %>
+		<%= user.check_box :message_notify_email %>
+	</li>
+	<li><%= user.submit "Save Changes" %></li>
+	
+</ul>
+
+<% end %>
