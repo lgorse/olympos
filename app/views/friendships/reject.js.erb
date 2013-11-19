@@ -1,0 +1,4 @@
+$(function(){
+	$("#user_mini_summary_<%= @user.id %>").hide('fast', function(){ $(this).remove(); });
+	$('.friendship_notification_wrapper').html("<%= escape_javascript(render 'friendships/received_friendships_count') %>");
+});

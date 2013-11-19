@@ -31,7 +31,9 @@ Olympos::Application.routes.draw do
 	resources :friendships, only: [:index, :create, :destroy] do
 		collection do
 			post :accept
-
+		end
+		member do
+			delete :reject
 		end
 
 	end

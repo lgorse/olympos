@@ -67,6 +67,22 @@
 		
 	}
 
+	.user_interact{
+		display: block;
+		float: right;
+		width: 75px;
+
+		.simple_friend_button{
+			margin-bottom: 5px;
+		}
+
+		.reject_request{
+			width: 75px;
+			text-align: center;
+			margin: auto;
+		}
+	}
+
 
 	.rating{
 		display: inline-block;
@@ -79,9 +95,5 @@
 		display: inline-block;
 	}
 
-	.simple_friend_button{
-		display: inline-block;
-		float: right;
-		
-	}
+
 }

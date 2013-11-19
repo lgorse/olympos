@@ -18,6 +18,11 @@ class FriendshipsController < ApplicationController
 		@current_user.unfriend(@user)		
 	end
 
+	def reject
+		@user = Friendship.find(params[:id]).friender
+		@user.unfriend(@current_user)
+	end
+
 	def friendships
 		@user = User.find(params[:user_id])
 		friend_hash = []
