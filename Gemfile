@@ -17,6 +17,7 @@ gem 'paperclip', '~> 3.0'
 gem 'aws-sdk'
 
 gem 'mailboxer'
+gem 'carmen-rails', '~> 1.0.0'
 
 group :development do
 	gem 'rspec-rails'

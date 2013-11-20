@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131115191036) do
+ActiveRecord::Schema.define(:version => 20131119223441) do
+
+  create_table "clubs", :force => true do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "street"
+    t.integer  "zip"
+    t.string   "country"
+    t.float    "lat"
+    t.float    "long"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "clubs", ["name"], :name => "index_clubs_on_name"
+  add_index "clubs", ["zip"], :name => "index_clubs_on_zip"
 
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
