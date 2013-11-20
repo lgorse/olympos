@@ -37,6 +37,14 @@ FactoryGirl.define do
 		association :friender, factory: :user
 		association :friended, factory: :user
 	end
+end
+
+FactoryGirl.define do
+	factory :club do
+		name	"test_club"
+		zip 	9403
+		country	"US"
+	end
 
 end
 
