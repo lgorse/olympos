@@ -12,7 +12,7 @@
 	 <% end %>
 	<li>
 		<%= user.label :zip, "Your location" %>
-		<%= user.text_field :zip, :placeholder => "zip code" %>
+		<%= user.text_field :zip, :value => @current_user.zip.blank? ? Geocoder.search([request.location.latitude,request.location.longitude]).first.postal_code : @current_user.zip  %>
 	</li>
 	<li>
 		<%= user.label :country %>

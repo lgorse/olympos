@@ -3,6 +3,9 @@ Olympos::Application.routes.draw do
 	root :to => 'sessions#new'
 
 	resources :users do
+		collection do
+			get :map, :search
+		end
 		resources :friendships, only: [:friendships, :requests, :pending] do
 			collection do
 			 get :friendships, :requests, :pending

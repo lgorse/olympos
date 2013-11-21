@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   attr_accessible :available, :birthdate, :fb_pic_large, :fb_pic_small, :first_rating, 
   :firstname, :gender, :has_played, :lastname, :location, :password_digest, 
   :password, :email, :zip, :fb_id, :signup_method, :photo, :friend_request_email, 
-  :message_notify_email, :country
+  :message_notify_email, :country, :lat, :long
   
   has_secure_password
   acts_as_messageable
@@ -162,6 +162,17 @@ class User < ActiveRecord::Base
 
     def message_email_notify(receipt, recipients)
       recipients.each{|recipient| CustomMessageMailer.send_email(receipt, recipient).deliver if recipient.message_notify_email}
+    end
+
+    def recommended_players(zip_param, country_param, request, distance)
+    if zip_param && country_param 
+      User.near(Geocoder.coordinates("#{zip_param} #{country_param}"), distance)
+      elsif (self.lat.blank? || self.long.blank? )
+       User.near([request.location.latitude, request.location.longitude], 30)
+      else
+        self.nearbys(distance)
+      end
+      
     end
 
 

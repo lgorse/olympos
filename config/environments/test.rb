@@ -42,4 +42,6 @@ Olympos::Application.configure do
   :lookup => :test
 
   )
+
+  config.middleware.use('SpoofIp', '98.234.52.106')
 end

@@ -175,7 +175,10 @@ describe User do
 		end
 
 		describe "geocode zip" do
-			before(:each) do
+			
+			
+			describe "if the user input location information" do
+				before(:each) do
 				@user = FactoryGirl.build(:user, :zip => "94303", :country => "US")
 			end
 
@@ -204,6 +207,8 @@ describe User do
 				user.lat.should == geocode.latitude
 				user.long.should == geocode.longitude
 			end
+
+		end
 
 		end
 

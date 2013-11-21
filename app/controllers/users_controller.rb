@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	include UsersHelper
 
-	before_filter :authenticate, :only => [:home, :show, :details, :change_picture, :edit, :destroy]
+	before_filter :authenticate, :only => [:home, :show, :details, :change_picture, :edit, :destroy, :map, :search]
 	
 
 	def new
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 	end
 
 	def home
-	@nearby_users = @current_user.nearbys(10)
+	@nearby_users = @current_user.recommended_players('', '', request, 20)
 
 	end
 
@@ -78,6 +78,16 @@ class UsersController < ApplicationController
 		end
 		@current_user.destroy
 		sign_out_user
+	end
+
+	def map
+		@nearby_users = @current_user.recommended_players(params[:zip], params[:country], request, params[:distance])
+
+	end
+
+	def search
+
+
 	end
 
 end
