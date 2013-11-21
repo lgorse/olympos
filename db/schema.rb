@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131120010049) do
+ActiveRecord::Schema.define(:version => 20131121064903) do
 
   create_table "clubs", :force => true do |t|
     t.string   "name"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20131120010049) do
     t.string   "fullname"
     t.boolean  "friend_request_email",              :default => true
     t.boolean  "message_notify_email",              :default => true
+    t.string   "country"
   end
 
   add_index "users", ["fb_id"], :name => "index_users_on_fb_id"

@@ -29,12 +29,14 @@
 #  fullname             :string(255)
 #  friend_request_email :boolean          default(TRUE)
 #  message_notify_email :boolean          default(TRUE)
+#  country              :string(255)
 #
 
 class User < ActiveRecord::Base
   attr_accessible :available, :birthdate, :fb_pic_large, :fb_pic_small, :first_rating, 
   :firstname, :gender, :has_played, :lastname, :location, :password_digest, 
-  :password, :email, :zip, :fb_id, :signup_method, :photo, :friend_request_email, :message_notify_email
+  :password, :email, :zip, :fb_id, :signup_method, :photo, :friend_request_email, 
+  :message_notify_email, :country
   
   has_secure_password
   acts_as_messageable
@@ -59,7 +61,7 @@ class User < ActiveRecord::Base
 
     before_validation :downcase_email, :set_full_name
     after_validation :geocode, :on => :create
-    after_validation :geocode, :if => lambda{|obj| obj.zip_changed?}
+    after_validation :geocode, :if => lambda{|obj| obj.zip_changed? || obj.country_changed?}
 
 
     has_many :invitations, :foreign_key => "inviter_id"
@@ -181,7 +183,7 @@ class User < ActiveRecord::Base
   end
 
   def zip_and_country
-    "#{self.zip} US"
+    "#{self.zip} #{self.country}"
   end
 
 end

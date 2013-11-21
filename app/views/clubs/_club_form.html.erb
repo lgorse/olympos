@@ -19,7 +19,7 @@
 	</li>
 	<li>
 		<%= club.label :country, "Country*" %>
-		<%= club.select :country, {priority: %w(US)} %>
+		<%= club.country_select :country, {priority: %w(US)} %>
 	</li>
 	<li>
 		<%= club.submit 'Save club' %>

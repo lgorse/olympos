@@ -15,6 +15,10 @@
 		<%= user.text_field :zip, :placeholder => "zip code" %>
 	</li>
 	<li>
+		<%= user.label :country %>
+		<%= user.country_select :country, {priority: %w(US)} %>
+	</li>
+	<li>
 		<%= user.submit 'Done' %>
 	</li>
 	

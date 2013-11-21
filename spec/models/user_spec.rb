@@ -29,6 +29,7 @@
 #  fullname             :string(255)
 #  friend_request_email :boolean          default(TRUE)
 #  message_notify_email :boolean          default(TRUE)
+#  country              :string(255)
 #
 
 require 'spec_helper'
@@ -175,7 +176,7 @@ describe User do
 
 		describe "geocode zip" do
 			before(:each) do
-				@user = FactoryGirl.build(:user, :zip => "94303")
+				@user = FactoryGirl.build(:user, :zip => "94303", :country => "US")
 			end
 
 			it "should save geocode on user creation" do
@@ -186,10 +187,19 @@ describe User do
 				@user.long.should == geocode.longitude
 			end
 
-			it "should save new geocode when user is altered" do
+			it "should save new geocode when zip is altered" do
 				@user.save
 				@user.update_attributes(:zip => '94305')
 				geocode = Geocoder.search("94305 US").first
+				user = User.find(@user.id)
+				user.lat.should == geocode.latitude
+				user.long.should == geocode.longitude
+			end
+
+			it "should save new geocode when country is altered" do
+				@user.save
+				@user.update_attributes(:country => 'FR')
+				geocode = Geocoder.search("94303 FR").first
 				user = User.find(@user.id)
 				user.lat.should == geocode.latitude
 				user.long.should == geocode.longitude

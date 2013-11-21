@@ -9,6 +9,10 @@
 		<%= user.label :zip, "Your location" %>
 		<%= user.text_field :zip, :placeholder => "zip code" %>
 	</li>
+	<li>
+		<%= user.label :country %>
+		<%= user.country_select :country, {priority: %w(US)} %>
+	</li>
 	<h3>E-mail Notifications</h3>
 	<li>
 		<%= user.label :friend_request_email, "For Friend Requests"  %>

@@ -20,7 +20,7 @@ describe Club do
   
   describe "validations" do
   	before(:each) do
-  		@attr = {:name => "Squash test club", :zip => 94303, :country => "USA"}
+  		@attr = {:name => "Squash test club", :zip => 94303, :country => "US"}
 
   	end
 

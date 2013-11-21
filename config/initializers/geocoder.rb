@@ -34,3 +34,18 @@ Geocoder::Lookup::Test.add_stub(
     }
   ]
 	)
+
+Geocoder::Lookup::Test.add_stub(
+  "94303 FR",
+  [
+    {
+      'latitude'     => 10,
+      'longitude'    => -1,
+      'address'      => 'Another place',
+      'state'        => 'New York',
+      'state_code'   => 'NY',
+      'country'      => 'United States',
+      'country_code' => 'US'
+    }
+  ]
+	)
