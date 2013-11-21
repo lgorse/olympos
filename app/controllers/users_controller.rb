@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 	end
 
 	def home
-		
+	@nearby_users = @current_user.nearbys(10)
 
 	end
 
