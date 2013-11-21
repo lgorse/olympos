@@ -19,6 +19,8 @@ gem 'aws-sdk'
 gem 'mailboxer'
 gem 'carmen-rails', '~> 1.0.0'
 
+gem 'geocoder'
+
 group :development do
 	gem 'rspec-rails'
 	gem 'autotest'

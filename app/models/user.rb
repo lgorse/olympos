@@ -54,7 +54,13 @@ class User < ActiveRecord::Base
     validates :gender, :presence =>  true
     validate :age_above_13, :unless => "birthdate.nil?"
 
+    geocoded_by :zip_and_country, :latitude => :lat, :longitude => :long
+
+
     before_validation :downcase_email, :set_full_name
+    after_validation :geocode, :on => :create
+    after_validation :geocode, :if => lambda{|obj| obj.zip_changed?}
+
 
     has_many :invitations, :foreign_key => "inviter_id"
     has_many :reverse_invitations, :foreign_key => "invitee_id", :class_name => "Invitation"
@@ -172,6 +178,10 @@ class User < ActiveRecord::Base
 
   def set_full_name
     self.fullname = "#{self.firstname} #{self.lastname}"
+  end
+
+  def zip_and_country
+    "#{self.zip} US"
   end
 
 end

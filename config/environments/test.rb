@@ -35,4 +35,11 @@ Olympos::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  #test environment for Geocoder
+  Geocoder.configure(
+
+  :lookup => :test
+
+  )
 end

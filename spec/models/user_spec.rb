@@ -173,6 +173,30 @@ describe User do
 
 		end
 
+		describe "geocode zip" do
+			before(:each) do
+				@user = FactoryGirl.build(:user, :zip => "94303")
+			end
+
+			it "should save geocode on user creation" do
+				@user.save
+				geocode = Geocoder.search("default search").first
+			
+				@user.lat.should == geocode.latitude
+				@user.long.should == geocode.longitude
+			end
+
+			it "should save new geocode when user is altered" do
+				@user.save
+				@user.update_attributes(:zip => '94305')
+				geocode = Geocoder.search("94305 US").first
+				user = User.find(@user.id)
+				user.lat.should == geocode.latitude
+				user.long.should == geocode.longitude
+			end
+
+		end
+
 		describe "associations" do
 			before(:each) do
 				@user = FactoryGirl.create(:user)

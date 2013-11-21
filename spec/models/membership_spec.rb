@@ -35,8 +35,15 @@ describe Membership do
 	end
 
 	describe "associations" do
+		before(:each) do
+			@user = FactoryGirl.create(:user)
+			@club = FactoryGirl.create(:club)
+			@attr = {:user_id => @user.id, :club_id => @club.id}
+			
+		end
 
 		it 'should have a user' do
+
 
 		end
 
