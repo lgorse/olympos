@@ -1,11 +1,11 @@
-<% recipients = conversation.participants.reject{|user| user.id == @current_user.id} %>
+<% recipients = conversation.participants%>
 
 
 <li class = "conversation_summary <%= 'selected' if conversation == @conversations.first %> <%= 'unread' if conversation.is_unread? @current_user %>" id = "conversation_<%= conversation.id %>">
 <%= link_to conversation, :remote => true do %>	
 <div class = "conversation_link_wrapper">
 	<div class = "participant_photo">
-	<%= render 'users/user_photo_partials/simple_small_user_photo', :user => recipients.first %>
+	<%= render 'users/user_photo_partials/simple_small_user_photo', :user => recipients.last %>
 	</div>
 	<div class = "top_row">
 		<div class = "conversation_participants">
