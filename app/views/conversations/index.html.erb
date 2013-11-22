@@ -3,9 +3,11 @@
 <%= render "conversation_list" %>
 </div>
 <div class = "conversation_show_column">
+	<% if @conversation %>
 	<ul class = "message_list">
 <%= render 'messages/message_list' %>
 </ul>
+<% end %>
 	
 </div>
 </div>
