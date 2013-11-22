@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
     end
 
     def friendship_requested_by(friender)
-      self.reverse_friendships.not_accepted.find_by_friender_id(friender.id)
+      friender.friendships.not_accepted.find_by_friended_id(self.id)
     end
 
     def friendship_requested_to(friend)

@@ -8,6 +8,6 @@ $(function(){
 		width: 450,
 		resizable: false
 	});
-	$("form.new_message").find("#recipient_name").message_autocomplete(recipient_id.length ? recipient: '');
+	$("form.new_message").find("#recipient_name").message_autocomplete("<%= @current_user.id %>", recipient_id.length ? recipient: '');
 
 });
