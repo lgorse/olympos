@@ -6,6 +6,8 @@ FactoryGirl.define do
 		password	"Supercool"
 		birthdate	15.years.ago.to_date
 		gender	MALE
+		zip 	94303
+		country 	"US"
 	end
 end
 

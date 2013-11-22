@@ -156,40 +156,6 @@ describe UsersController do
 
 			end
 
-			describe "player recommendation" do
-				describe "if user has a location" do
-					before(:each) do
-						@user = FactoryGirl.create(:user, :zip => "94303", :country => "US")
-						3.times do |i|
-							FactoryGirl.create(:user, :zip => "9430#{i}", :country => "US")
-						end
-						test_sign_in(@user)
-					end
-
-					it "should show the nearby users within x miles" do
-						get :home, :id => @user
-						assigns(:nearby_users).should == @user.recommended_players(request.location, 10)
-
-					end
-				end
-
-				describe "if user does not have a location" do
-					
-					before(:each) do
-						@user = FactoryGirl.create(:user)
-						3.times do |i|
-							FactoryGirl.create(:user, :zip => "9430#{i}", :country => "US")	
-						end
-						test_sign_in(@user)
-					end
-
-
-				end
-
-
-
-			end
-
 		end
 
 		describe "GET 'edit'" do
@@ -274,5 +240,6 @@ describe UsersController do
 			end
 
 		end
+
 
 	end
