@@ -81,7 +81,7 @@ class UsersController < ApplicationController
 	end
 
 	def map
-		@nearby_users = recommended_players(params[:zip], params[:user][:country], params[:distance])
+		@nearby_users = recommended_players(params[:zip], params[:user] ? params[:user][:country] : '', params[:distance])
 	end
 
 	def search

@@ -39,15 +39,15 @@ module UsersHelper
 		def recommended_players(zip, country, distance)
 			if zip && country
 				if distance
-					User.near(Geocoder.coordinates("#{zip} #{country}"), distance)
+					User.near(Geocoder.coordinates("#{zip} #{country}"), distance).without_user(@current_user)
 				else
-					User.near(Geocoder.coordinates("#{zip} #{country}"), 20)
+					User.near(Geocoder.coordinates("#{zip} #{country}"), 20).without_user(@current_user)
 				end
 			elsif (@current_user.lat.blank? || @current_user.long.blank?)	
 				if request.blank?
 					render 'users/search'
 				else
-					User.near([request.location.latitude, request.location.longitude], 20)
+					User.near([request.location.latitude, request.location.longitude], 20).without_user(@current_user)
 				end
 			else 	
 				if distance

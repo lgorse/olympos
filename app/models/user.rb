@@ -75,6 +75,8 @@ class User < ActiveRecord::Base
     has_many :friendees, :through => :friendships, :source => :friended
     has_many :frienders, :through => :friendships, :source => :friender
 
+    scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
+
 
     def facebook?
       self.signup_method == FACEBOOK
