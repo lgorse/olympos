@@ -75,6 +75,8 @@ class User < ActiveRecord::Base
     has_many :friendees, :through => :friendships, :source => :friended
     has_many :frienders, :through => :friendships, :source => :friender
 
+    scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
+
 
     def facebook?
       self.signup_method == FACEBOOK
@@ -136,7 +138,7 @@ class User < ActiveRecord::Base
     end
 
     def friendship_requested_by(friender)
-      self.reverse_friendships.not_accepted.find_by_friender_id(friender.id)
+      friender.friendships.not_accepted.find_by_friended_id(self.id)
     end
 
     def friendship_requested_to(friend)

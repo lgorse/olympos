@@ -140,6 +140,23 @@ describe User do
 
 		end
 
+		describe "scopes" do
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+				3.times {|i| FactoryGirl.create(:user)}
+			end
+
+			describe "without user" do
+
+				it "it should not include the designated user" do
+					user_list = User.without_user(@user)
+					user_list.should_not include(@user)
+				end
+
+			end
+
+		end
+
 		describe "attributes" do
 			before(:each) do
 				@user = FactoryGirl.create(:user)
@@ -600,5 +617,7 @@ describe User do
 			end
 
 		end
+
+
 	end
 

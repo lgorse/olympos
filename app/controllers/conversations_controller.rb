@@ -6,7 +6,7 @@ class ConversationsController < ApplicationController
 
 	def index
 		@conversations = Conversation.participant(@current_user)
-		@conversation = Conversation.last
+		@conversation = @conversations.first
 	end
 
 	def show

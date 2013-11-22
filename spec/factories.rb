@@ -2,10 +2,12 @@ FactoryGirl.define do
 	factory :user do
 		firstname 	"test"
 		lastname	"tester"
-		email	{generate(:email)}
+		email		{generate(:email)}
 		password	"Supercool"
 		birthdate	15.years.ago.to_date
-		gender	MALE
+		gender		MALE
+		zip 		94303
+		country 	"US"
 	end
 end
 

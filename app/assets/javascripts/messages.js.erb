@@ -1,10 +1,10 @@
 
-$.fn.message_autocomplete = function(recipient){
+$.fn.message_autocomplete = function(sender_id, recipient){
 	recipient_input = $(this);
 	console.log(recipient);
 	
 		recipient_input.tokenInput(
-			'/users/30/friendships/friendships',
+			'/users/'+sender_id+'/friendships/friendships',
 			{minChars: 0,
 			 theme: 'facebook',
 			 prePopulate: recipient
