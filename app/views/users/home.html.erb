@@ -2,6 +2,6 @@
 <div class = "dialog_new_message">
 	<div class = "new_message_form"></div></div>
 <div class = "listing" >
-	<%= render :partial => "users/user_summary_partials/user_summary", :collection => @nearby_users, :as => :user %>
+	<%= render :partial => "users/user_summary_partials/user_summary", :collection => User.all.reject{|user| user.id == @current_user.id}, :as => :user %>
 	
 </div>
