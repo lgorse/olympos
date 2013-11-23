@@ -1,8 +1,14 @@
-
-<%= form_tag map_users_path, :method => :get do %>
-<%= label_tag :distance %>
-<%= select_tag :distance, options_for_select([5, 10, 15, 20, 30])   %>
-<%= text_field_tag :zip, @current_user.zip %>
-<%= country_select(:user, :country, ["#{@current_user.country}"]) %>
-<%= submit_tag "Search" %>
-<% end %>
+<%= render "map_scripts/search_map" %>
+<%= @uniques %>
+<div class = "player_search">
+	<%= render 'users/search_form' %>
+</div>
+<div class = "dialog_new_message">
+	<div class = "new_message_form"></div></div>
+	<div style='width: 800px;'>
+		<div id="map" data-lat="<%= @lat %>", data-long= "<%= @long %>"style='width: 800px; height: 400px;'></div>
+	</div>
+	
+	<div class = "listing" >
+		<%= render :partial => "users/user_summary_partials/user_summary", :collection => @nearby_users, :as => :user %>	
+	</div>

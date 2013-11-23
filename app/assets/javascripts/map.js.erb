@@ -1,0 +1,68 @@
+
+
+$.fn.search_map = function(marker_list){
+
+	var RichMarkerBuilder = build_rich_marker();
+
+	map_div = $(this);
+	handler = Gmaps.build('Google', {builders: { Marker: RichMarkerBuilder} });
+	handler.buildMap({ provider: {zoom: 12}, internal: {id: 'map'}}, function(){
+		var lat = parseFloat(map_div.data("lat"));
+		var lng = parseFloat(map_div.data("long"));
+
+		markers = handler.addMarkers(marker_list,{
+			do_clustering: true
+		});
+		handler.map.centerOn({lat: lat, lng: lng});
+		handler.fitMapToBounds();
+	});
+}
+
+
+
+function build_rich_marker(){
+	var RichMarkerBuilder, 
+	__hasProp = {}.hasOwnProperty,
+	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+	RichMarkerBuilder = (function(_super) {
+
+		__extends(RichMarkerBuilder, _super);
+
+		function RichMarkerBuilder() {
+			return RichMarkerBuilder.__super__.constructor.apply(this, arguments);
+		}
+
+		RichMarkerBuilder.prototype.create_marker = function() {
+			var options;
+			options = _.extend(this.marker_options(), this.rich_marker_options());
+			return this.serviceObject = new RichMarker(options);
+		};
+
+		RichMarkerBuilder.prototype.rich_marker_options = function() {
+			var marker;
+			var arguments = this.args;
+			marker = document.createElement("div");
+			marker.setAttribute('class', 'marker_container round');
+			marker.innerHTML = "hello";
+			$(marker).click(arguments, function(e){
+				$.get('/users/map', {users: e.data.users}).done(function(data){
+					console.log(data);
+					
+				});
+
+			});
+			return _.extend(this.marker_options(), {
+				content: marker
+			});
+		};
+
+
+		return RichMarkerBuilder;
+
+
+
+	})(Gmaps.Google.Builders.Marker);
+
+	return RichMarkerBuilder;
+}

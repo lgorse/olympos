@@ -1,0 +1,4 @@
+$(function(){
+	$(".listing").html("<%= escape_javascript(render :partial => 'users/user_summary_partials/user_summary', :collection => @user_select, :as => :user ) %>");
+
+});

@@ -17,4 +17,6 @@
 //= require jquery.cookie.js
 //= require jquery.ui.autocomplete
 //= require jquery.tokeninput
+//= require underscore-min
+//= require gmaps/google
 //= require_tree .

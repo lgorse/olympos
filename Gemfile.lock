@@ -93,6 +93,7 @@ GEM
     foreigner (1.6.0)
       activerecord (>= 3.0.0)
     geocoder (1.1.8)
+    gmaps4rails (2.1.0)
     hike (1.2.3)
     httpclient (2.3.4.1)
     i18n (0.6.5)
@@ -220,6 +221,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   geocoder
+  gmaps4rails
   httpclient
   jquery-rails
   jquery-ui-rails

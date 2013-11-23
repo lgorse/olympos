@@ -47,8 +47,10 @@ module SessionsHelper
 	end
 
 	def login_fb_user
-		parse_fb_request
-		@current_user = User.find_by_fb_id(@signed_request['user_id'])
+		# parse_fb_request
+		# @current_user = User.find_by_fb_id(@signed_request['user_id'])
+		parse_fb_cookie
+		@current_user = User.find_by_fb_id(@facebook_cookies['user_id'])
 		if @current_user&&@current_user.facebook?
 			valid_user_signin
 		else

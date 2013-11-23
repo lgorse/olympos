@@ -20,6 +20,7 @@ gem 'mailboxer'
 gem 'carmen-rails', '~> 1.0.0'
 
 gem 'geocoder'
+gem 'gmaps4rails'
 
 group :development do
 	gem 'rspec-rails'
