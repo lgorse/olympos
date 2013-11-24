@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-<% recipients = conversation.participants%>
-=======
 <% recipients = conversation.participants %>
->>>>>>> master
+
 
 
 <li class = "conversation_summary <%= 'selected' if conversation == @conversations.first %> <%= 'unread' if conversation.is_unread? @current_user %>" id = "conversation_<%= conversation.id %>">
