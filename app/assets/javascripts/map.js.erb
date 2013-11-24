@@ -13,9 +13,34 @@ $.fn.search_map = function(marker_list){
 		markers = handler.addMarkers(marker_list,{
 			do_clustering: true
 		});
-		handler.map.centerOn({lat: lat, lng: lng});
+		handler.bounds.extendWith(markers);
 		handler.fitMapToBounds();
 	});
+
+	$(marker_list).set_link_city_names();
+	
+}
+
+$.fn.set_link_city_names = function(){
+	$.each($(this), function(index, marker_value){
+		var geocoder = new google.maps.Geocoder();
+		var latlng = new google.maps.LatLng(marker_value.lat, marker_value.lng)
+		geocoder.geocode({'latLng': latlng}, function(results, status){
+			if(status == google.maps.GeocoderStatus.OK){	
+				$.each(results[0].address_components, function(index, value){
+					if (value.types[0] == "locality"){
+						$(".zip_link#"+marker_value.zip).text(value.short_name+ "("+marker_value.users.length+")");
+					}
+				});
+				
+				
+			}else{
+			}
+		});
+
+	});
+
+
 }
 
 
@@ -44,10 +69,10 @@ function build_rich_marker(){
 			var arguments = this.args;
 			marker = document.createElement("div");
 			marker.setAttribute('class', 'marker_container round');
-			marker.innerHTML = "hello";
+			marker.innerHTML = arguments.users.length;
 			$(marker).click(arguments, function(e){
 				$.get('/users/map', {users: e.data.users}).done(function(data){
-					console.log(data);
+					
 					
 				});
 

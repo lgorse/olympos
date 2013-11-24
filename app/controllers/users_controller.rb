@@ -91,7 +91,6 @@ class UsersController < ApplicationController
 	def search
 		@nearby_users = recommended_players(params[:zip], params[:user] ? params[:user][:country] : '', params[:distance])
 		@uniques = @nearby_users.map{|user| {zip: user.zip, lat: user.lat, long: user.long} }.uniq
-		@this = Hash.new
 		@uniques.each do |unique|
 			user_array = @nearby_users.select{|user| user.zip == unique[:zip]}.map(&:id)
 			unique[:users] = user_array
@@ -99,7 +98,7 @@ class UsersController < ApplicationController
 		@hash = Gmaps4rails.build_markers(@uniques) do |zip, marker|
 			marker.lat zip[:lat]
 			marker.lng zip[:long]
-			marker.json({:users => zip[:users] })
+			marker.json({:users => zip[:users], :zip => zip[:zip] })
 			marker.title zip[:users].count.to_s
 		end
 	end

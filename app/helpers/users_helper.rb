@@ -55,8 +55,8 @@ module UsersHelper
 					User.near([@lat, @long], 20).without_user(@current_user)
 				end
 			else 
-			@lat = @current_user.lat
-			@long = @current_user.long	
+				@lat = @current_user.lat
+				@long = @current_user.long	
 				if distance
 					@current_user.nearbys(distance)
 				else

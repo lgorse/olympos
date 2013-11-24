@@ -1,14 +1,27 @@
 <%= render "map_scripts/search_map" %>
-<%= @uniques %>
 <div class = "player_search">
+	<div class = "search_form">
 	<%= render 'users/search_form' %>
+	</div>
+	<div class ="player_search_commentary">
+		<% if @nearby_users %>
+		<%= "#{@nearby_users.count} players nearby" %>
+		<% end %>
+		<% if @uniques %>
+		<%= link_to "Show all", map_users_path(:users => @uniques.map{|unique| unique[:users]}.flatten),:remote => true %>
+		<% @uniques.each do |unique| %>
+		<%= link_to "#{unique[:zip]}(#{unique[:users].count})", map_users_path(:users => unique[:users]), :class => "zip_link", :id => unique[:zip], :remote => true %>
+		<% end %>
+		<% end %>
+	</div>
 </div>
+
+
 <div class = "dialog_new_message">
 	<div class = "new_message_form"></div></div>
-	<div style='width: 800px;'>
-		<div id="map" data-lat="<%= @lat %>", data-long= "<%= @long %>"style='width: 800px; height: 400px;'></div>
+	<div class = "map_wrapper">
+		<div id="map" data-lat="<%= @lat %>", data-long= "<%= @long %>"></div>
 	</div>
-	
 	<div class = "listing" >
 		<%= render :partial => "users/user_summary_partials/user_summary", :collection => @nearby_users, :as => :user %>	
 	</div>
