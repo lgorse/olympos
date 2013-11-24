@@ -13,8 +13,15 @@ $.fn.search_map = function(marker_list){
 		markers = handler.addMarkers(marker_list,{
 			do_clustering: true
 		});
-		handler.bounds.extendWith(markers);
-		handler.fitMapToBounds();
+		if (markers.length > 1){
+			handler.bounds.extendWith(markers);
+			handler.fitMapToBounds();			
+		}else{
+			handler.bounds.extendWith(markers);
+			handler.fitMapToBounds();
+			handler.getMap().setZoom(13);
+		}
+		
 	});
 
 	$(marker_list).set_link_city_names();
