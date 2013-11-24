@@ -77,3 +77,14 @@ module Olympos
     :enable_starttls_auto => true }
   end
 end
+
+module AssetsInitializers
+  class Railtie < Rails::Railtie
+    initializer "assets_initializers.initialize_rails",
+                :group => :assets do |app|
+      require "#{Rails.root}/config/initializers/facebook_config.rb" 
+      require "#{Rails.root}/config/initializers/koala.rb" 
+      require "#{Rails.root}/config/initializers/constants.rb"
+    end
+  end
+end
