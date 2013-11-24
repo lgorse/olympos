@@ -1,6 +1,9 @@
 Olympos::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  #Don't precompile assets for production
+  config.assets.initialize_on_precompile = false
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
