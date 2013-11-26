@@ -85,7 +85,7 @@ describe Match do
 
 		end
 
-		describe "winner" do
+		describe "winner id" do
 
 			it 'should show the winner if there is one' do
 				match = Match.create(@attr)
@@ -201,25 +201,69 @@ describe Match do
 												  :player2_score => [12, 8, 12, 11, 6]))						
 					match.should be_valid
 				end
+			end
+		end
+	end
 
+	describe "associations" do
+		before(:each) do
+			@winner = FactoryGirl.create(:user)
+			@loser = FactoryGirl.create(:user)
+			@match = Match.create(:player1_id => @winner.id, :player2_id => @loser.id, 
+								  :player1_score => [11, 11, 11], :player2_score => [4, 6, 5])
 
+		end
+
+		describe "players" do
+			it "should have a player1 association" do
+				@match.should respond_to(:player1)
 			end
 
+			it "should have a player2 association" do
+				@match.should respond_to(:player2)
+			end
+
+			it "should return a player" do
+				@match.player2.should == @loser
+			end
 
 
 		end
 
-	end
-
-	describe "associations" do
-
 		describe "players" do
 
 			it 'should have a players attribute' do
+				@match.should respond_to(:players)
+			end
+
+			it 'should return the players involved' do
+				@match.players.sort.should == [@winner, @loser].sort
+			end
+		end
+
+		describe "winners" do
+
+			it "should have a winner attribute" do
+				@match.should respond_to(:winner)
+			end
+
+			it "should return the winning player" do
+				@match.winner.should == @winner
+			end
+
+		end
+
+		describe "opponent" do
+
+			it "should have an opponent method" do
+				@match.should respond_to(:opponent)
 
 			end
 
-			it 'should'
+			it "should return the other player" do
+				@match.opponent(@winner).should == @loser
+			end
+
 		end
 
 	end

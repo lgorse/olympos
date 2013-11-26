@@ -52,12 +52,10 @@ end
 
 FactoryGirl.define do
 	factory :match do
-		#association :player1, factory: :user
-		#association :player2, factory: :user
-		player1_id 	1
-		player2_id 	2
-		player1_score	[11, 11, 11].join(",")
-		player2_score 	[9, 9, 0].join(",")
+		association :player1, factory: :user
+		association :player2, factory: :user
+		player1_score	[11, 11, 11]
+		player2_score 	[9, 9, 0]
 	end
 
 end

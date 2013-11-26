@@ -17,6 +17,8 @@
 
 class Match < ActiveRecord::Base
   include ActiveModel::Validations
+  serialize :player1_score
+  serialize :player2_score
   
   attr_accessible :confirmed, :player1_id, :player1_confirm, :player1_score, :player2_id, :player2_confirm, :player2_score
 
@@ -29,6 +31,24 @@ class Match < ActiveRecord::Base
   after_validation :set_winner
   before_save :check_player_confirmation
 
+  belongs_to :player1, :foreign_key => "player1_id", :class_name => "User"
+  belongs_to :player2, :foreign_key => "player2_id", :class_name => "User"
+  belongs_to :winner, :foreign_key => "winner_id", :class_name => "User"
+
+
+
+def players
+  [self.player1, self.player2]
+end
+
+def opponent(opponent)
+  [self.player1, self.player2].reject{|player| player == opponent}.first
+
+end
+
+
+  
+ 
 
   private
   

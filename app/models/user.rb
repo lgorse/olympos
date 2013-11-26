@@ -75,6 +75,9 @@ class User < ActiveRecord::Base
     has_many :friendees, :through => :friendships, :source => :friended
     has_many :frienders, :through => :friendships, :source => :friender
 
+    has_many :initiated_matches, :foreign_key => "player1_id", :class_name => "Match"
+    has_many :received_matches, :foreign_key => "player2_id", :class_name => "Match"
+
     scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
 
 
@@ -175,6 +178,33 @@ class User < ActiveRecord::Base
         self.nearbys(distance)
       end
       
+    end
+
+    def matches
+      Match.where('player1_id = :user_id OR player2_id = :user_id', user_id: self.id)
+    end
+
+    def matches_won
+      self.matches.where(:winner_id => self.id)
+    end
+
+    def matches_lost
+      self.matches.where('winner_id != :user_id', :user_id => self.id)
+    end
+
+    def matches_with(opponent)
+      self.matches.select{|match| match.opponent(self) == opponent}
+    end
+
+    def confirm_match(match)
+      if match = self.matches.find(match)
+        match.players.each do |player|
+          if self == player
+            player == match.player1 ? match.player1_confirm = true : match.player2_confirm = true
+            match.save
+          end
+        end
+      end
     end
 
 

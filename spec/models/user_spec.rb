@@ -196,36 +196,36 @@ describe User do
 			
 			describe "if the user input location information" do
 				before(:each) do
-				@user = FactoryGirl.build(:user, :zip => "94303", :country => "US")
-			end
+					@user = FactoryGirl.build(:user, :zip => "94303", :country => "US")
+				end
 
-			it "should save geocode on user creation" do
-				@user.save
-				geocode = Geocoder.search("default search").first
-			
-				@user.lat.should == geocode.latitude
-				@user.long.should == geocode.longitude
-			end
+				it "should save geocode on user creation" do
+					@user.save
+					geocode = Geocoder.search("default search").first
 
-			it "should save new geocode when zip is altered" do
-				@user.save
-				@user.update_attributes(:zip => '94305')
-				geocode = Geocoder.search("94305 US").first
-				user = User.find(@user.id)
-				user.lat.should == geocode.latitude
-				user.long.should == geocode.longitude
-			end
+					@user.lat.should == geocode.latitude
+					@user.long.should == geocode.longitude
+				end
 
-			it "should save new geocode when country is altered" do
-				@user.save
-				@user.update_attributes(:country => 'FR')
-				geocode = Geocoder.search("94303 FR").first
-				user = User.find(@user.id)
-				user.lat.should == geocode.latitude
-				user.long.should == geocode.longitude
-			end
+				it "should save new geocode when zip is altered" do
+					@user.save
+					@user.update_attributes(:zip => '94305')
+					geocode = Geocoder.search("94305 US").first
+					user = User.find(@user.id)
+					user.lat.should == geocode.latitude
+					user.long.should == geocode.longitude
+				end
 
-		end
+				it "should save new geocode when country is altered" do
+					@user.save
+					@user.update_attributes(:country => 'FR')
+					geocode = Geocoder.search("94303 FR").first
+					user = User.find(@user.id)
+					user.lat.should == geocode.latitude
+					user.long.should == geocode.longitude
+				end
+
+			end
 
 		end
 
@@ -606,11 +606,10 @@ describe User do
 						@user.update_attribute(:message_notify_email, false)
 
 					end
+					
 					it "should return nil" do
 						@user.message_notify('hi').should == nil
 					end
-
-
 
 				end
 
@@ -618,6 +617,130 @@ describe User do
 
 		end
 
+		describe "matches" do
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+				@opponent = FactoryGirl.create(:user)
+				2.times do |i|
+					if i == 0
+						match = FactoryGirl.create(:match, :player1_id => @user.id, :player2_id => @opponent.id) 
+					else
+						match = FactoryGirl.create(:match, :player1_id => @user.id, :player2_id => @opponent.id,
+							:player1_score => [8, 8, 8],
+							:player2_score => [11, 11, 11])
+					end
+				end
+				3.times do|i|
+					if i == 0
+						match = FactoryGirl.create(:match, :player2_id => @user.id, :player1_id => @opponent.id,
+							:player1_score => [8, 8, 8],
+							:player2_score => [11, 11, 11])
+					else
+						match = FactoryGirl.create(:match, :player1_id => @opponent.id, :player2_id => @user.id)
+					end
+				end
+				@last_match = FactoryGirl.create(:match)
+			end
 
+
+			describe "initiated matches" do
+
+				it "should respond to a initiated matches association" do
+					@user.should respond_to(:initiated_matches)
+				end
+
+				it 'should return matches initiated by the user' do
+					@user.initiated_matches.should == Match.where(:player1_id => @user.id)
+				end
+
+			end
+
+			describe "received matches" do
+
+				it "should respond to a received matches association" do
+					@user.should respond_to(:received_matches)
+				end
+
+				it "should return matches where the user has not submitted" do
+					@user.received_matches.should == Match.where(:player2_id => @user.id)
+				end
+
+			end
+
+			describe "matches" do
+
+				it "should respond to a matches association" do
+					@user.should respond_to(:matches)
+
+				end
+
+				it "should return all matches where the user is featured" do
+					@user.matches.should == Match.all.reject{|match| match == @last_match}
+				end
+			
+			end
+
+			describe "matches_won" do
+				it "should respond to a matches_won association" do
+					@user.should respond_to (:matches_won)
+				end
+
+				it "should return the matches where the player has won" do
+					@user.matches_won.pluck(:id).should == Match.where(:winner_id => @user.id).pluck(:id)
+					
+
+				end
+
+			end
+
+			describe "matches_lost" do
+
+				it "should respond to a matches lost association" do
+					@user.should respond_to(:matches_lost)
+
+				end
+
+				it "should return the matches where the player has not won" do
+					@user.matches_lost.should ==Match.where('winner_id != :user_id', :user_id =>@user.id).reject{|match| match == @last_match}
+
+				end
+
+			end
+
+			describe 'matches_with' do
+
+				it 'should respond to a matches with method' do
+					@user.should respond_to(:matches_with)
+
+				end
+
+				it 'should return the matches that involved the other player' do
+					@user.matches_with(@opponent).should == @opponent.matches.select{|match| [match.player1_id, match.player2_id].include?(@user.id)}
+
+				end
+
+			end
+
+			describe "confirm match" do
+
+				it "should respond to a confirm match method" do
+					@user.should respond_to(:confirm_match)
+				end
+
+				it 'should confirm the match' do
+					match = Match.first
+					match.confirmed?.should == false
+					match.update_attributes(:player2_confirm => true)
+					match.save
+					@user.confirm_match(match)
+					Match.find(match).confirmed?.should == true
+
+
+				end
+
+			end
+
+
+		end
 	end
 
