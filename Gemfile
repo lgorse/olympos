@@ -33,6 +33,7 @@ group :development do
 end
 
 group :test do
+	gem 'spork-rails'
 	gem 'rspec-rails'
 	gem 'capybara'
 	gem 'factory_girl_rails' 
