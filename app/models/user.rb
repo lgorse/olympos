@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
     has_many :friendees, :through => :friendships, :source => :friended
     has_many :frienders, :through => :friendships, :source => :friender
 
-    has_many :initiated_matches, :foreign_key => "player1_id", :class_name => "Match"
+    has_many :initiated_matches, :foreign_key => "player1_id", :class_name => "Match" 
     has_many :received_matches, :foreign_key => "player2_id", :class_name => "Match"
 
     scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }

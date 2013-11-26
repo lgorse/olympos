@@ -2,6 +2,8 @@ Olympos::Application.routes.draw do
 
 	root :to => 'sessions#new'
 
+	resources :sessions, :conversations, :messages, :clubs, :matches
+
 	resources :users do
 		collection do
 			get :map, :search
@@ -23,7 +25,7 @@ Olympos::Application.routes.draw do
 
 	end
 
-	resources :sessions, :conversations, :messages, :clubs
+	
 
 	resources :invitations do
 		collection do

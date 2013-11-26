@@ -642,7 +642,7 @@ describe User do
 				@last_match = FactoryGirl.create(:match)
 			end
 
-
+			
 			describe "initiated matches" do
 
 				it "should respond to a initiated matches association" do
