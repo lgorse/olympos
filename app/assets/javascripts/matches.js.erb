@@ -1,0 +1,17 @@
+$(function(){
+	$("#match_player2_id").match_partner_autocomplete(34);
+
+});
+
+$.fn.match_partner_autocomplete = function(sender_id){
+	partner_input = $(this);
+
+	partner_input.tokenInput(
+		'/users/'+sender_id+'/friendships/friendships',
+			{minChars: 0,
+			 theme: 'facebook',
+			 tokenLimit: 1
+			});
+
+}
+

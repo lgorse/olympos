@@ -1,3 +1,4 @@
+<%= render 'layouts/error_messages', :object => match.object %>
 <table>
 	<tr>
 		<td>
@@ -6,8 +7,7 @@
 </td>
 <td>
 <%= match.label :player2_id, "Player 2:" %>
-<%= text_field_tag :player2_input %>
-<%= match.hidden_field :player2_id %>
+<%= text_field_tag "match[player2_id]" %>
 </td>
 </tr>
 <tr>

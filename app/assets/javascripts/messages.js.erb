@@ -19,3 +19,16 @@ $.fn.message_autocomplete = function(sender_id, recipient){
 	});
 	
 }
+
+$.fn.match_partner_autocomplete = function(sender_id){
+	partner_input = $(this);
+
+	partner_input.tokenInput(
+		'/users/'+sender_id+'/friendships/friendships',
+			{minChars: 0,
+			 theme: 'facebook',
+			 tokenLimit: 1
+			});
+
+}
+
