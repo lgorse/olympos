@@ -9,12 +9,12 @@ Spork.prefork do
   # need to restart spork for it take effect.
 
   # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
-require 'rspec/autorun'
-require 'capybara/rails'
-require 'capybara/rspec'
+  ENV["RAILS_ENV"] ||= 'test'
+  require File.expand_path("../../config/environment", __FILE__)
+  require 'rspec/rails'
+  require 'rspec/autorun'
+  require 'capybara/rails'
+  require 'capybara/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -54,7 +54,7 @@ RSpec.configure do |config|
 
   Capybara.app_host = "#{FULL_ROOT}"
 
-  Capybara.default_wait_time = 5
+  #Capybara.default_wait_time = 5
 
 
   def test_sign_in(user)
