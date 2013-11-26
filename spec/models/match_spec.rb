@@ -3,13 +3,14 @@
 # Table name: matches
 #
 #  id              :integer          not null, primary key
-#  player1         :integer
-#  player2         :integer
+#  player1_id      :integer
+#  player2_id      :integer
+#  winner_id       :integer
 #  player1_score   :text
 #  player2_score   :text
-#  player1_confirm :boolean
-#  player2_confirm :boolean
-#  confirmed       :boolean
+#  player1_confirm :boolean          default(FALSE)
+#  player2_confirm :boolean          default(FALSE)
+#  confirmed       :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -22,7 +23,7 @@ describe Match do
 		before(:each) do
 			@user1 = FactoryGirl.create(:user)
 			@user2 = FactoryGirl.create(:user)
-			@attr = {:player1=> @user1.id, :player2 => @user2.id, 
+			@attr = {:player1_id=> @user1.id, :player2_id => @user2.id, 
 				:player1_score => [11, 11, 11], :player2_score => [7, 8, 4]}
 		end
 
@@ -31,7 +32,7 @@ describe Match do
 			describe "player 1" do
 
 				it 'should be present' do
-					match = Match.new(@attr.merge(:player1 => ''))
+					match = Match.new(@attr.merge(:player1_id => ''))
 					match.should_not be_valid
 				end
 
@@ -40,7 +41,7 @@ describe Match do
 			describe "player 2" do
 
 				it 'should be present' do
-					match = Match.new(@attr.merge(:player2 => ''))
+					match = Match.new(@attr.merge(:player2_id => ''))
 					match.should_not be_valid
 				end
 
@@ -84,22 +85,31 @@ describe Match do
 
 		end
 
+		describe "winner" do
+
+			it 'should show the winner if there is one' do
+				match = Match.create(@attr)
+				match.winner_id.should == @user1.id
+			end
+
+		end
+
 		describe "score" do
 			before(:each) do
 			@user1 = FactoryGirl.create(:user)
 			@user2 = FactoryGirl.create(:user)
-			@attr = {:player1=> @user1.id, :player2 => @user2.id, 
+			@attr = {:player1_id => @user1.id, :player2_id => @user2.id, 
 				:player1_score => [11, 11, 11], :player2_score => [7, 8, 4]}
 			end
 
 			describe "presence validation" do
 
-				it 'should require a player1 score' do
+				it 'should require a player1_id score' do
 					match = Match.new(@attr.merge(:player1_score => ''))
 					match.should_not be_valid
 				end
 
-				it 'should require a player2 score' do
+				it 'should require a player2_id score' do
 					match = Match.new(@attr.merge(:player2_score => ''))
 					match.should_not be_valid
 				end
@@ -111,7 +121,7 @@ describe Match do
 				before(:each) do
 					@user1 = FactoryGirl.create(:user)
 					@user2 = FactoryGirl.create(:user)
-					@attr = {:player1=> @user1.id, :player2 => @user2.id, 
+					@attr = {:player1_id=> @user1.id, :player2_id => @user2.id, 
 						:player1_score => [11, 11, 11], :player2_score => [7, 8, 4]}
 				end
 
@@ -164,7 +174,7 @@ describe Match do
 				before(:each) do
 					@user1 = FactoryGirl.create(:user)
 					@user2 = FactoryGirl.create(:user)
-					@attr = {:player1=> @user1.id, :player2 => @user2.id}
+					@attr = {:player1_id=> @user1.id, :player2_id => @user2.id}
 				end
 
 				it "should pass a simple 3-0 game" do
@@ -199,6 +209,18 @@ describe Match do
 
 		end
 
+	end
+
+	describe "associations" do
+
+		describe "players" do
+
+			it 'should have a players attribute' do
+
+			end
+
+			it 'should'
+		end
 
 	end
 
