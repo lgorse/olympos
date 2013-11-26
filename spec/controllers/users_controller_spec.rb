@@ -245,51 +245,27 @@ describe UsersController do
 			before(:each) do
 				@user = FactoryGirl.create(:user)
 				3.times {|i| FactoryGirl.create(:user, :zip => "9430#{i}")}
+				@user_list = User.without_user(@user).pluck(:id)
 				test_sign_in(@user)
 			end
 
 			describe "general function"  do
 
 				it "should not include the user" do
-					get :map, :zip => @user.zip, :user => @user.attributes, :distance => 10
-					assigns(:nearby_users).should_not include(@user)
-
+					get :map, :users => @user_list
+					assigns(:user_select).should_not include(@user)
 				end
 
 			end
 
-			describe "if there are all the params" do
+		
 
 				it "should return the search results according to the params" do
-					get :map, :zip => 94305, :user => @user.attributes, :distance => 5
-					assigns(:nearby_users).pluck(:id).should == User.near(Geocoder.coordinates("#{94305} #{@user.country}"), 5).without_user(@user).pluck(:id)
+					get :map, :users => @user_list
+					assigns(:user_select).map{|user| user.id}.should == @user_list
 				end
 
-			end
-
-			describe "if there are not all the params" do
-
-				it "should return the search based on default values" do
-					get :map
-					assigns(:nearby_users).pluck(:id).should == @user.nearbys(10).pluck(:id)
-
-				end
-
-			end
-
-			describe "if there are no lats or longs" do
-				before(:each) do
-					@user.update_attributes(:lat => '', :long => '')
-				end
-
-				it "should return values based on the request params" do
-
-					get :map
-					assigns(:nearby_users).pluck(:id).should == User.near([request.location.latitude, request.location.longitude], 20).without_user(@current_user).pluck(:id)
-				end
-
-			end
-
+		
 		end
 
 

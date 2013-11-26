@@ -18,3 +18,7 @@ VALID_EMAIL = /[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 FACEBOOK_VALID_EMAIL = /^([\w!.%+\-])+@([\w\-])+(?:\.[\w\-]+)+$/
 
 DEFAULT_FROM = "olympos.help@gmail.com"
+
+WINNING_SCORE = 11
+MAX_PERIODS = 5
+MAX_PERIODS_TO_WIN = 3

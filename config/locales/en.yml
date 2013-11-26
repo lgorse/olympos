@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      match:
+        player1_score: "Player 1 Score"
+        player2_score: "Player 2 Score"
+
