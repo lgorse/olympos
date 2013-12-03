@@ -11,7 +11,7 @@
 	<div class = "top_row">
 		<div class = "conversation_participants">
 <%= recipients.collect(&:firstname).join(",") %></div>
-<%= render 'layouts/date_summary', :object => conversation %>
+<%= render 'layouts/date_summary', :time_object => conversation.updated_at %>
 </div>
 <div class = "conversation_last_message">
 <%= truncate(conversation.messages.last.body, length: 35) %>

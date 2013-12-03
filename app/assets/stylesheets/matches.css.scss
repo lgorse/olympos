@@ -3,28 +3,66 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .matches_wrapper{
-	width: 500px;
+	width: 425px;
 	margin: auto;
+	
 }
 
 .match_list{
-	width: 425px;
+	width: 100%;
+	
 
 	
 	.separator{
-		width: 90%;
-		height: 1px;
+		width: 85%;
+		
 		border-bottom: 1px solid #C2C2CF;
 		margin: auto;
 
 	}
 
 	.match_summary{
-		height: 25px;
-		width: 100%;
+		height: 55px;
 		
+		//display: block;
 		margin: 2px 0px;
-		padding: 10px;
+		padding: 5px;
+
+		.match_opponent_photo{
+			float: left;
+			width: 60px;
+			height: 100%;
+			text-align: center;
+			
+
+			span{
+				display: inline-block;
+				height: 100%;
+				vertical-align: middle;
+				margin: auto;
+			}
+
+			img{
+				vertical-align: middle;
+				max-height: 50px;
+				max-width: 50px;
+			}
+		}
+
+		.match_content{
+			float: left;
+			height: 100%;
+			padding-left: 5px;
+		}
+
+		.match_main_line{
+			height: 18px;
+			margin: 3px 0px 5px;
+		}
+
+		.time_summary{
+			color: #76787A;
+		}
 
 
 		.match_info, .match_confirmation{
@@ -32,17 +70,33 @@
 		}
 
 		.match_info{
-			width: 325px;
+			width: 250px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+
 
 		}
 
 		.opponent{
 			margin-right: 20px;
+
 		}
 
 
 		.reject_match, .cancel_match{
 			font-size: 90%;
+		}
+
+		.prompt_text{
+			font-size: 85%;
+			color: #76787A;
+			margin-left: 5px;
+
+			a{
+				color: #7aaad1;
+			}
+
 		}
 	}
 }

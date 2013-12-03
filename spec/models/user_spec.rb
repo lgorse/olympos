@@ -640,6 +640,7 @@ describe User do
 					end
 				end
 				@last_match = FactoryGirl.create(:match)
+				
 			end
 
 			
@@ -728,14 +729,13 @@ describe User do
 				end
 
 				it 'should confirm the match' do
-					match = Match.first
+					match = Match.unscoped.first
+					print match
 					match.confirmed?.should == false
 					match.update_attributes(:player2_confirm => true)
 					match.save
 					@user.confirm_match(match)
 					Match.find(match).confirmed?.should == true
-
-
 				end
 
 			end

@@ -10,4 +10,19 @@ module MatchesHelper
 		end
 		winner_id
 	end
+
+	def prompt_text(match)
+		unless match.confirmed?
+			content_tag(:div, :class => "prompt_text") do
+			case match.player1_id
+			when @current_user.id				
+				concat "#{match.opponent(@current_user).firstname} has not confirmed yet. "  
+				concat link_to "Nag", match.opponent(@current_user)
+
+			else 
+				concat "#{match.opponent(@current_user).firstname} wants you to confirm this match"
+			end
+			end
+		end
+	end
 end

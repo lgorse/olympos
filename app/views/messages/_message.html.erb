@@ -4,7 +4,7 @@
 	</div>
 	<div class = "top_row">
 <%= link_to message.sender.firstname, message.sender %>
-<%= render 'layouts/date_summary', :object => message %>
+<%= render 'layouts/date_summary', :time_object => message.updated_at %>
 </div>
 <%= message.body %>
 </li>
