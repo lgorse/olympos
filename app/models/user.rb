@@ -184,6 +184,11 @@ class User < ActiveRecord::Base
       Match.where('player1_id = :user_id OR player2_id = :user_id', user_id: self.id)
     end
 
+    def ordered_matches
+      by_owner = Match.send(:sanitize_sql_array, [ 'case when player2_id = %d then 0 else 1 end', self.id ])
+      self.matches.order(by_owner).order("play_date DESC, created_at DESC")
+    end
+
     def matches_won
       self.matches.where(:winner_id => self.id)
     end

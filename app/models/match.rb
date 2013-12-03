@@ -18,7 +18,7 @@
 class Match < ActiveRecord::Base
   include ActiveModel::Validations
 
-  default_scope order('confirmed, play_date DESC, created_at DESC')
+  default_scope order('confirmed')
   serialize :player1_score
   serialize :player2_score
   

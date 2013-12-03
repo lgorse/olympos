@@ -23,7 +23,10 @@ class MatchesController < ApplicationController
 	end
 
 	def index
-		@matches = @current_user.matches
+		#@matches = @current_user.matches
+		#by_owner = Match.send(:sanitize_sql_array, [ 'case when player2_id = %d then 0 else 1 end', @current_user.id ])
+		@matches = @current_user.ordered_matches
+
 	end
 
 	def destroy
