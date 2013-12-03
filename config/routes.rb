@@ -25,7 +25,7 @@ Olympos::Application.routes.draw do
 			get :home
 		end
 
-		resources :matches, only: [:index]
+		resources :matches, only: [:index, :update]
 
 	end
 
@@ -46,7 +46,7 @@ Olympos::Application.routes.draw do
 		end
 	end
 
-	resources :matches, except: [:index]
+	resources :matches, except: [:index, :update]
 
 	
 

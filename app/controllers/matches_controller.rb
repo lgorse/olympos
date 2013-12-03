@@ -16,13 +16,17 @@ class MatchesController < ApplicationController
 			:player1_confirm => true,
 			:winner_id => @winner_id))
 		if @match.save
-			redirect_to user_matches_path(@current_user)
+			respond_to do |format|
+				format.html {redirect_to user_matches_path(@current_user)}
+				format.js {@user = @current_user}
+			end
 		else
 			render 'new'
 		end
 	end
 
 	def index
+		@match = Match.new
 		@user = User.find(params[:user_id])
 		@matches = @user.ordered_matches
 
@@ -35,10 +39,15 @@ class MatchesController < ApplicationController
 		else
 			flash[:failure] = "Cannot destroy someone else\'s match"
 		end
-		redirect_to user_matches_path(@current_user)
+		respond_to do |format|
+			format.html {redirect_to user_matches_path(@current_user)}
+			format.js
+		end
+		
 	end
 
 	def update
+		@user = User.find(params[:user_id])
 		@match = Match.find(params[:id])
 		if @match.player2_id == @current_user.id
 			if @match.update_attributes(params[:match])
@@ -48,7 +57,13 @@ class MatchesController < ApplicationController
 		else
 			flash[:error] = "Cannot destroy someone else\'s match"
 		end
-		redirect_to user_matches_path(@current_user)
+		respond_to do |format|
+			format.html {redirect_to user_matches_path(@current_user)}
+			format.js {
+				@match = Match.new
+				@matches = @user.ordered_matches
+			}
+		end
 
 	end
 

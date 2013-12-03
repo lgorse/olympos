@@ -2,14 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.matches_wrapper{
-	width: 425px;
-	margin: auto;
-	
-}
 
 .match_list{
-	width: 100%;
+	width: 425px;
+	margin: auto;
 	
 
 	
@@ -23,8 +19,6 @@
 
 	.match_summary{
 		height: 55px;
-		
-		//display: block;
 		margin: 2px 0px;
 		padding: 5px;
 
@@ -107,4 +101,53 @@
 		font-size: 80%;
 		padding: 0px 3px;
 	}
+}
+
+.new_match{
+	width: 465px;
+	margin: auto auto 10px;
+	
+
+	table{
+		
+
+		th{
+			font-weight: normal;
+			text-align: left;
+			padding-left: 5px;
+
+			label{
+			font-size: 90%;	
+			}
+			
+
+		}
+
+		td{
+			height: 100%;
+			padding: 0px;
+			display: table-cell;
+		}
+		td:first-child{
+			width: 210px;
+			vertical-align: middle;
+		}
+
+		td:first-child + td{
+			width: 250px;
+		}
+
+		.winner_loser{
+			float: right;
+			margin-right: 5px;
+		}
+
+	}
+
+	ul.token-input-list-facebook{
+		width: 250px;
+		
+	}
+
+
 }

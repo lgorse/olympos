@@ -1,0 +1,5 @@
+$(function(){
+	$(".listing").html("<%= escape_javascript(render 'matches/index_content') %>");
+	$("#match_player2_id").match_partner_autocomplete($("#match_player1_id").val());
+
+});

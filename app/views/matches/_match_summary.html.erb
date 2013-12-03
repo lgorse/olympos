@@ -1,5 +1,6 @@
 <% opponent = match.opponent(@user) %>
-<li class = "match_summary">
+<div id = "match_<%= match.id %>">
+<li class = "match_summary" >
 	<div class = "match_opponent_photo">
 		<span></span>
 	<%= render 'users/user_photo_partials/simple_small_user_photo', :user =>match.opponent(@user) %>
@@ -19,10 +20,12 @@
 	<div class = "match_confirmation">
 	<% unless match.confirmed? %>
 		<% if match.player2_id == @current_user.id %>
-			<%= link_to "Reject", match, :method => :delete, :class => "reject_match", :title => "Reject" %>
+			<%= link_to "Reject", match, :method => :delete, :class => "reject_match", 
+				:title => "Reject", :remote => true %>
 			<%= render 'matches/confirm', :match => match %>
 		<% elsif match.player1_id == @current_user.id %>
-			<%= link_to "Cancel", match, :method => :delete, :class => "cancel_match", :title => "Cancel" %>
+			<%= link_to "Cancel", match, :method => :delete, :class => "cancel_match", 
+				:title => "Cancel", :remote => true %>
 		<% end %>
 	<% end %>
 	</div>
@@ -30,3 +33,4 @@
 		<%= prompt_text(match) %>		
 </li>
 <div class = "separator"></div>
+</div>

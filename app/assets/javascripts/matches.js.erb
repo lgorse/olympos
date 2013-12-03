@@ -1,5 +1,6 @@
 $(function(){
-	$("#match_player2_id").match_partner_autocomplete(34);
+	$("#match_player2_id").match_partner_autocomplete($("#match_player1_id").val());
+	
 });
 
 $.fn.match_partner_autocomplete = function(sender_id){

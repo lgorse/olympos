@@ -1,0 +1,3 @@
+$(function(){
+	$(".match_list").html("<%= escape_javascript(render :partial => 'matches/match_summary', :collection => @matches, :as => :match) %>");
+});
