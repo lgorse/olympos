@@ -2,7 +2,7 @@ Olympos::Application.routes.draw do
 
 	root :to => 'sessions#new'
 
-	resources :sessions, :conversations, :messages, :clubs, :matches
+	resources :sessions, :conversations, :messages, :clubs
 
 	resources :users do
 		collection do
@@ -18,10 +18,14 @@ Olympos::Application.routes.draw do
 			get :details
 			get :change_picture
 		end
+
 		get 'fb', on: :new
+
 		collection do
 			get :home
 		end
+
+		resources :matches, only: [:index]
 
 	end
 
@@ -40,8 +44,9 @@ Olympos::Application.routes.draw do
 		member do
 			delete :reject
 		end
-
 	end
+
+	resources :matches, except: [:index]
 
 	
 

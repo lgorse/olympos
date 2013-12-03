@@ -1,3 +1,4 @@
+<% unless current_user?(user) %>
 <div class = "simple_friend_button", id = "friend_button_<%= user.id %>">
 <% if friendship = @current_user.friendship_mutual(user) %>
 		<%= render 'messages/message_button', :user => user %>
@@ -9,3 +10,4 @@
 	<%= render 'friendships/friendship_forms/friend', :user => user %>
 <% end %>
 </div>
+<% end %>

@@ -66,4 +66,8 @@ module UsersHelper
 
 		end
 
+		def you_for_current_user(user)
+			current_user?(user) ? "You" : user.firstname
+		end
+
 	end

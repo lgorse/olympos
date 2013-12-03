@@ -1,18 +1,18 @@
-<% opponent = match.opponent(@current_user) %>
+<% opponent = match.opponent(@user) %>
 <li class = "match_summary">
 	<div class = "match_opponent_photo">
 		<span></span>
-	<%= render 'users/user_photo_partials/simple_small_user_photo', :user =>match.opponent(@current_user) %>
+	<%= render 'users/user_photo_partials/simple_small_user_photo', :user =>match.opponent(@user) %>
 	
 	</div>
 	<div class = "match_content">	
 	<%= render 'layouts/date_summary', :time_object => match.play_date.to_time %>
 	<div class = "match_main_line">
 	<div class = "match_info">
-	<% if match.winner == @current_user %>
-		<%= "You won against " %>
+	<% if match.winner == @user %>
+		<%= "#{you_for_current_user(@user)} won against " %>
 	<% else %>
-		<%= "You lost against " %>
+		<%= "#{you_for_current_user(@user)} lost against " %>
 	<% end %>
 	<%= link_to opponent.fullname, opponent, :class => "opponent" %>
 	</div>
@@ -21,7 +21,7 @@
 		<% if match.player2_id == @current_user.id %>
 			<%= link_to "Reject", match, :method => :delete, :class => "reject_match", :title => "Reject" %>
 			<%= render 'matches/confirm', :match => match %>
-		<% else %>
+		<% elsif match.player1_id == @current_user.id %>
 			<%= link_to "Cancel", match, :method => :delete, :class => "cancel_match", :title => "Cancel" %>
 		<% end %>
 	<% end %>

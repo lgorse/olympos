@@ -16,16 +16,15 @@ class MatchesController < ApplicationController
 			:player1_confirm => true,
 			:winner_id => @winner_id))
 		if @match.save
-			redirect_to matches_path
+			redirect_to user_matches_path(@current_user)
 		else
 			render 'new'
 		end
 	end
 
 	def index
-		#@matches = @current_user.matches
-		#by_owner = Match.send(:sanitize_sql_array, [ 'case when player2_id = %d then 0 else 1 end', @current_user.id ])
-		@matches = @current_user.ordered_matches
+		@user = User.find(params[:user_id])
+		@matches = @user.ordered_matches
 
 	end
 
@@ -36,7 +35,7 @@ class MatchesController < ApplicationController
 		else
 			flash[:failure] = "Cannot destroy someone else\'s match"
 		end
-		redirect_to matches_path
+		redirect_to user_matches_path(@current_user)
 	end
 
 	def update
@@ -49,7 +48,7 @@ class MatchesController < ApplicationController
 		else
 			flash[:error] = "Cannot destroy someone else\'s match"
 		end
-		redirect_to matches_path
+		redirect_to user_matches_path(@current_user)
 
 	end
 
