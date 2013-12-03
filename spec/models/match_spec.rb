@@ -23,8 +23,8 @@ describe Match do
 		before(:each) do
 			@user1 = FactoryGirl.create(:user)
 			@user2 = FactoryGirl.create(:user)
-			@attr = {:player1_id=> @user1.id, :player2_id => @user2.id, 
-				:player1_score => [11, 11, 11], :player2_score => [7, 8, 4]}
+			@attr = {:player1_id=> @user1.id, :player2_id => @user2.id,
+					 :play_date => 1.day.ago.to_date, :winner_id => @user1.id}
 		end
 
 		describe "players" do
@@ -45,6 +45,15 @@ describe Match do
 					match.should_not be_valid
 				end
 
+			end
+
+		end
+
+		describe "play date" do
+
+			it "should require a play date" do
+				match = Match.new(@attr.merge(:play_date => ''))
+				match.should_not be_valid
 			end
 
 		end
@@ -87,10 +96,20 @@ describe Match do
 
 		describe "winner id" do
 
-			it 'should show the winner if there is one' do
-				match = Match.create(@attr)
-				match.winner_id.should == @user1.id
+			it "should be required" do
+				match = Match.new(@attr.merge(:winner_id => ''))
+				match.should_not be_valid
 			end
+
+			it 'should be either player1 or player2' do
+
+
+			end
+
+			# it 'should show the winner if there is one' do
+			# 	match = Match.create(@attr)
+			# 	match.winner_id.should == @user1.id
+			# end
 
 		end
 
@@ -99,32 +118,13 @@ describe Match do
 			@user1 = FactoryGirl.create(:user)
 			@user2 = FactoryGirl.create(:user)
 			@attr = {:player1_id => @user1.id, :player2_id => @user2.id, 
-				:player1_score => [11, 11, 11], :player2_score => [7, 8, 4]}
+				:player1_score => [11, 11, 11], :player2_score => [7, 8, 4],
+				:play_date => 1.day.ago.to_date, :winner_id => @user1.id}
 			end
 
-			describe "presence validation" do
-
-				it 'should require a player1_id score' do
-					match = Match.new(@attr.merge(:player1_score => ''))
-					match.should_not be_valid
-				end
-
-				it 'should require a player2_id score' do
-					match = Match.new(@attr.merge(:player2_score => ''))
-					match.should_not be_valid
-				end
-
-
-			end
-
-			describe 'period validation' do
-				before(:each) do
-					@user1 = FactoryGirl.create(:user)
-					@user2 = FactoryGirl.create(:user)
-					@attr = {:player1_id=> @user1.id, :player2_id => @user2.id, 
-						:player1_score => [11, 11, 11], :player2_score => [7, 8, 4]}
-				end
-
+			
+			describe 'score validation validation' do
+				
 				it 'should have the same length' do
 					match = Match.new(@attr.merge(:player1_score => [11, 11]))
 					match.should_not be_valid
@@ -174,7 +174,8 @@ describe Match do
 				before(:each) do
 					@user1 = FactoryGirl.create(:user)
 					@user2 = FactoryGirl.create(:user)
-					@attr = {:player1_id=> @user1.id, :player2_id => @user2.id}
+					@attr = {:player1_id=> @user1.id, :player2_id => @user2.id,
+							 :play_date => 1.day.ago.to_date, :winner_id => @user1.id}
 				end
 
 				it "should pass a simple 3-0 game" do
@@ -210,7 +211,8 @@ describe Match do
 			@winner = FactoryGirl.create(:user)
 			@loser = FactoryGirl.create(:user)
 			@match = Match.create(:player1_id => @winner.id, :player2_id => @loser.id, 
-								  :player1_score => [11, 11, 11], :player2_score => [4, 6, 5])
+								  :player1_score => [11, 11, 11], :player2_score => [4, 6, 5],
+								  :play_date => 1.day.ago.to_date, :winner_id => @winner.id)
 
 		end
 
@@ -241,17 +243,18 @@ describe Match do
 			end
 		end
 
-		describe "winners" do
 
-			it "should have a winner attribute" do
-				@match.should respond_to(:winner)
-			end
+		# describe "winners" do
 
-			it "should return the winning player" do
-				@match.winner.should == @winner
-			end
+		# 	it "should have a winner attribute" do
+		# 		@match.should respond_to(:winner)
+		# 	end
 
-		end
+		# 	it "should return the winning player" do
+		# 		@match.winner.should == @winner
+		# 	end
+
+		# end
 
 		describe "opponent" do
 
@@ -264,6 +267,19 @@ describe Match do
 				@match.opponent(@winner).should == @loser
 			end
 
+		end
+
+	end
+
+	describe "scoping" do
+		before(:each) do
+				@last = FactoryGirl.create(:match, :play_date => 2.days.ago.to_date)
+				@first = FactoryGirl.create(:match, :play_date => 1.day.ago.to_date)
+			end
+
+		it "should order by the play date in reverse" do
+			Match.all.first.should == @first
+			
 		end
 
 	end

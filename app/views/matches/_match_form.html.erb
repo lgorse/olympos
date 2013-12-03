@@ -2,6 +2,13 @@
 <table>
 	<tr>
 		<td>
+			<%= match.label :play_date, "Played on" %>
+	<%= match.date_select :play_date, :order => [:month, :day, :year], :start_year => 3.months.ago.year , :end_year => Time.now.year  %>
+		</td>
+		
+	</tr>
+	<tr>
+		<td>
 <%= match.label :player1_id, "Player 1: #{@current_user.fullname}" %>
 <%= match.hidden_field :player1_id, :value => @current_user.id%>
 </td>
@@ -10,23 +17,19 @@
 <%= text_field_tag "match[player2_id]" %>
 </td>
 </tr>
+
 <tr>
 	<td>
-<%= match.label :player1_score, "Score" %></td>
-<td>
-<%= match.label :player2_score, "Score" %>
-</td>
-</tr>
-<% 5.times do |i| %>
-<tr>
+	<%= match.label :winner_id, "I won" %>
+	<%= match.radio_button :winner_id, true %>
+	</td>
 	<td>
-<%= text_field_tag "match[player1_score][#{i}]" %>
-</td>
-<td>
-<%= text_field_tag "match[player2_score][#{i}]" %>
-</td>
+	<%= match.label :winner_id, "I lost" %>
+	<%= match.radio_button :winner_id, false %>
+	</td>
+	
 </tr>
-<% end %>
+
 
 </table>
 <%= match.submit "Confirm" %>

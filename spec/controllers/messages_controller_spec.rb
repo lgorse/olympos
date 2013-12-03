@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MessagesController do
 
 	describe 'GET "new" (and before_filter tests)' do
-		render_views
+		
 		
 		describe "before_filter tests" do
 			before(:each) do
@@ -43,16 +43,6 @@ describe MessagesController do
 
 			end
 
-			it 'should have a full_name field' do
-				get :new
-				response.body.should have_field(:recipient_name)
-
-			end
-
-			it 'should have a body field' do
-				get :new
-				response.body.should have_field(:message_body)
-			end
 
 		end
 

@@ -56,6 +56,8 @@ FactoryGirl.define do
 		association :player2, factory: :user
 		player1_score	[11, 11, 11]
 		player2_score 	[9, 9, 0]
+		winner_id	{player1_id}
+		play_date 	1.day.ago.to_date
 	end
 
 end

@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20131125175808) do
     t.integer  "player1_id"
     t.integer  "player2_id"
     t.integer  "winner_id"
+    t.date     "play_date"
     t.text     "player1_score"
     t.text     "player2_score"
     t.boolean  "player1_confirm", :default => false

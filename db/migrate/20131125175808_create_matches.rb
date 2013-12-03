@@ -4,6 +4,7 @@ class CreateMatches < ActiveRecord::Migration
       t.integer :player1_id
       t.integer :player2_id
       t.integer :winner_id
+      t.date :play_date
       t.text :player1_score
       t.text :player2_score
       t.boolean :player1_confirm, :default => false

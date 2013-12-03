@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe InvitationsController do
-	render_views
+	
 
 	describe 'GET /new' do
 
@@ -19,11 +19,7 @@ describe InvitationsController do
 
 			end
 
-			it "should have an invite form" do
-				get :new
-				response.body.should have_field(:invitation_email)
-			end
-
+			
 			it "should authenticate" do
 				session[:user_id] = ''
 				get :new

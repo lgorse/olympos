@@ -1,0 +1,23 @@
+<% opponent = match.opponent(@current_user) %>
+<li class = "match_summary">
+	<div class = "match_info">
+	<%= match.play_date %>
+	<% if match.winner == @current_user %>
+		<%= "You won against " %>
+	<% else %>
+		<%= "You lost against " %>
+	<% end %>
+	<%= link_to opponent.fullname, opponent, :class => "opponent" %>
+	</div>
+	<div class = "match_confirmation">
+	<% unless match.confirmed? %>
+		<% if match.player2_id == @current_user.id %>
+			<%= link_to "Reject", match, :method => :delete, :class => "reject_match", :title => "Reject" %>
+			<%= render 'matches/confirm', :match => match %>
+		<% else %>
+			<%= link_to "Cancel", match, :method => :delete, :class => "cancel_match", :title => "Cancel" %>
+		<% end %>
+	<% end %>
+	</div>
+</li>
+<div class = "separator"></div>

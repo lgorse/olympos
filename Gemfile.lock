@@ -95,6 +95,7 @@ GEM
     geocoder (1.1.8)
     gmaps4rails (2.1.0)
     hike (1.2.3)
+    htmlbeautifier (0.0.8)
     httpclient (2.3.4.1)
     i18n (0.6.5)
     journey (1.0.4)
@@ -226,6 +227,7 @@ DEPENDENCIES
   faker
   geocoder
   gmaps4rails
+  htmlbeautifier
   httpclient
   jquery-rails
   jquery-ui-rails

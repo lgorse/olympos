@@ -1,3 +1,56 @@
 // Place all the styles related to the matches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.matches_wrapper{
+	width: 500px;
+	margin: auto;
+}
+
+.match_list{
+	width: 425px;
+
+	
+	.separator{
+		width: 90%;
+		height: 1px;
+		border-bottom: 1px solid #C2C2CF;
+		margin: auto;
+
+	}
+
+	.match_summary{
+		height: 25px;
+		width: 100%;
+		
+		margin: 2px 0px;
+		padding: 10px;
+
+
+		.match_info, .match_confirmation{
+			display: inline-block;
+		}
+
+		.match_info{
+			width: 325px;
+
+		}
+
+		.opponent{
+			margin-right: 20px;
+		}
+
+
+		.reject_match, .cancel_match{
+			font-size: 90%;
+		}
+	}
+}
+.edit_match{
+	display: inline-block;
+
+	input[type=submit]{
+		font-size: 80%;
+		padding: 0px 3px;
+	}
+}

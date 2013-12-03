@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SessionsController do
-	render_views
+	
 
 	describe 'GET "New"' do
 		describe "if there is no session" do
