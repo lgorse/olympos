@@ -189,6 +189,10 @@ class User < ActiveRecord::Base
       self.matches.order(by_owner).order("play_date DESC, created_at DESC")
     end
 
+    def matches_submitted_to_me
+      self.matches.where(:player2_id => self.id, :player2_confirm => false)
+    end
+
     def matches_won
       self.matches.where(:winner_id => self.id)
     end

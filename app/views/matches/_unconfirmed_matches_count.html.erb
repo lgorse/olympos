@@ -1,0 +1,4 @@
+<% current_user_unconfirmed_matches = @current_user.matches_submitted_to_me.count %>
+<% if  current_user_unconfirmed_matches > 0 %>
+		<div class = "unconfirmed_matches notification round_very"><%= current_user_unconfirmed_matches  %></div>
+		<% end %>

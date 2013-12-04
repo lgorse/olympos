@@ -1,3 +1,4 @@
 $(function(){
 	$(".match_list").html("<%= escape_javascript(render :partial => 'matches/match_summary', :collection => @matches, :as => :match) %>");
+	$('.match_notification_wrapper').html("<%= escape_javascript(render 'matches/unconfirmed_matches_count') %>");
 });

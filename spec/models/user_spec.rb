@@ -761,6 +761,25 @@ describe User do
 
 			end
 
+			describe "matches submitted to user" do
+				before(:each) do
+					@player = FactoryGirl.create(:user)
+					@opponent = FactoryGirl.create(:user)
+					@match_from_player = FactoryGirl.create(:match, :player1_id => @player.id,
+															:player2_id => @opponent.id)
+					@match_from_opponent = FactoryGirl.create(:match, :player1_id => @opponent.id,
+															  :player2_id => @player.id)
+
+				end
+
+				it "should returned the matches the user must confirm" do
+					@player.matches_submitted_to_me.should_not include @match_from_player
+					@player.matches_submitted_to_me.should include @match_from_opponent
+
+				end
+
+			end
+
 
 		end
 	end

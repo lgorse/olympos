@@ -5,6 +5,10 @@
 		<%= link_to "Search", search_users_path %>
 	</nav>
 	<nav class = "header_right">
+
+		<div class = "match_notification_wrapper">
+			<%= render 'matches/unconfirmed_matches_count' %>
+		</div>
 		<div class = "message_notification_wrapper">
 		<%= render 'conversations/unread_conversation_count' %>
 		</div>

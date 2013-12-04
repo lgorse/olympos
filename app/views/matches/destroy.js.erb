@@ -2,5 +2,6 @@ $(function(){
 	$("#match_<%= @match.id %>").hide('fast', function(){
 		$(this).remove();
 	});
+	$('.match_notification_wrapper').html("<%= escape_javascript(render 'matches/unconfirmed_matches_count') %>");
 
 });
