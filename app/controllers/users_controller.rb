@@ -69,7 +69,7 @@ class UsersController < ApplicationController
 			@user = User.find(params[:id])
 		end
 		@user.set_fb_large_pic(@graph) if @user.facebook? && @graph
-		@full_name = @user.firstname + " " +  @user.lastname
+		
 	end
 
 	def destroy

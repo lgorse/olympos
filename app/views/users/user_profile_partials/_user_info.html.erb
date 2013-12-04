@@ -1,5 +1,5 @@
 <div class = "main_user_name">
-	<%= @full_name %>
+	<%= @user.fullname %>
 </div>
 <% if current_user?(@user) && @user.first_rating.blank? %>
 	<%= form_for @user do |user| %>

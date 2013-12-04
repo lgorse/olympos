@@ -29,5 +29,7 @@
 	</ul>
 </div>
 
-<div class = "listing" ></div>
+<div class = "listing" >
+	<%= render :partial => 'users/user_summary_partials/user_summary', :collection => @user.friends, :as => :user %>
+</div>
 

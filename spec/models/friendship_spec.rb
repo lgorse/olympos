@@ -127,7 +127,6 @@ describe Friendship do
 			it "should give the reverse friendship" do
 				@user2.accept(@friendship)
 				@friendship.reverse.should == Friendship.find_by_friender_id_and_friended_id(@user2.id, @user1.id)
-
 			end
 
 		end
@@ -145,6 +144,22 @@ describe Friendship do
 		it "should be destroyed with the user" do
 			@user2.destroy
 			Friendship.find_by_friended_id(@user2.id).should be_blank
+
+		end
+
+	end
+
+	describe "if there is a friendship and reverse_friendship with the same users" do
+		before(:each) do
+			@friender = FactoryGirl.create(:user)
+			@friended = FactoryGirl.create(:user)
+			@friender.friend(@friended)
+			@friended.friend(@friender)
+		end
+
+		it "should automatically make the friendship mutual" do
+			friendship = Friendship.find_by_friender_id_and_friended_id(@friender.id, @friended.id)
+			reverse_friendship = Friendship.find_by_friender_id_and_friended_id(@friended.id, @friender.id)
 
 		end
 
