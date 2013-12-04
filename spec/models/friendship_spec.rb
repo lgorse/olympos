@@ -154,13 +154,15 @@ describe Friendship do
 			@friender = FactoryGirl.create(:user)
 			@friended = FactoryGirl.create(:user)
 			@friender.friend(@friended)
-			@friended.friend(@friender)
+			
 		end
 
-		it "should automatically make the friendship mutual" do
+		it "should automatically make the friendship mutual if there is a reverse friendship" do
+			@friended.friend(@friender)
 			friendship = Friendship.find_by_friender_id_and_friended_id(@friender.id, @friended.id)
-			reverse_friendship = Friendship.find_by_friender_id_and_friended_id(@friended.id, @friender.id)
-
+			reverse_friendship = friendship.reverse			
+			friendship.confirmed?.should == true
+			reverse_friendship.confirmed?.should == true
 		end
 
 	end

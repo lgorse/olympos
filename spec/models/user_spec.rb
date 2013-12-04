@@ -678,7 +678,7 @@ describe User do
 				it "should return all matches where the user is featured" do
 					@user.matches.should == Match.all.reject{|match| match == @last_match}
 				end
-			
+
 			end
 
 			describe "matches_won" do
@@ -730,12 +730,33 @@ describe User do
 
 				it 'should confirm the match' do
 					match = Match.unscoped.first
-					print match
 					match.confirmed?.should == false
 					match.update_attributes(:player2_confirm => true)
 					match.save
 					@user.confirm_match(match)
 					Match.find(match).confirmed?.should == true
+				end
+
+			end
+
+			describe "ordered players" do
+				before(:each) do
+					@player = FactoryGirl.create(:user)
+					@opponent = FactoryGirl.create(:user)
+					@first = FactoryGirl.create(:match, :play_date => 1.day.ago.to_date,
+												:player1_id => @opponent.id, 
+												:player2_id => @player.id)
+					@second = FactoryGirl.create(:match, :play_date => 2.days.ago.to_date,
+												 :player1_id => @opponent.id, 
+												 :player2_id => @player.id)
+					@last = FactoryGirl.create(:match, :play_date => 1.day.ago.to_date,
+											   :player1_id => @player.id,
+											   :player2_id => @opponent.id)
+				end
+
+				it "should order by the play date in reverse" do
+					@player.ordered_matches.first.should == @first
+					@player.ordered_matches.last.should == @last
 				end
 
 			end

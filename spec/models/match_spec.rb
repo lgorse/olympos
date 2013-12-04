@@ -88,7 +88,7 @@ describe Match do
 
 			it 'should go to true if both players have confirmed' do
 				match =  Match.create(@attr.merge(:player1_confirm => true, :player2_confirm => true))
-				match.errors.full_messages.each {|msg| print msg}
+				
 				match.confirmed.should== true
 			end
 
@@ -271,17 +271,6 @@ describe Match do
 
 	end
 
-	describe "scoping" do
-		before(:each) do
-				@last = FactoryGirl.create(:match, :play_date => 2.days.ago.to_date)
-				@first = FactoryGirl.create(:match, :play_date => 1.day.ago.to_date)
-			end
-
-		it "should order by the play date in reverse" do
-			Match.all.first.should == @first
-			
-		end
-
-	end
+	
 
 end

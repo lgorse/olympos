@@ -61,7 +61,7 @@ describe MatchesController do
 
 			it "should redirect to the index of matches" do
 				post :create, :match => @attr
-				response.should redirect_to matches_path
+				response.should redirect_to user_matches_path(@winner)
 
 			end
 
@@ -122,7 +122,7 @@ describe MatchesController do
 
 			it "should redirect to the index page" do
 				delete :destroy, :id => @match.id
-				response.should redirect_to matches_path
+				response.should redirect_to user_matches_path(@user)
 
 			end
 
@@ -144,13 +144,13 @@ describe MatchesController do
 			end
 
 			it "should update the match attribute" do
-				put :update, :id => @match.id, :match => @attr
+				put :update, :user_id => @user.id, :id => @match.id, :match => @attr
 				Match.find(@match.id).player2_confirm.should == true
 
 			end
 
 			it "should also make the match confirmed if the match confirmation is true across all players" do
-				put :update, :id => @match.id, :match => @attr
+				put :update, :user_id => @user.id, :id => @match.id, :match => @attr
 				Match.find(@match.id).confirmed.should == true
 			end
 
@@ -163,7 +163,7 @@ describe MatchesController do
 			end
 
 			it "should not allow confirmation except by current user" do
-				put :update, :id => @match.id, :match => @attr
+				put :update, :user_id => @user.id, :id => @match.id, :match => @attr
 				Match.find(@match.id).player2_confirm.should == false
 
 			end
@@ -177,8 +177,8 @@ describe MatchesController do
 			end
 
 			it 'should redirect to the index page' do
-				put :update, :id => @match.id, :match => @attr
-				response.should redirect_to matches_path
+				put :update, :user_id => @user.id, :id => @match.id, :match => @attr
+				response.should redirect_to user_matches_path(@user)
 			end
 
 		end

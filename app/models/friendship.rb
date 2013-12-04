@@ -23,6 +23,8 @@ class Friendship < ActiveRecord::Base
   belongs_to :friender, :foreign_key => "friender_id", :class_name => "User"
   belongs_to :friended, :foreign_key => "friended_id", :class_name => "User"
 
+  before_create :confirm_if_reverse_exists
+
   scope :mutual, -> {where(confirmed: true)}
   scope :not_accepted, -> {where(confirmed: false)}
 
@@ -44,6 +46,16 @@ class Friendship < ActiveRecord::Base
   
   def email_request
     FriendshipMailer.friend_request(self).deliver if self.friended.friend_request_email
+  end
+
+  private
+  def confirm_if_reverse_exists
+    if reverse_friendship = self.reverse
+      self.confirmed = true
+      reverse_friendship.confirmed = true
+      reverse_friendship.save
+    end
+
   end
 
 end
