@@ -1,13 +1,13 @@
 <% unless current_user?(user) %>
-<div class = "simple_friend_button", id = "friend_button_<%= user.id %>">
-<% if friendship = @current_user.friendship_mutual(user) %>
-		<%= render 'messages/message_button', :user => user %>
-<% elsif friend_requested = @current_user.friendship_requested_to(user) %>
-<%= render 'friendships/friendship_forms/unfriend', :friendship => friend_requested %>
-<% elsif friend_request = @current_user.friendship_requested_by(user) %>
-	<%= render 'friendships/friendship_forms/accept', :user => user %>
-<% else %>
-	<%= render 'friendships/friendship_forms/friend', :user => user %>
-<% end %>
-</div>
+  <div class = "simple_friend_button", id = "friend_button_<%= user.id %>">
+    <% if friendship = @current_user.friendship_mutual(user) %>
+      <%= render 'messages/message_button', :user => user %>
+    <% elsif friend_requested = @current_user.friendship_requested_to(user) %>
+      <%= render 'friendships/friendship_forms/unfriend', :friendship => friend_requested %>
+    <% elsif friend_request = @current_user.friendship_requested_by(user) %>
+      <%= render 'friendships/friendship_forms/accept', :user => user %>
+    <% else %>
+      <%= render 'friendships/friendship_forms/friend', :user => user %>
+    <% end %>
+  </div>
 <% end %>

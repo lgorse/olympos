@@ -1,45 +1,35 @@
-
 <%= form_for @match, :remote => true do |match| %>
-<h3>Enter your latest match</h3>
-<%= render 'layouts/error_messages', :object => match.object %>
-<%= match.hidden_field :player1_id, :value => @current_user.id%>
-<table>
-	<tr>
-		<th>
-			<%= match.label :play_date, "Played on" %>
-		</th>
-		<th>
-			<%= match.label :player2_id, "Your opponent:" %>
-		</th>
-		
-	</tr>
-	<tr>
-		<td>
-
-	<%= match.date_select :play_date, :order => [:month, :day, :year], :start_year => 3.months.ago.year , :end_year => Time.now.year  %>
-		</td>
-<td>
-
-<%= text_field_tag "match[player2_id]" %>
-</td>
-</tr>
-
-<tr>
-	<td class = "helper"></td>
-	<td>
-		<span class = "winner_loser">
-	<%= match.label :winner_id, "I won" %>
-	<%= match.radio_button :winner_id, true %>
-	
-	<%= match.label :winner_id, "I lost" %>
-	<%= match.radio_button :winner_id, false %>
-
-	<%= match.submit "Confirm" %>
-	</span>	
-	</td>
-</tr>
-
-
-</table>
-
+  <h3>Enter your latest match</h3>
+  <%= render 'layouts/error_messages', :object => match.object %>
+  <%= match.hidden_field :player1_id, :value => @current_user.id%>
+  <table>
+    <tr>
+      <th>
+        <%= match.label :play_date, "Played on" %>
+      </th>
+      <th>
+        <%= match.label :player2_id, "Your opponent:" %>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <%= match.date_select :play_date, :order => [:month, :day, :year], :start_year => 3.months.ago.year , :end_year => Time.now.year  %>
+      </td>
+      <td>
+        <%= text_field_tag "match[player2_id]" %>
+      </td>
+    </tr>
+    <tr>
+      <td class = "helper"></td>
+      <td>
+        <span class = "winner_loser">
+          <%= match.label :winner_id, "I won" %>
+          <%= match.radio_button :winner_id, true %>
+          <%= match.label :winner_id, "I lost" %>
+          <%= match.radio_button :winner_id, false %>
+          <%= match.submit "Confirm" %>
+        </span>
+      </td>
+    </tr>
+  </table>
 <% end %>

@@ -1,22 +1,18 @@
 <% recipients = conversation.participants %>
-
-
-
 <li class = "conversation_summary <%= 'selected' if conversation == @conversations.first %> <%= 'unread' if conversation.is_unread? @current_user %>" id = "conversation_<%= conversation.id %>">
-<%= link_to conversation, :remote => true do %>	
-<div class = "conversation_link_wrapper">
-	<div class = "participant_photo">
-	<%= render 'users/user_photo_partials/simple_small_user_photo', :user => recipients.last %>
-	</div>
-	<div class = "top_row">
-		<div class = "conversation_participants">
-<%= recipients.collect(&:firstname).join(",") %></div>
-<%= render 'layouts/date_summary', :time_object => conversation.updated_at %>
-</div>
-<div class = "conversation_last_message">
-<%= truncate(conversation.messages.last.body, length: 35) %>
-</div>
-</div>
-
-<% end %>	
+  <%= link_to conversation, :remote => true do %>
+    <div class = "conversation_link_wrapper">
+      <div class = "participant_photo">
+        <%= render 'users/user_photo_partials/simple_small_user_photo', :user => recipients.last %>
+      </div>
+      <div class = "top_row">
+        <div class = "conversation_participants">
+          <%= recipients.collect(&:firstname).join(",") %></div>
+        <%= render 'layouts/date_summary', :time_object => conversation.updated_at %>
+      </div>
+      <div class = "conversation_last_message">
+        <%= truncate(conversation.messages.last.body, length: 35) %>
+      </div>
+    </div>
+  <% end %>
 </li>

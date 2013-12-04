@@ -1,4 +1,6 @@
 $(function(){
 	$(".match_list").prepend("<%= escape_javascript(render 'matches/match_summary', :match => @match) %>");
+	$("#match_player2_id").tokenInput("clear");
 
 });
+

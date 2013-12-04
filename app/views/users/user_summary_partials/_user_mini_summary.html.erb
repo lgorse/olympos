@@ -1,17 +1,17 @@
 <li class = "user_mini_summary" id ="user_mini_summary_<%= user.id %>">
-	<div class = "mini_summary_photo">
-	<%= render 'users/user_photo_partials/small_user_photo', :user => user, :name => user.fullname %>
-	</div>
-	<%= render 'layouts/ratings/user_rating', :user => user, :star_size => "small_stars" %>
-	<div class = "user_location">
-		<%= user.zip %>
-	</div>
-	<div class = "user_interact">
-	<%= render 'friendships/simple_friend_button', :user => user %>
-	<% if friendship_request = @current_user.friendship_requested_by(user) %>
-	<div class = "reject_request">
-	<%= link_to "No thanks", reject_friendship_path(friendship_request), :method => :delete, :remote => true %>
-	</div>
-	<% end %>
-	</div>
+  <div class = "mini_summary_photo">
+    <%= render 'users/user_photo_partials/small_user_photo', :user => user, :name => user.fullname %>
+  </div>
+  <%= render 'layouts/ratings/user_rating', :user => user, :star_size => "small_stars" %>
+  <div class = "user_location">
+    <%= user.zip %>
+  </div>
+  <div class = "user_interact">
+    <%= render 'friendships/simple_friend_button', :user => user %>
+    <% if friendship_request = @current_user.friendship_requested_by(user) %>
+      <div class = "reject_request">
+        <%= link_to "No thanks", reject_friendship_path(friendship_request), :method => :delete, :remote => true %>
+      </div>
+    <% end %>
+  </div>
 </li>

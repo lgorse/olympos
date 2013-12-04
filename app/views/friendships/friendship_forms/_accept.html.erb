@@ -1,4 +1,4 @@
 <%= form_for(@current_user.reverse_friendships.build(:friender_id => user.id), :url => accept_friendships_path, :remote => true, :html => {:class => "accept_button"}) do |f| %>
-	<%= f.hidden_field :friender_id %>
-			<%= f.submit "Accept", :class => "round" %>
-	<% end %>
+  <%= f.hidden_field :friender_id %>
+  <%= f.submit "Accept", :class => "round" %>
+<% end %>

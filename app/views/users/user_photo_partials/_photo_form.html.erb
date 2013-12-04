@@ -1,8 +1,7 @@
 <%= form_for @current_user do |user| %>
-<%= hidden_field_tag :redirect_url, params[:redirect_url] %>
+  <%= hidden_field_tag :redirect_url, params[:redirect_url] %>
   <%= user.file_field :photo, :class => "photo_upload" %>
   <%= user.submit "Submit" %>
 <% end %>
-
 <div id = "progressbar">
 </div>

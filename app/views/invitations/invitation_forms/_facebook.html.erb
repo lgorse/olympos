@@ -1,10 +1,9 @@
 <%= form_for @invitation, :html => {:class => 'new_invitation_fb', :id => 'new_invitation_fb'} do |invite| %>
-<%= invite.hidden_field :inviter_id, :value => @current_user.id %>
-<%= invite.hidden_field :invite_method, :value => FACEBOOK %>
-<%= invite.hidden_field :fb_id %>
-<label for="fb_name">
-<%= image_tag 'FB_logo_blue_29.png', :class => "invite_fb_img"%></label>
-<%= text_field_tag :fb_name, nil, :placeholder => "Enter Facebook friend" %>
-<%= invite.submit 'Invite', :class => "fb_invite_submit round fb" %>
+  <%= invite.hidden_field :inviter_id, :value => @current_user.id %>
+  <%= invite.hidden_field :invite_method, :value => FACEBOOK %>
+  <%= invite.hidden_field :fb_id %>
+  <label for="fb_name">
+    <%= image_tag 'FB_logo_blue_29.png', :class => "invite_fb_img"%></label>
+  <%= text_field_tag :fb_name, nil, :placeholder => "Enter Facebook friend" %>
+  <%= invite.submit 'Invite', :class => "fb_invite_submit round fb" %>
 <% end %>
-

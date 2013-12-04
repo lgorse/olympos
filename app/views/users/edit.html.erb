@@ -1,9 +1,9 @@
 <h1>Hello edit user</h1>
 <div class = "edit_user_wrapper">
-<div class = "photo_wrapper">
-<%= render 'users/user_photo_partials/user_profile_picture', :user => @current_user %>
-</div>
-<%= render "edit_user_form" %>
+  <div class = "photo_wrapper">
+    <%= render 'users/user_photo_partials/user_profile_picture', :user => @current_user %>
+  </div>
+  <%= render "edit_user_form" %>
 </div>
 <%= link_to "Unsubscribe", @current_user, :method => :delete, :confirm => "This is not undoable. We actually delete you from our database forever" %>
 <p>Note: you will lose all your connections and matches</p>

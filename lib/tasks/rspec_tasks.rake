@@ -4,3 +4,11 @@ namespace :rspec do
 	end
 
 end
+
+task :beautify do
+	@files = Dir.glob("app/views/**/*.erb")
+	@files.each do |file|
+		system 'htmlbeautifier '+file
+	end
+	#@files.map{|file| puts file}
+end

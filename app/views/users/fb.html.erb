@@ -1,8 +1,5 @@
 <h1>Hello new FB user</h1>
 <%= form_for @current_user do |user| %>
-<%= render 'layouts/error_messages', :object => user.object %>
-<%= render 'fb_scripts/fb_register_form' %>
+  <%= render 'layouts/error_messages', :object => user.object %>
+  <%= render 'fb_scripts/fb_register_form' %>
 <% end %>
-
-
-

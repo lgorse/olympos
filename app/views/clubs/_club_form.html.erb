@@ -1,29 +1,29 @@
 <%= form_for @club do |club| %>
-<%= render 'layouts/error_messages', :object => club.object %>
-<ul>
-	<li>
-		<%= club.label :name, "Name*" %>
-		<%= club.text_field :name, :placeholder => "Club name" %>
-	</li>
-	<li>
-		<%= club.label :city %>
-		<%= club.text_field :city, :placeholder => "Club city" %>
-	</li>
-	<li>
-		<%= club.label :zip, "Zip Code*" %>
-		<%= club.text_field :zip, :placeholder => "Club zip code" %>
-	</li>
-	<li>
-		<%= club.label :street %>
-		<%= club.text_field :street, :placeholder => "Club street address i.e. 123 Main Street" %>
-	</li>
-	<li>
-		<%= club.label :country, "Country*" %>
-		<%= club.country_select :country, {priority: %w(US)} %>
-	</li>
-	<li>
-		<%= club.submit 'Save club' %>
-	</li>
-	<li>* Required</li>
-</ul>
+  <%= render 'layouts/error_messages', :object => club.object %>
+  <ul>
+    <li>
+      <%= club.label :name, "Name*" %>
+      <%= club.text_field :name, :placeholder => "Club name" %>
+    </li>
+    <li>
+      <%= club.label :city %>
+      <%= club.text_field :city, :placeholder => "Club city" %>
+    </li>
+    <li>
+      <%= club.label :zip, "Zip Code*" %>
+      <%= club.text_field :zip, :placeholder => "Club zip code" %>
+    </li>
+    <li>
+      <%= club.label :street %>
+      <%= club.text_field :street, :placeholder => "Club street address i.e. 123 Main Street" %>
+    </li>
+    <li>
+      <%= club.label :country, "Country*" %>
+      <%= club.country_select :country, {priority: %w(US)} %>
+    </li>
+    <li>
+      <%= club.submit 'Save club' %>
+    </li>
+    <li>* Required</li>
+  </ul>
 <% end %>

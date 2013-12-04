@@ -1,7 +1,7 @@
 <div class = "time_summary">
-<% if Time.now - time_object < 12.hours %>
-<%= time_object.strftime("%I:%M %p") %>
-<% else %>
-<%= time_object.strftime("%b %d") %>
-<% end %>
+  <% if Time.now - time_object < 12.hours %>
+    <%= time_object.strftime("%I:%M %p") %>
+  <% else %>
+    <%= time_object.strftime("%b %d") %>
+  <% end %>
 </div>

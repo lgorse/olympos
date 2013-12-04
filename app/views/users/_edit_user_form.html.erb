@@ -1,29 +1,30 @@
 <%= form_for @current_user do |user| %>
-<ul>
-
-	<li>
-		<%= user.label :email %>
-		<%= user.text_field :email %>
-	</li>
-	<li>
-		<%= user.label :zip, "Zip code" %>
-		<%= user.text_field :zip, :value => @current_user.zip.blank? ? Geocoder.search([request.location.latitude,request.location.longitude]).first.postal_code : @current_user.zip %>
-	</li>
-	<li>
-		<%= user.label :country %>
-		<%= user.country_select :country, {priority: %w(US)} %>
-	</li>
-	<h3>E-mail Notifications</h3>
-	<li>
-		<%= user.label :friend_request_email, "For Friend Requests"  %>
-		<%= user.check_box :friend_request_email %>	
-	</li>
-	<li>
-		<%= user.label :message_notify_email, "For new Messages" %>
-		<%= user.check_box :message_notify_email %>
-	</li>
-	<li><%= user.submit "Save Changes" %></li>
-	
-</ul>
-
+  <ul>
+    <li>
+      <%= user.label :email %>
+      <%= user.text_field :email %>
+    </li>
+    <li>
+      <%= user.label :zip, "Zip code" %>
+      <%= user.text_field :zip, :value => @current_user.zip.blank? ? Geocoder.search([request.location.latitude,request.location.longitude]).first.postal_code : @current_user.zip %>
+    </li>
+    <li>
+      <%= user.label :country %>
+      <%= user.country_select :country, {priority: %w(US)} %>
+    </li>
+    <h3>E-mail Notifications</h3>
+    <li>
+      <%= user.label :friend_request_email, "For Friend Requests"  %>
+      <%= user.check_box :friend_request_email %>
+    </li>
+    <li>
+      <%= user.label :message_notify_email, "For new Messages" %>
+      <%= user.check_box :message_notify_email %>
+    </li>
+    <li>
+      <%= user.label :match_notify_email, "For new matches" %>
+      <%= user.check_box :match_notify_email %>
+    </li>
+    <li><%= user.submit "Save Changes" %></li>
+  </ul>
 <% end %>

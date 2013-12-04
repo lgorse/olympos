@@ -1,5 +1,5 @@
 <%= form_for(Message.new, :url => new_message_path, :html => {:method => :get, :class => "message_button round"}, :remote => true) do |message| %>
-<%= hidden_field_tag :recipient_id, user.id %>
-<%= hidden_field_tag :recipient_fullname, user.fullname %>
-<%= message.submit "Message", :class => "round" %>
+  <%= hidden_field_tag :recipient_id, user.id %>
+  <%= hidden_field_tag :recipient_fullname, user.fullname %>
+  <%= message.submit "Message", :class => "round" %>
 <% end %>

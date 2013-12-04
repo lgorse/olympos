@@ -2,9 +2,9 @@
 <h2><%= "You have a new friend on #{APP_NAME}" %></h2>
 <h3><%= "#{@friender.firstname} wants to connect with you" %></h3>
 <% if @friender.facebook? %>
-			<%= image_tag @friender.fb_pic_large, :class => "user_profile_pic fb round", :height => "200" %>
-		<% else %>
-			<%= image_tag @friender.photo.url(:large), :class => "user_profile_pic custom round"  %>
-		<% end %>
+  <%= image_tag @friender.fb_pic_large, :class => "user_profile_pic fb round", :height => "200" %>
+<% else %>
+  <%= image_tag @friender.photo.url(:large), :class => "user_profile_pic custom round"  %>
+<% end %>
 <h3><%= "#{@friender.fullname}" %></h3>
 <%= link_to "Visit #{@friender.firstname}\'s profile", user_url(@friender, :redirect_url => user_path(@friender), :host => @host) %>

@@ -1,0 +1,11 @@
+<h1>Hello match</h1>
+
+<h3><%= "#{@sender.firstname} recorded your last match" %></h3>
+<% if @sender.facebook? %>
+  <%= image_tag @sender.fb_pic_large, :class => "user_profile_pic fb round", :height => "200" %>
+<% else %>
+  <%= image_tag @sender.photo.url(:large), :class => "user_profile_pic custom round"  %>
+<% end %>
+<h3><%= "#{@sender.fullname}" %></h3>
+<%= link_to "Visit #{@sender.firstname}\'s profile", user_url(@sender, :redirect_url => user_matches_path(@sender), :host => @host) %>
+

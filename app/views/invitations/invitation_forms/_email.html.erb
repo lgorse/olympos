@@ -1,7 +1,7 @@
 <%= form_for @invitation, :html => {:class => 'new_invitation_email', :id => 'new_invitation_email'} do |invite| %>
-<%= label_tag "E-mail" %>
-<%= invite.hidden_field :inviter_id, :value => @current_user.id %>
-<%= invite.hidden_field :invite_method, :value => EMAIL %>
-<%= invite.text_field :email, :placeholder => "Enter friend's e-mail" %>
-<%= invite.submit "Invite" %>
+  <%= label_tag "E-mail" %>
+  <%= invite.hidden_field :inviter_id, :value => @current_user.id %>
+  <%= invite.hidden_field :invite_method, :value => EMAIL %>
+  <%= invite.text_field :email, :placeholder => "Enter friend's e-mail" %>
+  <%= invite.submit "Invite" %>
 <% end %>

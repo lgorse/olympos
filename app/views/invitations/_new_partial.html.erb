@@ -1,14 +1,14 @@
 <%= render 'layouts/error_messages', :object => @invitation %>
 <ul class = "invite_methods">
-<li class = "invite_method">
-<%= render 'invitations/invitation_forms/email' %>
-</li>
-<% if @current_user.facebook? %>
-<li class = "invite_method">
-<%= render 'invitations/invitation_forms/facebook' %>
-</li>
-<% end %>
-<li class = "invite_method">
-<%= render 'invitations/invitation_forms/ussquash' %>
-</li>
+  <li class = "invite_method">
+    <%= render 'invitations/invitation_forms/email' %>
+  </li>
+  <% if @current_user.facebook? %>
+    <li class = "invite_method">
+      <%= render 'invitations/invitation_forms/facebook' %>
+    </li>
+  <% end %>
+  <li class = "invite_method">
+    <%= render 'invitations/invitation_forms/ussquash' %>
+  </li>
 </ul>
