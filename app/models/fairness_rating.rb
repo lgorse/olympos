@@ -18,6 +18,7 @@ class FairnessRating < ActiveRecord::Base
   validates :rated_id, :presence => true
   validates :rater_id, :presence => true
   validates :rating, :presence => true, :numericality => {:less_than_or_equal_to => 5, :greater_than => 0}
+  validates_uniqueness_of :match_id, :scope => [:rater_id, :rated_id]
 
   belongs_to :match
   belongs_to :rater, :class_name => "User"

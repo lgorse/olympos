@@ -4,11 +4,11 @@
 <%= form_for @current_user do |user| %>
   <%= hidden_field_tag :redirect_url, home_users_path%>
   <ul>
-    <% if @current_user.first_rating.blank? %>
+    <%# if @current_user.first_rating.blank? %>
       <li>
         <%= render 'layouts/ratings/first_rating', :user => user %>
       </li>
-    <% end %>
+    <%# end %>
     <li>
       <%= user.label :zip, "Your location" %>
       <%= user.text_field :zip, :value => @current_user.zip.blank? ? Geocoder.search([request.location.latitude,request.location.longitude]).first.postal_code : @current_user.zip  %>

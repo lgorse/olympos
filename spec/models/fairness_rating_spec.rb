@@ -57,6 +57,16 @@ describe FairnessRating do
 
 		end
 
+		describe "uniqueness" do
+			
+			it "should not allow the user to rate the same match twice" do
+				rating = FairnessRating.create(@attr)
+				same_rating = FairnessRating.new(@attr)
+				same_rating.should_not be_valid
+			end
+
+		end
+
 	end
 
 	describe "associations" do

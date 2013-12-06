@@ -1,0 +1,5 @@
+<%= form_for @rating do |rating| %>
+<%= rating.hidden_field :rated_id, :value => @match.opponent(@current_user).id %>
+<%= rating.hidden_field :match_id, :value => @match.id %>
+<%= render 'fairness_ratings/rating', :rating => rating, :base => 0 %>
+<% end %>

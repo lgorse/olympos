@@ -8,6 +8,11 @@ function star_ratings(){
 			update_rating(data);
 		});
 	});
+	$(".rate_fairness").each(function(){
+		$(this).ratings(5).bind('ratingchanged', function(event, data){
+			create_fairness_rating(data);
+		});
+	});
 
 }
 
@@ -25,9 +30,23 @@ function update_rating(data){
 
 }
 
+function create_fairness_rating(data){
+	path = data.form.attr("action");
+	$.ajax({
+		type: 'POST',
+		url: path,
+		data: data.form.serialize(),
+		beforeSend: function(xhr, settings) {
+    xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script);
+  }
+
+	});
+
+}
+
 $.fn.ratings = function(stars){
 	
-	var review_field = $(this).find("#user_first_rating");
+	var review_field = $(this).find(".rating");
 	var initial_rating = review_field.attr("value");
 
 	if (!initial_rating){
