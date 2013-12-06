@@ -62,5 +62,15 @@ FactoryGirl.define do
 
 end
 
+FactoryGirl.define do
+	factory :fairness_rating do
+		association :match, factory: :match
+		association :rater, factory: :user
+		association :rated, factory: :user
+		rating 	4
+	end
+
+end
+
 
 

@@ -81,6 +81,8 @@ class User < ActiveRecord::Base
 
     scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
 
+    has_many :fairness_ratings_given, :foreign_key => "rater_id", :class_name => "FairnessRating", :dependent =>:destroy
+    has_many :fairness_ratings_received, :foreign_key => "rated_id", :class_name => "FairnessRating", :dependent => :destroy
 
     def facebook?
       self.signup_method == FACEBOOK
@@ -171,72 +173,82 @@ class User < ActiveRecord::Base
     end
 
     def recommended_players(zip_param, country_param, request, distance)
-    if zip_param && country_param 
-      User.near(Geocoder.coordinates("#{zip_param} #{country_param}"), distance)
+      if zip_param && country_param 
+        User.near(Geocoder.coordinates("#{zip_param} #{country_param}"), distance)
       elsif (self.lat.blank? || self.long.blank? )
        User.near([request.location.latitude, request.location.longitude], 30)
-      else
-        self.nearbys(distance)
-      end
-      
+     else
+      self.nearbys(distance)
     end
+    
+  end
 
-    def matches
-      Match.where('player1_id = :user_id OR player2_id = :user_id', user_id: self.id)
-    end
+  def matches
+    Match.where('player1_id = :user_id OR player2_id = :user_id', user_id: self.id)
+  end
 
-    def ordered_matches
-      by_owner = Match.send(:sanitize_sql_array, [ 'case when player2_id = %d then 0 else 1 end', self.id ])
-      self.matches.order(by_owner).order("play_date DESC, created_at DESC")
-    end
+  def ordered_matches
+    by_owner = Match.send(:sanitize_sql_array, [ 'case when player2_id = %d then 0 else 1 end', self.id ])
+    self.matches.order(by_owner).order("play_date DESC, created_at DESC")
+  end
 
-    def matches_submitted_to_me
-      self.matches.where(:player2_id => self.id, :player2_confirm => false)
-    end
+  def matches_submitted_to_me
+    self.matches.where(:player2_id => self.id, :player2_confirm => false)
+  end
 
-    def matches_won
-      self.matches.where(:winner_id => self.id)
-    end
+  def matches_won
+    self.matches.where(:winner_id => self.id)
+  end
 
-    def matches_lost
-      self.matches.where('winner_id != :user_id', :user_id => self.id)
-    end
+  def matches_lost
+    self.matches.where('winner_id != :user_id', :user_id => self.id)
+  end
 
-    def matches_with(opponent)
-      self.matches.select{|match| match.opponent(self) == opponent}
-    end
+  def matches_with(opponent)
+    self.matches.select{|match| match.opponent(self) == opponent}
+  end
 
-    def confirm_match(match)
-      if match = self.matches.find(match)
-        match.players.each do |player|
-          if self == player
-            player == match.player1 ? match.player1_confirm = true : match.player2_confirm = true
-            match.save
-          end
+  def confirm_match(match)
+    if match = self.matches.find(match)
+      match.players.each do |player|
+        if self == player
+          player == match.player1 ? match.player1_confirm = true : match.player2_confirm = true
+          match.save
         end
       end
     end
-
-
-
-
-    private
-    def age_above_13
-     if self.birthdate > 13.years.ago.to_date
-      errors.add(:birthdate, "cannot be less than 13 years old")
-    end
   end
 
-  def downcase_email
-  	self.email = self.email.downcase
+  def rate_fairness(rated_id, match_id, rating)
+    FairnessRating.create(:rater_id => self.id, :rated_id => rated_id,
+      :match_id => match_id, :rating => rating)
   end
 
-  def set_full_name
-    self.fullname = "#{self.firstname} #{self.lastname}"
+  def fairness
+    self.fairness_ratings_received.blank? ? 0 : self.fairness_ratings_received.pluck(:rating).sum/self.fairness_ratings_received.count
+    
   end
 
-  def zip_and_country
-    "#{self.zip} #{self.country}"
+
+
+
+  private
+  def age_above_13
+   if self.birthdate > 13.years.ago.to_date
+    errors.add(:birthdate, "cannot be less than 13 years old")
   end
+end
+
+def downcase_email
+ self.email = self.email.downcase
+end
+
+def set_full_name
+  self.fullname = "#{self.firstname} #{self.lastname}"
+end
+
+def zip_and_country
+  "#{self.zip} #{self.country}"
+end
 
 end

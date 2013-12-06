@@ -40,13 +40,13 @@ describe User do
   describe "validations" do
     before(:each) do
       @attr = {:firstname => "test", :lastname => "tester",
-               :password => "gobbldygook",
-               :birthdate => Date.strptime("8/24/70", '%m/%d/%Y'),
-               :email => "test@tester.com", :gender => MALE}
+       :password => "gobbldygook",
+       :birthdate => Date.strptime("8/24/70", '%m/%d/%Y'),
+       :email => "test@tester.com", :gender => MALE}
 
-    end
+     end
 
-    describe "first and last name" do
+     describe "first and last name" do
       it "should require a first name" do
         @user = User.new(@attr.merge(:firstname => ""))
         @user.should_not be_valid
@@ -641,15 +641,15 @@ describe User do
           match = FactoryGirl.create(:match, :player1_id => @user.id, :player2_id => @opponent.id)
         else
           match = FactoryGirl.create(:match, :player1_id => @user.id, :player2_id => @opponent.id,
-                                     :player1_score => [8, 8, 8],
-                                     :player2_score => [11, 11, 11])
+           :player1_score => [8, 8, 8],
+           :player2_score => [11, 11, 11])
         end
       end
       3.times do|i|
         if i == 0
           match = FactoryGirl.create(:match, :player2_id => @user.id, :player1_id => @opponent.id,
-                                     :player1_score => [8, 8, 8],
-                                     :player2_score => [11, 11, 11])
+           :player1_score => [8, 8, 8],
+           :player2_score => [11, 11, 11])
         else
           match = FactoryGirl.create(:match, :player1_id => @opponent.id, :player2_id => @user.id)
         end
@@ -759,14 +759,14 @@ describe User do
         @player = FactoryGirl.create(:user)
         @opponent = FactoryGirl.create(:user)
         @first = FactoryGirl.create(:match, :play_date => 1.day.ago.to_date,
-                                    :player1_id => @opponent.id,
-                                    :player2_id => @player.id)
+          :player1_id => @opponent.id,
+          :player2_id => @player.id)
         @second = FactoryGirl.create(:match, :play_date => 2.days.ago.to_date,
-                                     :player1_id => @opponent.id,
-                                     :player2_id => @player.id)
+         :player1_id => @opponent.id,
+         :player2_id => @player.id)
         @last = FactoryGirl.create(:match, :play_date => 1.day.ago.to_date,
-                                   :player1_id => @player.id,
-                                   :player2_id => @opponent.id)
+         :player1_id => @player.id,
+         :player2_id => @opponent.id)
       end
 
       it "should order by the play date in reverse" do
@@ -781,9 +781,9 @@ describe User do
         @player = FactoryGirl.create(:user)
         @opponent = FactoryGirl.create(:user)
         @match_from_player = FactoryGirl.create(:match, :player1_id => @player.id,
-                                                :player2_id => @opponent.id)
+          :player2_id => @opponent.id)
         @match_from_opponent = FactoryGirl.create(:match, :player1_id => @opponent.id,
-                                                  :player2_id => @player.id)
+          :player2_id => @player.id)
 
       end
 
@@ -795,6 +795,81 @@ describe User do
 
     end
 
+
+  end
+
+  describe "fairness rating " do
+    before(:each) do
+      @user1 = FactoryGirl.create(:user)
+      @user2  = FactoryGirl.create(:user)
+      @match = FactoryGirl.create(:match, :player1 => @user1, :player2 => @user2)
+    end
+
+    describe "fairness rating given" do
+      it "should have a fairness rating given attribute" do
+        @user1.should respond_to(:fairness_ratings_given)
+      end
+
+      it 'should return only the fairness ratings given' do
+        rating_given = FactoryGirl.create(:fairness_rating, :match_id => @match.id,
+                                          :rater => @user1, :rated => @user2)
+        @user1.fairness_ratings_given.sort.should == [rating_given].sort
+
+      end
+
+    end
+
+    describe "fairness rating received" do
+
+      it "should have a fairness rating received attribute " do
+        @user1.should respond_to(:fairness_ratings_received)
+      end
+
+      it "should return only the fairness ratings received" do
+        rating_received = FactoryGirl.create(:fairness_rating, :rater => @user2,
+                                             :rated => @user1, :match => @match)
+        @user1.fairness_ratings_received.sort.should == [rating_received].sort
+      end
+
+    end
+
+    describe "rate other user" do
+
+      it "should respond to a rate_fairness method" do
+        @user1.should respond_to(:rate_fairness)
+      end
+
+      it "should create a fairness rating" do
+        lambda do
+          @user1.rate_fairness(@user2.id, @match.id, 4)
+        end.should change(FairnessRating, :count).by(1)
+      end
+
+
+    end
+
+    describe "average rating" do
+      it "should respond to an average fairness method" do
+        @user1.should respond_to(:fairness)
+      end
+
+      it "should return the average of the user's fairness rating" do
+        ratings = [1, 2, 4]
+        ratings.count.times do |i|
+          match = FactoryGirl.create(:match, :player1_id => @user1.id)
+          FactoryGirl.create(:fairness_rating, :rated => @user1, 
+                             :rater => match.player2, :match => match,
+                             :rating => ratings[i])
+        end
+        @user1.fairness.should == ratings.sum/ratings.length
+      end
+
+      it "should return 0 if the user has no ratings" do
+        @user1.fairness.should == 0
+
+      end
+
+    end
 
   end
 end

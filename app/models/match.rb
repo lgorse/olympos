@@ -43,6 +43,8 @@ class Match < ActiveRecord::Base
   belongs_to :player2, :foreign_key => "player2_id", :class_name => "User"
   belongs_to :winner, :foreign_key => "winner_id", :class_name => "User"
 
+  has_many :fairness_ratings, :dependent => :destroy
+
 
 
   def players
