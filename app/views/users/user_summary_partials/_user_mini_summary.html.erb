@@ -1,9 +1,19 @@
 <li class = "user_mini_summary" id ="user_mini_summary_<%= user.id %>">
-  <div class = "mini_summary_photo">
+  <div class = "mini_summary_photo"> 
     <%= render 'users/user_photo_partials/small_user_photo', :user => user, :name => user.fullname %>
   </div>
-  <%= render 'layouts/ratings/user_rating', :user => user, :star_size => "small_stars" %>
+  <div class = ratings>
+  
+  <%= render 'layouts/ratings/show_rating', :rating => user.first_rating, :star_size => "small_stars",
+  :rating_type => "Skill" %>
+  
+ 
+    <%= render 'layouts/ratings/show_rating', :rating => user.fairness, :star_size => "small_stars",
+    :rating_type => "Fairness" %>
+   
+   </div>
   <div class = "user_location">
+    <span></span>
     <%= user.zip %>
   </div>
   <div class = "user_interact">

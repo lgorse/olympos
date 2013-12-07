@@ -15,9 +15,6 @@
 			float: left;
 			padding: 5px;
 
-			.rating{
-				margin-top: 10px;
-			}
 		}
 
 		.user_photo{
@@ -57,8 +54,24 @@
 	border-bottom: 1px solid #C2C2CF;
 	
 	.mini_summary_photo{
-		display: inline-block;
+		float: left;
+		text-align: left;
 		width: 150px;
+		height: 100%;
+		margin-top: 10px;
+
+		
+		img{
+			vertical-align: middle;
+			
+
+		}
+		
+		a{
+			display: block;
+			
+		}
+
 
 		.my_profile_button{
 			margin-right: 5px;
@@ -84,16 +97,39 @@
 	}
 
 
-	.rating{
+	.ratings{
 		display: inline-block;
 		margin-right: 40px;	
+		float: left;
 
 
 	}
 
 	.user_location{
 		display: inline-block;
+		vertical-align: middle;
+		float: left;
+		height: 100%;
+
+		span{
+			display: inline-block;
+				height: 100%;
+				vertical-align: middle;
+				margin: auto;
+		}
+
+
 	}
 
 
+}
+
+.user_summary, .user_mini_summary{
+	.skill_rating, .fairness_rating{
+			display: block;
+			width: 100%;
+			height: 20px;
+			margin-top: 5px;
+			
+		}
 }

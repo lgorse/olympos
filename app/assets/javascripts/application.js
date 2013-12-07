@@ -16,6 +16,7 @@
 //= require jquery.ui.progressbar
 //= require jquery.cookie.js
 //= require jquery.ui.autocomplete
+//= require jquery.ui.tooltip
 //= require jquery.tokeninput
 //= require underscore-min
 //= require gmaps/google

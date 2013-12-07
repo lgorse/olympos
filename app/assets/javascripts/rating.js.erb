@@ -1,36 +1,21 @@
 $(function(){
-	star_ratings();
+	$(".rate_skill").rating();
+	$(".rate_fairness").rating();
 });
 
-function star_ratings(){
-	$(".rate_skill").each(function(){
+
+$.fn.rating = function(){
+	$(this).each(function(){
 		$(this).ratings(5).bind('ratingchanged', function(event, data){
-			update_rating(data);
-		});
-	});
-	$(".rate_fairness").each(function(){
-		$(this).ratings(5).bind('ratingchanged', function(event, data){
-			create_fairness_rating(data);
+			rate(data);
 		});
 	});
 
 }
 
-function update_rating(data){
-	path = data.form.attr("action");
-	$.ajax({
-		type: 'PUT',
-		url: path,
-		data: data.form.serialize(),
-		beforeSend: function(xhr, settings) {
-    xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script);
-  }
 
-	});
 
-}
-
-function create_fairness_rating(data){
+function rate(data){
 	path = data.form.attr("action");
 	$.ajax({
 		type: 'POST',
@@ -56,7 +41,17 @@ $.fn.ratings = function(stars){
 
 	return this.each(function(){
 		var container = $(this);
-		container.css('overflow', 'auto');		
+		var color;
+		switch (container.attr('class')){
+			case 'rate_skill':
+			color = "yellow";
+			break;
+			default:
+			color = "blue"
+		}
+		var star_filled_class = "full "+color;
+
+		container.css('overflow', 'auto');
 		container.rating = initial_rating;
 		
 		var starsCollection = Array();
@@ -69,7 +64,7 @@ $.fn.ratings = function(stars){
 			$(star).addClass('input_stars');
 
 			if (x < container.rating){
-				$(star).addClass('full');
+				$(star).addClass(star_filled_class);
 
 			}
 
@@ -87,20 +82,20 @@ $.fn.ratings = function(stars){
 			$(star).mouseenter(function(){
 
 				for (var i = 0; i <this.rating; i++){
-					starsCollection[i].addClass('full');
+					starsCollection[i].addClass(star_filled_class);
 				}
 
 				for (var i = this.rating; i < stars; i++){
-					starsCollection[i].removeClass('full');
+					starsCollection[i].removeClass(star_filled_class);
 				}
 
 				container.mouseleave(function(){
 					for (var i = 0; i <container.rating; i++){
-						starsCollection[i].addClass('full');
+						starsCollection[i].addClass(star_filled_class);
 					}
 
 					for (var i = container.rating; i < stars; i++){
-						starsCollection[i].removeClass('full');
+						starsCollection[i].removeClass(star_filled_class);
 					}
 
 

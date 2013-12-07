@@ -1,3 +1,28 @@
 // Place all the styles related to the FairnessRatings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+.new_fairness_rating, .edit_fairness_rating{
+	height: 35px;
+	width: 350px;
+	margin-left: 70px;
+
+
+	div, label,form{
+		display: inline-block;
+	}
+
+	
+	
+
+	label{
+		vertical-align: top;
+		padding-top: 5px;
+		font-size: 90%;
+
+
+	}
+}

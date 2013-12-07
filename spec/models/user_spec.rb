@@ -871,5 +871,26 @@ describe User do
 
     end
 
+    describe "user has rated method" do
+
+      it "should respond to a has_rated? method" do
+        @user1.should respond_to(:has_rated?)
+
+      end
+
+      it "should be true if the user has rated the user for the match" do
+        rating = FactoryGirl.create(:fairness_rating, :match_id => @match.id,
+                                          :rater => @user1, :rated => @user2)
+        @user1.has_rated?(@match).should == true
+
+      end
+
+      it 'should be false if the user has not rated the user for the match' do
+        @user1.has_rated?(@match).should == false
+
+      end
+
+    end
+
   end
 end

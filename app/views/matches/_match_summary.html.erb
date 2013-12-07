@@ -31,5 +31,10 @@
       </div>
       <%= prompt_text(match) %>
     </li>
+    <div id = "fairness_match_<%= match.id %>">
+      <%# unless @current_user.has_rated?(match) %>
+    <%= render 'fairness_ratings/fairness_form', :match => match %>
+    <%# end %>
+  </div>
     <div class = "separator"></div>
   </div>

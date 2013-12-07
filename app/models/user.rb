@@ -226,7 +226,11 @@ class User < ActiveRecord::Base
 
   def fairness
     self.fairness_ratings_received.blank? ? 0 : self.fairness_ratings_received.pluck(:rating).sum/self.fairness_ratings_received.count
-    
+  end
+
+  def has_rated?(match)
+    rating = match.fairness_ratings.select{|rating| rating.rater_id == self.id}
+    rating.present?
   end
 
 

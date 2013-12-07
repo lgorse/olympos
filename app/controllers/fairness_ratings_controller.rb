@@ -8,8 +8,17 @@ class FairnessRatingsController < ApplicationController
 	end
 
 	def create
-		print params
+		
 		@rating = FairnessRating.new(params[:fairness_rating].merge(:rater_id => @current_user.id))
 		@rating.save
+	end
+
+	def update
+		@rating = FairnessRating.find(params[:id])
+		if @rating.update_attributes(params[:fairness_rating])
+		else
+			flash[:error] = "Something went wrong"
+		end
+
 	end
 end

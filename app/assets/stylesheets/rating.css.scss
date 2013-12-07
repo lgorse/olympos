@@ -37,15 +37,23 @@ $total: $numStars * $steps;
 	}
 
 	
-	
+	&.yellow{
+			background: url(/assets/rating/star_full.png) repeat-x top left;
+		}
+
+		&.blue{
+			background: url(/assets/rating/star_blue.png) repeat-x top left;
+
+		}
 	
 
 	@for $i from 0 through ($total){
 		&.filled_#{$i} {@include filled($i);
-			background: url(/assets/rating/star_full.png) repeat-x top left;
 			@include stars_values;
 			@include large_stars;
 		}
+
+		
 	}
 }
 
@@ -57,9 +65,14 @@ $total: $numStars * $steps;
 	background-image: url(/assets/rating/star_empty.png);
 	background-repeat: no-repeat;
 
-	&.full{
+	&.yellow{
 		background-image: url(/assets/rating/star_full.png);
 	}
+
+	&.blue{
+			background-image: url(/assets/rating/star_blue.png);
+
+		}
 	
 }
 
@@ -83,17 +96,26 @@ $small_star: 20px;
 		width: $numStars * $small_star;
 		background: url(/assets/rating/star_empty.png) repeat-x top left;
 		@include stars_values;
-		@include small_stars
+		@include small_stars;
 
 	}
+
+	&.yellow{
+			background: url(/assets/rating/star_full.png) repeat-x top left;
+		}
+
+		&.blue{
+			background: url(/assets/rating/star_blue.png) repeat-x top left;
+
+		}
+	
 
 	
 	
 	
 
 	@for $i from 0 through ($total){
-		&.filled_#{$i} {@include filled($i);
-			background: url(/assets/rating/star_full.png) repeat-x top left;
+		&.filled_#{$i} {@include small_filled($i);
 			@include stars_values;
 			@include small_stars;
 

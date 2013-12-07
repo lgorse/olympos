@@ -6,5 +6,8 @@
     <%= render 'layouts/ratings/first_rating', :user => user %>
   <% end %>
 <% else %>
-  <%= render 'layouts/ratings/user_rating', :star_size => "stars", :user => @user %>
+  <%= render 'layouts/ratings/show_rating', :star_size => "stars", :rating => @user.first_rating,
+  :rating_type => "Skill" %>
+  	 
 <% end %>
+<%= render 'layouts/ratings/show_rating', :star_size => "stars", :rating => @user.fairness, :rating_type => "Fairness" %>

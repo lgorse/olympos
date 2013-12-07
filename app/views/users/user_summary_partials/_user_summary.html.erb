@@ -10,7 +10,10 @@
     </div>
     <div class =  "user_summary_info">
       <%= link_to user.fullname, user %>
-      <%= render 'layouts/ratings/user_rating', :user => user, :star_size => "small_stars" %>
+      
+      <%= render 'layouts/ratings/show_rating', :rating => user.first_rating, :star_size => "small_stars",  :rating_type => "Skill" %>
+      <%= render 'layouts/ratings/show_rating', :rating => user.fairness, :star_size => "small_stars",
+      :rating_type => "Fairness" %>
     </div>
   </div>
   <div class = "user_summary_bottom">
