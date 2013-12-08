@@ -1,0 +1,9 @@
+$(function(){
+$(".about_fairness_wrapper").html("<%= escape_javascript render 'fairness_ratings/about' %>");
+	var about_dialog = $(".dialog_about_fairness").dialog({
+		modal: true,
+		width: 600,
+		resizable: false
+	});
+	$(".ui-button").blur();
+});

@@ -1,4 +1,5 @@
 class FairnessRatingsController < ApplicationController
+	
 	before_filter :authenticate
 
 	
@@ -19,6 +20,8 @@ class FairnessRatingsController < ApplicationController
 		else
 			flash[:error] = "Something went wrong"
 		end
+	end
 
+	def about
 	end
 end

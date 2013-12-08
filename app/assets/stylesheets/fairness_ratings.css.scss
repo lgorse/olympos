@@ -15,6 +15,10 @@
 		display: inline-block;
 	}
 
+	div.rating_wrapper{
+		height: 100%;
+	}
+
 	
 	
 
@@ -22,7 +26,36 @@
 		vertical-align: top;
 		padding-top: 5px;
 		font-size: 90%;
+		width: 150px;
+
+	}
+
+	.help_rating{
+		margin-left: 10px;
+		height: 100%;
+		vertical-align: middle;
+
+		a{
+			vertical-align: middle;
+			font-size: 110%;
+			display: inline-block;
+			height: 100%;
+		}
 
 
+	}
+
+	
+}
+
+
+.rating_explained{
+	tr{
+
+	}
+	td{
+		padding: 5px;
+		text-align: top;
+		vertical-align: top;
 	}
 }

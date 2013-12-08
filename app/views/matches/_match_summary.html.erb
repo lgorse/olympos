@@ -2,7 +2,7 @@
 <div id = "match_<%= match.id %>">
   <li class = "match_summary" >
     <div class = "match_opponent_photo">
-      <span></span>
+      <span class = "vertical_align"></span>
       <%= render 'users/user_photo_partials/simple_small_user_photo', :user =>match.opponent(@user) %>
     </div>
     <div class = "match_content">
@@ -20,11 +20,11 @@
           <% unless match.confirmed? %>
             <% if match.player2_id == @current_user.id %>
               <%= link_to "Reject", match, :method => :delete, :class => "reject_match", 
-				:title => "Reject", :remote => true %>
+				 :remote => true %>
               <%= render 'matches/confirm', :match => match %>
             <% elsif match.player1_id == @current_user.id %>
               <%= link_to "Cancel", match, :method => :delete, :class => "cancel_match", 
-				:title => "Cancel", :remote => true %>
+				 :remote => true %>
             <% end %>
           <% end %>
         </div>

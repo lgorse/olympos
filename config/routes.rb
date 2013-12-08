@@ -2,7 +2,7 @@ Olympos::Application.routes.draw do
 
 	root :to => 'sessions#new'
 
-	resources :sessions, :conversations, :messages, :clubs, :fairness_ratings
+	resources :sessions, :conversations, :messages, :clubs
 
 	resources :users do
 		collection do
@@ -46,6 +46,12 @@ Olympos::Application.routes.draw do
 	end
 
 	resources :matches, except: [:index, :update]
+
+	resources :fairness_ratings do
+		collection do
+			get :about
+		end
+	end
 
 
 	
