@@ -1,5 +1,6 @@
 $(function(){
 	$("ul.message_list").append("<%= escape_javascript(render 'messages/message, :message => @message') %>");
+	console.log("conversation");
 
 });
 

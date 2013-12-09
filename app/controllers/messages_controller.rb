@@ -19,7 +19,11 @@ class MessagesController < ApplicationController
 		end
 		if @receipt
 			@current_user.message_email_notify(@receipt, @recipients)
-			redirect_to @receipt.conversation
+			respond_to do |format|
+				format.html {redirect_to @receipt.conversation}
+				format.js 
+			end
+			
 		else
 			render 'new'
 		end

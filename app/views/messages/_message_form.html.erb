@@ -1,4 +1,4 @@
-<%= form_for @message do |msg| %>
+<%= form_for @message, :remote => true do |msg| %>
   <%= render 'layouts/error_messages', :object => msg.object %>
   <div class = 'to_recipients'>
     <%= label_tag "To:" %>
