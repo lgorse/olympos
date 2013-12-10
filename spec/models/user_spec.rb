@@ -31,6 +31,7 @@
 #  message_notify_email :boolean          default(TRUE)
 #  country              :string(255)
 #  match_notify_email   :boolean          default(TRUE)
+#  intro                :text
 #
 
 require 'spec_helper'
@@ -135,6 +136,18 @@ describe User do
         @user.should_not be_valid
 
       end
+
+    end
+
+    describe "intro" do
+
+      it "should be limited to #{INTRO_LIMIT} characters" do
+        user = User.new(@attr.merge(:intro => "A"*261))
+        user.should_not be_valid
+
+      end
+
+
 
     end
 

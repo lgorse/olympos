@@ -31,13 +31,14 @@
 #  message_notify_email :boolean          default(TRUE)
 #  country              :string(255)
 #  match_notify_email   :boolean          default(TRUE)
+#  intro                :text
 #
 
 class User < ActiveRecord::Base
   attr_accessible :available, :birthdate, :fb_pic_large, :fb_pic_small, :first_rating, 
   :firstname, :gender, :has_played, :lastname, :location, :password_digest, 
   :password, :email, :zip, :fb_id, :signup_method, :photo, :friend_request_email, 
-  :message_notify_email, :match_notify_email, :country, :lat, :long
+  :message_notify_email, :match_notify_email, :country, :lat, :long, :intro
   
   has_secure_password
   acts_as_messageable
@@ -56,6 +57,7 @@ class User < ActiveRecord::Base
     validates :birthdate, :presence => true
     validates :gender, :presence =>  true
     validate :age_above_13, :unless => "birthdate.nil?"
+    validates :intro, :length => {:maximum => INTRO_LIMIT}
 
     geocoded_by :zip_and_country, :latitude => :lat, :longitude => :long
 

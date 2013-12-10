@@ -52,7 +52,9 @@ class UsersController < ApplicationController
 						redirect_to @current_user
 					end
 				}
-				format.js
+				format.js{
+					@user = @current_user
+				}
 			end						
 		end
 

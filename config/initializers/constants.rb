@@ -1,6 +1,7 @@
 APP_NAME = "Olympos"
 FULL_ROOT = YAML.load_file("#{Rails.root}/config/full_root.yml")[Rails.env]
 
+#User constants
 FEMALE = 0
 MALE = 1
 
@@ -12,6 +13,11 @@ EXPERT = 5
 
 EMAIL = 0
 FACEBOOK = 1
+
+INTRO_LIMIT = 260
+
+#edit user param
+INTRO = 0
 
 
 VALID_EMAIL = /[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

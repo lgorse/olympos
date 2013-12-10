@@ -65,13 +65,13 @@
 
 	.user_info{
 		float: left;
-		width: 450px;
+		width: 250px;
 		height: 100%;
 		
 		.main_user_name{
 			font-size: 150%;
 			font-weight: bold;
-			margin-top: 10px;
+			margin-bottom: 20px;
 		}
 
 		.rating{
@@ -86,9 +86,26 @@
 		}
 	}
 
-	.user_location{
+	.user_info2{
 		float: left;
 		height: 100%;
+		width: 325px;
+		
+
+		.user_intro{
+			word-wrap: break-word;
+			vertical-align: text-top;
+			padding-top: 10px;
+			height: 120px;
+
+		}
+
+		#user_intro{
+			
+				height: 120px;
+			
+
+		}
 	}
 
 	
@@ -133,6 +150,10 @@
 
 	}
 
+}
+
+textarea#user_intro{
+	resize: none;
 }
 
 .user_buttons{
