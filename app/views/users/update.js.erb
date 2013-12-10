@@ -1,0 +1,15 @@
+$(function(){
+	switch("<%= params[:edit_type] %>"){
+		case "<%= INTRO %>":
+		render_info2();
+		break;
+		default :
+
+	}
+
+})
+
+function render_info2(){
+	$(".user_info2").html("<%= escape_javascript(render 'users/user_profile_partials/user_info2') %>");
+
+}

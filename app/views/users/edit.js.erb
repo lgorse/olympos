@@ -1,0 +1,17 @@
+$(function(){
+	switch("<%= params[:edit_type] %>"){
+		case "<%= INTRO %>":
+		intro_edit();
+		break;
+		default :
+
+	}
+
+});
+
+
+function intro_edit(){
+	$(".user_info2").html("<%= escape_javascript(render 'users/user_edit_partials/edit_intro_form') %>");
+	$("textarea#user_intro").focus();
+	
+}

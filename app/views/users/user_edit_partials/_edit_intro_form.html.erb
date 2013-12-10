@@ -1,0 +1,7 @@
+
+<%= form_for @current_user, :remote => true do |user| %>
+<%= render 'layouts/error_messages', :object => user.object %>
+<%= hidden_field_tag :edit_type, INTRO %>
+<%= user.text_area :intro, :placeholder => "Max 260 characters" %>
+<%= user.submit "Confirm"%>
+<% end %>
