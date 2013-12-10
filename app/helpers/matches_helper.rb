@@ -18,8 +18,8 @@ module MatchesHelper
 			when @current_user.id				
 				concat "#{match.opponent(@current_user).firstname} has not confirmed yet. "  
 				concat link_to "Nag", new_message_path(:recipient_id => match.player2_id, 
-													 :recipient_fullname => match.opponent(@current_user).fullname),
-									  :remote => true
+													 :recipient_fullname => match.opponent(@current_user).fullname,
+													 :message_type => NAG), :remote => true
 
 			else 
 				concat "#{match.opponent(@current_user).firstname} wants you to confirm this match"

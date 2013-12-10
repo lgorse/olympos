@@ -1,5 +1,5 @@
 $(function(){
-	$(".new_message_form").html("<%= escape_javascript render 'messages/message_form' %>");
+	$(".new_message_form").html("<%= escape_javascript(render 'messages/message_form') %>");
 	var recipient_name = "<%= params[:recipient_fullname] %>";
 	var recipient_id = "<%= params[:recipient_id] %>";
 	var recipient = [{id: recipient_id, name: recipient_name}];

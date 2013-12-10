@@ -25,3 +25,6 @@ MAX_PERIODS_TO_WIN = 3
 
 SKILL_TOOLTIP = "How good is this guy?"
 FAIRNESS_TOOLTIP = "How fair is this guy?"
+
+#Message types
+NAG = 0

@@ -5,7 +5,10 @@ class MessagesController < ApplicationController
 	before_filter :get_mailbox
 
 	def new
-		@message = Message.new
+		# print "A"*50
+		# print params
+		
+		
 	end
 
 	def create
