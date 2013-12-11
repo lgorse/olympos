@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210185543) do
+ActiveRecord::Schema.define(:version => 20131211080015) do
 
   create_table "clubs", :force => true do |t|
     t.string   "name"
@@ -129,7 +129,6 @@ ActiveRecord::Schema.define(:version => 20131210185543) do
     t.string   "lastname"
     t.string   "password_digest"
     t.integer  "fb_id",                :limit => 8
-    t.date     "birthdate"
     t.integer  "zip"
     t.float    "lat"
     t.float    "long"
@@ -154,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20131210185543) do
     t.string   "country"
     t.boolean  "match_notify_email",                :default => true
     t.text     "intro"
+    t.integer  "birthdate"
   end
 
   add_index "users", ["fb_id"], :name => "index_users_on_fb_id"

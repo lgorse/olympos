@@ -10,11 +10,12 @@ module UsersHelper
 
   def new_user_from_FB
     my_fb = @graph.get_object("me")
+    print my_fb
     @attr = {:firstname => my_fb['first_name'], :lastname => my_fb['last_name'],
              :email => my_fb['email'], :gender => my_fb['gender'],
-             :birthdate => Date.strptime(my_fb['birthday'], "%m/%d/%Y"), :fb_id => my_fb['id'],
+             :birthdate => Date.strptime(my_fb['birthday'], "%m/%d/%Y").year, :fb_id => my_fb['id'],
              :password => 'randompassword'}
-    @current_user = User.where(:fb_id => @signed_request['user_id']).first_or_initialize(@attr.merge(:signup_method => FACEBOOK))
+    @current_user = User.where(:fb_id => my_fb['id']).first_or_initialize(@attr.merge(:signup_method => FACEBOOK))
     save_fb_user
   end
 

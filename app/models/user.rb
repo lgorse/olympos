@@ -240,7 +240,7 @@ class User < ActiveRecord::Base
 
   private
   def age_above_13
-   if self.birthdate > 13.years.ago.to_date
+   if self.birthdate > 13.years.ago.to_date.year
     errors.add(:birthdate, "cannot be less than 13 years old")
   end
 end

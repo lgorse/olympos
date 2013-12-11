@@ -15,7 +15,7 @@
     </li>
     <li>
       <%= user.label :birthday %>
-      <%= user.date_select :birthdate, :order => [:month, :day, :year], :start_year => 1900, :end_year => Time.now.year  %>
+      <%= user.select :birthdate, (12.years.ago.year.downto(95.years.ago.year)).to_a   %>
       <p>You must be 13 or older to sign up</p>
     </li>
     <li>
