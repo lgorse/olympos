@@ -1,0 +1,8 @@
+<% case rating_type %>
+<% when "Skill" %>
+<div class = "skill_rating rating_wrapper" title = "<%= SKILL_TOOLTIP %>" >
+  <div class = "rating_label">Skill:</div>
+  <div class = "rating">
+    <div class = "<%= star_size %> empty"><div class = "<%= star_size %> filled_<%= rating %> yellow"></div></div>
+  </div>
+</div>

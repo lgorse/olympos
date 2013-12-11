@@ -19,8 +19,8 @@
     </div>
     <div class = "user_intro">
       <% unless user.intro.blank? %>
-      <%= truncate(user.intro, :length => 150, :omission => '') %>
-      <%= link_to "...", user if user.intro.size > 150 %>
+        <%= truncate(user.intro, :length => 150, :omission => '') %>
+        <%= link_to "...", user if user.intro.size > 150 %>
       <% end %>
     </div>
     <!-- <div class = 'user_location'>
