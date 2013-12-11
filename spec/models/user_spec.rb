@@ -42,7 +42,7 @@ describe User do
     before(:each) do
       @attr = {:firstname => "test", :lastname => "tester",
        :password => "gobbldygook",
-       :birthdate => Date.strptime("8/24/70", '%m/%d/%Y'),
+       :birthdate => Date.strptime("8/24/70", '%m/%d/%Y').year,
        :email => "test@tester.com", :gender => MALE}
 
      end
@@ -75,7 +75,7 @@ describe User do
       end
 
       it "should not belong to someone below 13" do
-        @user = User.new(@attr.merge(:birthdate => Date.strptime("10/24/2010", '%m/%d/%Y')))
+        @user = User.new(@attr.merge(:birthdate => Date.strptime("10/24/2010", '%m/%d/%Y').year))
         @user.should_not be_valid
       end
 

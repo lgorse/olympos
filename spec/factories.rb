@@ -4,7 +4,7 @@ FactoryGirl.define do
 		lastname	"tester"
 		email		{generate(:email)}
 		password	"Supercool"
-		birthdate	15.years.ago.to_date
+		birthdate	15.years.ago.to_date.year
 		gender		MALE
 		zip 		94303
 		country 	"US"
