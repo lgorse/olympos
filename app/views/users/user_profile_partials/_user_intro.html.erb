@@ -1,0 +1,6 @@
+<% if user.intro.blank? %>
+  <%= link_to "Introduce yourself!", edit_user_path(@current_user, :edit_type => INTRO), :remote => true if current_user?(user) %>
+<% else %>
+  <%= user.intro %>
+  <%= link_to "edit", edit_user_path(@current_user, :edit_type => INTRO), :remote => true if current_user?(user) %>
+<% end %>
