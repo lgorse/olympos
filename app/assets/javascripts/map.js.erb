@@ -9,15 +9,19 @@ $.fn.search_map = function(marker_list){
 	handler.buildMap({ provider: {zoom: 12}, internal: {id: 'map'}}, function(){
 		var lat = parseFloat(map_div.data("lat"));
 		var lng = parseFloat(map_div.data("long"));
-
+				
 		markers = handler.addMarkers(marker_list,{
 			do_clustering: true
 		});
 		if (markers.length > 1){
 			handler.bounds.extendWith(markers);
 			handler.fitMapToBounds();			
-		}else{
+		}else if (markers.length == 1){
 			handler.bounds.extendWith(markers);
+			handler.fitMapToBounds();
+			handler.getMap().setZoom(13);
+		}else{
+			handler.map.centerOn({lat: lat, lng: lng});
 			handler.fitMapToBounds();
 			handler.getMap().setZoom(13);
 		}
@@ -39,9 +43,8 @@ $.fn.set_link_city_names = function(){
 						$(".zip_link#"+marker_value.zip).text(value.short_name+ "("+marker_value.users.length+")");
 					}
 				});
-				
-				
 			}else{
+				console.log("Failed due to: "+status);
 			}
 		});
 

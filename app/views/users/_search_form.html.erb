@@ -2,7 +2,7 @@
   <%= label_tag :distance %>
   <%= select_tag :distance, options_for_select([5, 10, 15, 20, 30], :selected => params[:distance])   %>
   <%= label_tag :zip, "Zip code" %>
-  <%= text_field_tag :zip, params[:zip] ? params[:zip] : @current_user.zip %>
-  <%= country_select(:user, :country, ["#{@current_user.country}"]) %>
+  <%= text_field_tag :zip, @zip %>
+  <%= country_select(:user, :country, ["#{@country}"]) %>
   <%= submit_tag "Search" %>
 <% end %>

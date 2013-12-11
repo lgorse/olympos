@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	include UsersHelper
+	include SearchHelper
 
 	before_filter :authenticate, :only => [:home, :show, :details, :change_picture, :edit, :destroy, :map, :search]
 	
@@ -91,18 +92,9 @@ class UsersController < ApplicationController
 	end
 
 	def search
-		@nearby_users = recommended_players(params[:zip], params[:user] ? params[:user][:country] : '', params[:distance])
-		@uniques = @nearby_users.map{|user| {zip: user.zip, lat: user.lat, long: user.long} }.uniq
-		@uniques.each do |unique|
-			user_array = @nearby_users.select{|user| user.zip == unique[:zip]}.map(&:id)
-			unique[:users] = user_array
-		end
-		@hash = Gmaps4rails.build_markers(@uniques) do |zip, marker|
-			marker.lat zip[:lat]
-			marker.lng zip[:long]
-			marker.json({:users => zip[:users], :zip => zip[:zip] })
-			marker.title zip[:users].count.to_s
-		end
+		set_coordinates(params[:zip], params[:user] ? params[:user][:country] : '')
+		@nearby_users = recommended_players(params[:distance])
+		organize_unique_players_from_nearby_users(@nearby_users)
 	end
 
 end
