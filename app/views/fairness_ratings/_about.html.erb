@@ -4,11 +4,10 @@
 <h3>Players only get a fairness rating after they\'ve played 3 games</h3>
 <h3>So your opponent will never guess what ranking you put down</h3>
 <table class = "rating_explained">
-	<% 5.downto(1) do |i| %>
-	<tr>
-		<td><%= render 'layouts/ratings/show_rating', :star_size => "stars", :rating_type => "Fairness", :rating => i %></td>
-		<td><%= simple_format rating_explain(i) %></td>
-	</tr>
-	<% end %>
-		
+  <% 5.downto(1) do |i| %>
+    <tr>
+      <td><%= render 'layouts/ratings/show_rating', :star_size => "stars", :rating_type => "Fairness", :rating => i %></td>
+      <td><%= simple_format rating_explain(i) %></td>
+    </tr>
+  <% end %>
 </table>

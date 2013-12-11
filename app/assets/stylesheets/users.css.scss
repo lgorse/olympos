@@ -93,8 +93,6 @@
 		
 
 		.user_intro{
-			word-wrap: break-word;
-			vertical-align: text-top;
 			padding-top: 10px;
 			height: 120px;
 
@@ -194,3 +192,8 @@ textarea#user_intro{
 #user_country{
 	width: 150px;
 }
+
+.user_intro{
+			word-wrap: break-word;
+			vertical-align: text-top;
+		}

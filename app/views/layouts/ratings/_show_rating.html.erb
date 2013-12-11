@@ -1,14 +1,14 @@
 <% case rating_type %>
 <% when "Skill" %>
 <div class = "skill_rating" title = "<%= SKILL_TOOLTIP %>" >
-<div class = "rating">
-  <div class = "<%= star_size %> empty"><div class = "<%= star_size %> filled_<%= rating %> yellow"></div></div>
+	<div class = "rating">
+		<div class = "<%= star_size %> empty"><div class = "<%= star_size %> filled_<%= rating %> yellow"></div></div>
+	</div>
 </div>
- </div>
 <% else %>
 <div class = "fairness_rating" title = "<%= FAIRNESS_TOOLTIP %>">
-<div class = "rating">
-  <div class = "<%= star_size %> empty"><div class = "<%= star_size %> filled_<%= rating %> blue"></div></div>
-</div>
+	<div class = "rating">
+		<div class = "<%= star_size %> empty"><div class = "<%= star_size %> filled_<%= rating %> blue"></div></div>
+	</div>
 </div>
 <% end %>

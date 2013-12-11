@@ -1,5 +1,5 @@
 <div class = "user_summary round">
-  <div class = "user_summary_top">
+  <div class = "user_summary_left">
     <div class = "user_photo">
       <% if user.facebook? %>
         <% user.set_fb_small_pic(@graph) %>
@@ -8,18 +8,23 @@
         <%= link_to (image_tag user.photo.url(:small), :width => 75), user %>
       <% end %>
     </div>
+    <div class = "user_interact"><%= render 'friendships/message_friend_button', :user => user %></div>
+  </div>
+  <div class = "user_summary_right">
     <div class =  "user_summary_info">
       <%= link_to user.fullname, user %>
-      
       <%= render 'layouts/ratings/show_rating', :rating => user.first_rating, :star_size => "small_stars",  :rating_type => "Skill" %>
       <%= render 'layouts/ratings/show_rating', :rating => user.fairness, :star_size => "small_stars",
       :rating_type => "Fairness" %>
     </div>
-  </div>
-  <div class = "user_summary_bottom">
-    <div class = "user_interact"><%= render 'friendships/message_friend_button', :user => user %></div>
-    <div class = 'user_location'>
-      <%= user.zip %>
+    <div class = "user_intro">
+      <% unless user.intro.blank? %>
+      <%= truncate(user.intro, :length => 150, :omission => '') %>
+      <%= link_to "...", user if user.intro.size > 150 %>
+      <% end %>
     </div>
+    <!-- <div class = 'user_location'>
+      <%= user.zip %>
+    </div> -->
   </div>
 </div>
