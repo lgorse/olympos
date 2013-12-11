@@ -108,11 +108,6 @@ $small_star: 20px;
 			background: url(/assets/rating/star_blue.png) repeat-x top left;
 
 		}
-	
-
-	
-	
-	
 
 	@for $i from 0 through ($total){
 		&.filled_#{$i} {@include small_filled($i);
@@ -121,4 +116,49 @@ $small_star: 20px;
 
 		}
 	}
+}
+
+.rating_wrapper{
+	display: block;
+width: 100%;
+	
+			
+}
+
+.rating_label, .rating{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.rating_label{
+	width: 45px;
+	text-align: left;
+}
+
+
+.user_summary, .user_mini_summary{
+	.rating_wrapper{
+		height: 20px;
+		margin-top: 5px;
+	}
+
+	.rating_label{
+font-size: 70%;	
+	}
+
+}
+
+.user_profile{
+.user_info{
+	.rating_wrapper{
+		height: 25px;
+	}
+
+	.rating_label{
+		font-size: 90%;	
+		width: 55px;
+
+	}
+
+}
 }

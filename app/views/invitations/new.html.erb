@@ -1,15 +1,16 @@
-<h1>Invite your friends</h1>
 <div class = "invitation_wrapper friendship_wrapper">
   <div class = "friendship_column round">
+    <h1><%= "Your pending friendships on #{APP_NAME}" %></h1>
     <ul class = "pending_friendship_buttons">
-      <li class = "friendships_received"><%= link_to 'Connections received', pending_user_friendships_path(@current_user), :remote => true  %></li>
-      <li class = "friendships_sent"><%= link_to 'Connections sent', requests_user_friendships_path(@current_user), :remote => true %></li>
+      <li class = "friendships_received"><%= link_to 'Friendships received', pending_user_friendships_path(@current_user), :remote => true  %></li>
+      <li class = "friendships_sent"><%= link_to 'Friendships sent', requests_user_friendships_path(@current_user), :remote => true %></li>
     </ul>
     <div class = "pending_friendship_list">
-      <%= render 'friendships/friendship_partials/friendships_sent', :friendship_list => @current_user.friends_pending  %>
+      <%= render 'users/mini_summary_list', :friendship_list => @current_user.friends_pending  %>
     </div>
   </div>
   <div class = "invitation_column round">
+    <h1><%= "Invite new people to #{APP_NAME}" %></h1>
     <div class = "new_invitations round">
       <%= render 'invitations/new_partial' %>
     </div>
