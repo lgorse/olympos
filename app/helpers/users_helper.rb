@@ -41,4 +41,8 @@ module UsersHelper
     current_user?(user) ? "You" : user.firstname
   end
 
+  def geolocalize
+    @current_user.localize_by_request_location(request) if @current_user.a_location_attribute_is_missing
+  end
+
 end

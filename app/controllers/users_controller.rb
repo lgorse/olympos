@@ -2,7 +2,9 @@ class UsersController < ApplicationController
 	include UsersHelper
 	include SearchHelper
 
-	before_filter :authenticate, :only => [:home, :show, :details, :change_picture, :edit, :destroy, :map, :search]
+	before_filter :authenticate, :except => [:new, :fb, :create, :index]
+	before_filter :geolocalize, :except => [:new, :fb, :create, :index, :details, :update]
+
 	
 
 	def new

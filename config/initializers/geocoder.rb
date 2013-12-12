@@ -15,7 +15,8 @@ Geocoder::Lookup::Test.set_default_stub(
       'state'        => 'New York',
       'state_code'   => 'NY',
       'country'      => 'United States',
-      'country_code' => 'US'
+      'country_code' => 'US',
+      'postal_code'  => '10013'
     }
   ]
 )

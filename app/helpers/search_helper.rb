@@ -7,6 +7,10 @@ module SearchHelper
       @long = coordinates.last
       @zip  = zip
       @country = country
+    elsif @current_user.lat && @current_user.long
+      @lat = @current_user.lat
+      @long = @current_user.long
+      get_zip_and_country_from_lat_long(@lat, @long)
     else
       request_location = request.location
       @lat = request_location.latitude

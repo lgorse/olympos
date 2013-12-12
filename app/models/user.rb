@@ -235,6 +235,19 @@ class User < ActiveRecord::Base
     rating.present?
   end
 
+  def a_location_attribute_is_missing
+    self.zip.blank? || self.country.blank?
+  end
+
+  def localize_by_request_location(request)
+    location_result = request.location
+    self.lat = location_result.latitude
+    self.long = location_result.longitude
+    self.country = location_result.country_code
+    self.zip = location_result.data['zipcode']
+    self.save
+  end
+
 
 
 
