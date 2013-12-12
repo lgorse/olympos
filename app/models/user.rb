@@ -59,8 +59,7 @@ class User < ActiveRecord::Base
     validate :age_above_13, :unless => "birthdate.nil?"
     validates :intro, :length => {:maximum => INTRO_LIMIT}
 
-    geocoded_by :zip_and_country, :latitude => :lat, :longitude => :long
-
+    geocoded_by :zip_and_country, :latitude => :lat, :longitude => :long 
 
     before_validation :downcase_email, :set_full_name
     after_validation :geocode, :on => :create
