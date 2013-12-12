@@ -885,8 +885,15 @@ describe User do
         @user1.fairness.should == ratings.sum/ratings.length
       end
 
-      it "should return 0 if the user has no ratings" do
-        @user1.fairness.should == 0
+      it "should return 0 if the user has played less than the min number of games" do
+        ratings = [4, 4]
+        ratings.count.times do |i|
+          match = FactoryGirl.create(:match, :player1_id => @user1.id)
+          FactoryGirl.create(:fairness_rating, :rated => @user1,
+                             :rater => match.player2, :match => match,
+                             :rating => ratings[i])
+        end
+        @user1.fairness.should == DEFAULT_FAIRNESS
 
       end
 

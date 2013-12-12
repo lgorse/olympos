@@ -236,7 +236,7 @@ class User < ActiveRecord::Base
   end
 
   def fairness
-    self.fairness_ratings_received.blank? ? 0 : self.fairness_ratings_received.pluck(:rating).sum/self.fairness_ratings_received.count
+    self.fairness_ratings_received.count < MIN_GAMES_FOR_FAIRNESS ? DEFAULT_FAIRNESS : self.fairness_ratings_received.pluck(:rating).sum/self.fairness_ratings_received.count
   end
 
   def has_rated?(match)
