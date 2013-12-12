@@ -36,6 +36,8 @@ Olympos::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
+  config.middleware.use('SpoofIp', '98.234.52.106')
+
   #test environment for Geocoder
   Geocoder.configure(
 
@@ -43,5 +45,5 @@ Olympos::Application.configure do
 
   )
 
-  config.middleware.use('SpoofIp', '98.234.52.106')
+  
 end

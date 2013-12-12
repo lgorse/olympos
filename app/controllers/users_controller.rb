@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	include SearchHelper
 
 	before_filter :authenticate, :except => [:new, :fb, :create, :index]
-	before_filter :geolocalize, :except => [:new, :fb, :create, :index, :details, :update]
+	after_filter :geolocalize, :only => [:update]
 
 	
 

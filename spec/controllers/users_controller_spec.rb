@@ -82,6 +82,20 @@ describe UsersController do
       end
 
 
+    it "should geolocalize the user if zip is blank" do
+      request.location.data['zipcode'] = 94303
+      @user.zip = ''
+      @user.save
+      put :update, :id => @user.id, :user => @attr.merge(:zip => '')
+      user = User.find(@user.id)
+      user.lat.should_not be_blank
+      user.long.should_not be_blank
+      user.zip.should_not be_blank
+      user.country.should_not be_blank
+      
+    end
+
+
 
 
     end
@@ -125,23 +139,7 @@ describe UsersController do
 
   end
 
-  describe "GET 'home' geolocalization test" do
-    before(:each) do
-      @user = FactoryGirl.create(:user, :zip => '')
-    end
-
-    it "should geolocalize the user" do
-      test_sign_in(@user)
-      get :home, :id => @user
-      user = User.find(@user.id)
-      user.lat.should_not be_blank
-      user.long.should_not be_blank
-      user.zip.should_not be_blank
-      
-    end
-
-  end
-
+  
   describe "GET 'home'" do
 
     describe "authentication" do
