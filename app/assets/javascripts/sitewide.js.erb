@@ -1,5 +1,6 @@
 $(function(){
 	$(document).tooltip();
+	$(".nag").hide_on_click();
 
 });
 
@@ -38,4 +39,11 @@ function to_bool(phrase){
 
 function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+
+$.fn.hide_on_click = function(){
+	$(this).click(function(){
+		$(this).find(".flash").css('visibility', 'hidden');
+
+	});
 }

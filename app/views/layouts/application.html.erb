@@ -13,7 +13,7 @@
       <div id = "session_data" data-logged="<%= signed_in? %>" data-fb="<%= @current_user.facebook? %>"></div>
       <%= render 'layouts/header' %>
       <div class = "main_container">
-        <div class = "nag"></div>
+        <div class = "nag"><%= render 'layouts/flash', :flash => flash %></div>
         <div class = "main_activity">
           <%= yield %>
         </div>

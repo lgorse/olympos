@@ -50,9 +50,9 @@ class UsersController < ApplicationController
 			respond_to do |format|
 				format.html{
 					if params[:redirect_url]
-						redirect_to params[:redirect_url]
+						redirect_to params[:redirect_url], flash: {success: "Changes saved"}
 					else
-						redirect_to @current_user
+						redirect_to @current_user, flash: {success: "Changes saved"}
 					end
 				}
 				format.js{
@@ -68,6 +68,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		flash.now[:failure] = "Yes, I will, Yes."
 		if params[:id] == @current_user.id
 			@user = @current_user
 		else

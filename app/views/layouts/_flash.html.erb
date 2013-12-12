@@ -1,5 +1,9 @@
 <% if flash %>
   <% flash.each do |key, value| %>
-    <div class = "flash round", id = "<%= key %>"><%= value %></div>
+    <div class = "flash round", id = "<%= key %>">
+    	<span class = "vertical_align"></span>
+    	<div class = "flash_text">
+    	<%= value %></div>
+    </div>
   <% end %>
 <% end %>

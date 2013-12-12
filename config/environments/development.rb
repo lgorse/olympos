@@ -39,6 +39,7 @@ config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.logger = Logger.new(STDOUT)
   config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
+  config.logger.level = Logger::ERROR if ENV['PATH_INFO'] =~ %r{^/assets/}
 
   config.paperclip_defaults = {
     :storage => :s3,
@@ -49,5 +50,6 @@ config.active_record.auto_explain_threshold_in_seconds = 0.5
 
 
 config.middleware.use('SpoofIp', '98.234.52.106')
+config.middleware.insert_before Rails::Rack::Logger, DisableAssetsLogger
   
 end
