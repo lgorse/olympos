@@ -1,4 +1,25 @@
-
+$.fn.map_it = function(){
+	map_div = $(this);
+	handler = Gmaps.build('Google');
+	handler.buildMap({ provider: {zoom: 10, disableDefaultUI: true}, internal: {id: 'user_map'}}, function(){
+		var lat = parseFloat(map_div.data("lat"));
+		var lng = parseFloat(map_div.data("long"));
+		var geocoder = new google.maps.Geocoder();
+		var latlng = new google.maps.LatLng(lat, lng);
+		geocoder.geocode({'latLng': latlng}, function(results, status){
+			if(status == google.maps.GeocoderStatus.OK){	
+				$.each(results[0].address_components, function(index, value){
+					if (value.types[0] == "locality"){
+						console.log(value.short_name);
+					}
+				});
+			}else{
+				console.log("Failed due to: "+status);
+			}
+		});
+	handler.map.centerOn({lat: lat, lng: lng});			
+	});
+}
 
 $.fn.search_map = function(marker_list){
 
