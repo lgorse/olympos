@@ -86,9 +86,8 @@
 		width: 250px;
 		height: 90%;
 		
-		
-
-		
+		.user_ratings{
+			height: 80px;
 
 		.skill_rating, .fairness_rating{
 			display: inline-block;
@@ -96,12 +95,17 @@
 			height: 25px;
 			margin-bottom: 5px;
 		}
+
+		}
+
+		
 	}
 
 	.user_info2{
 		display: inline-block;
 		height: 90%;
 		width: 325px;
+		vertical-align: top;
 		
 
 		.user_intro{

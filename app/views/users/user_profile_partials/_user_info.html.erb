@@ -1,3 +1,4 @@
+<div class = "user_ratings">
 <% if current_user?(@user) && @user.first_rating.blank? %>
   <%= form_for @user do |user| %>
     <%= render 'layouts/ratings/first_rating', :user => user %>
@@ -7,3 +8,7 @@
   :rating_type => "Skill" %>
 <% end %>
 <%= render 'layouts/ratings/show_rating', :star_size => "stars", :rating => @user.fairness, :rating_type => "Fairness" %>
+</div>
+<div class = 'user_location'>
+      <%= link_to @user.city, search_users_path(:zip => @user.zip, :user => {:country => @user.country}) %>
+    </div>

@@ -25,7 +25,7 @@
 			
 		}
 
-	
+
 		
 	}
 
@@ -36,28 +36,33 @@
 		position: relative;
 
 		.user_summary_info{
-			height: 35%;
+			height: 50%;
 			padding: 5px;
+
+			.user_ratings{
+				height: 60px;
+
+			}
+
+			.user_location{
+				width: 100%;
+
+
+			}
 
 		}
 
-		
-
 		.user_intro{
-			position: absolute;
+			
 			width: 100%;
-			height: 100px;
+			
 			overflow: hidden;
 			
 			display: block;
 			font-size: 85%;
 		}
 
-		.user_location{
-			width: 50%;
-			
 
-		}
 		
 		
 	}
@@ -130,9 +135,9 @@
 
 		span{
 			display: inline-block;
-				height: 100%;
-				vertical-align: middle;
-				margin: auto;
+			height: 100%;
+			vertical-align: middle;
+			margin: auto;
 		}
 
 

@@ -41,13 +41,13 @@ describe User do
   describe "validations" do
     before(:each) do
       @attr = {:firstname => "test", :lastname => "tester",
-       :password => "gobbldygook",
-       :birthdate => Date.strptime("8/24/70", '%m/%d/%Y').year,
-       :email => "test@tester.com", :gender => MALE}
+               :password => "gobbldygook",
+               :birthdate => Date.strptime("8/24/70", '%m/%d/%Y').year,
+               :email => "test@tester.com", :gender => MALE}
 
-     end
+    end
 
-     describe "first and last name" do
+    describe "first and last name" do
       it "should require a first name" do
         @user = User.new(@attr.merge(:firstname => ""))
         @user.should_not be_valid
@@ -119,8 +119,8 @@ describe User do
 
     describe "password" do
       # it "should be required" do
-      # 	@user = User.new(@attr.merge(:password_digest => ""))
-      # 	@user.should_not be_valid
+      #   @user = User.new(@attr.merge(:password_digest => ""))
+      #   @user.should_not be_valid
       # end
 
       it "should be at least 6 characters long" do
@@ -147,7 +147,15 @@ describe User do
 
       end
 
+    end
 
+    describe "city" do
+
+      it "should create a city if the user has a lat and long" do
+        user = User.new(@attr.merge(:zip => 94305, :country => "US"))
+        user.save
+        User.find(user).city.should_not be_blank
+      end
 
     end
 
@@ -654,15 +662,15 @@ describe User do
           match = FactoryGirl.create(:match, :player1_id => @user.id, :player2_id => @opponent.id)
         else
           match = FactoryGirl.create(:match, :player1_id => @user.id, :player2_id => @opponent.id,
-           :player1_score => [8, 8, 8],
-           :player2_score => [11, 11, 11])
+                                     :player1_score => [8, 8, 8],
+                                     :player2_score => [11, 11, 11])
         end
       end
       3.times do|i|
         if i == 0
           match = FactoryGirl.create(:match, :player2_id => @user.id, :player1_id => @opponent.id,
-           :player1_score => [8, 8, 8],
-           :player2_score => [11, 11, 11])
+                                     :player1_score => [8, 8, 8],
+                                     :player2_score => [11, 11, 11])
         else
           match = FactoryGirl.create(:match, :player1_id => @opponent.id, :player2_id => @user.id)
         end
@@ -772,14 +780,14 @@ describe User do
         @player = FactoryGirl.create(:user)
         @opponent = FactoryGirl.create(:user)
         @first = FactoryGirl.create(:match, :play_date => 1.day.ago.to_date,
-          :player1_id => @opponent.id,
-          :player2_id => @player.id)
+                                    :player1_id => @opponent.id,
+                                    :player2_id => @player.id)
         @second = FactoryGirl.create(:match, :play_date => 2.days.ago.to_date,
-         :player1_id => @opponent.id,
-         :player2_id => @player.id)
+                                     :player1_id => @opponent.id,
+                                     :player2_id => @player.id)
         @last = FactoryGirl.create(:match, :play_date => 1.day.ago.to_date,
-         :player1_id => @player.id,
-         :player2_id => @opponent.id)
+                                   :player1_id => @player.id,
+                                   :player2_id => @opponent.id)
       end
 
       it "should order by the play date in reverse" do
@@ -794,9 +802,9 @@ describe User do
         @player = FactoryGirl.create(:user)
         @opponent = FactoryGirl.create(:user)
         @match_from_player = FactoryGirl.create(:match, :player1_id => @player.id,
-          :player2_id => @opponent.id)
+                                                :player2_id => @opponent.id)
         @match_from_opponent = FactoryGirl.create(:match, :player1_id => @opponent.id,
-          :player2_id => @player.id)
+                                                  :player2_id => @player.id)
 
       end
 
@@ -870,7 +878,7 @@ describe User do
         ratings = [1, 2, 4]
         ratings.count.times do |i|
           match = FactoryGirl.create(:match, :player1_id => @user1.id)
-          FactoryGirl.create(:fairness_rating, :rated => @user1, 
+          FactoryGirl.create(:fairness_rating, :rated => @user1,
                              :rater => match.player2, :match => match,
                              :rating => ratings[i])
         end
@@ -893,7 +901,7 @@ describe User do
 
       it "should be true if the user has rated the user for the match" do
         rating = FactoryGirl.create(:fairness_rating, :match_id => @match.id,
-                                          :rater => @user1, :rated => @user2)
+                                    :rater => @user1, :rated => @user2)
         @user1.has_rated?(@match).should == true
 
       end

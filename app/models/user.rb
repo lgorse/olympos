@@ -38,7 +38,8 @@ class User < ActiveRecord::Base
   attr_accessible :available, :birthdate, :fb_pic_large, :fb_pic_small, :first_rating, 
   :firstname, :gender, :has_played, :lastname, :location, :password_digest, 
   :password, :email, :zip, :fb_id, :signup_method, :photo, :friend_request_email, 
-  :message_notify_email, :match_notify_email, :country, :lat, :long, :intro
+  :message_notify_email, :match_notify_email, :country, :lat, :long, :intro,
+  :city
   
   has_secure_password
   acts_as_messageable
@@ -64,6 +65,15 @@ class User < ActiveRecord::Base
     before_validation :downcase_email, :set_full_name
     after_validation :geocode, :on => :create
     after_validation :geocode, :if => lambda{|obj| obj.zip_changed? || obj.country_changed?}
+
+    reverse_geocoded_by :lat, :long do |obj, results|
+      
+      if geo = results.first
+        obj.city = geo.city
+      end
+    end
+    before_save :reverse_geocode, :on => :create
+    before_save :reverse_geocode, :if => lambda{|obj| obj.zip_changed? || obj.country_changed?}
 
 
     has_many :invitations, :foreign_key => "inviter_id"
