@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   validates :password, :length => {:minimum => 6}, :on => :create
   validates :birthdate, :presence => true
   validates :gender, :presence =>  true
-  #validate :age_above_13, :unless => "birthdate.nil?"
+  validate :age_above_13, :unless => "birthdate.nil?"
   validates :intro, :length => {:maximum => INTRO_LIMIT}
 
   geocoded_by :zip_and_country, :latitude => :lat, :longitude => :long
