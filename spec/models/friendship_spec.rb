@@ -14,159 +14,185 @@ require 'spec_helper'
 
 describe Friendship do
 
-	describe "validations" do
-		before(:each) do
-			@user1 = FactoryGirl.create(:user)
-			@user2 = FactoryGirl.create(:user)
-			@attr = {:friender_id => @user1.id, :friended_id => @user2.id}
+  describe "validations" do
+    before(:each) do
+      @user1 = FactoryGirl.create(:user)
+      @user2 = FactoryGirl.create(:user)
+      @attr = {:friender_id => @user1.id, :friended_id => @user2.id}
 
-		end
+    end
 
-		it "should have a friender id" do
-			friendship = Friendship.new(@attr.merge(:friender_id => ''))
-			friendship.should_not be_valid
+    it "should have a friender id" do
+      friendship = Friendship.new(@attr.merge(:friender_id => ''))
+      friendship.should_not be_valid
 
-		end
+    end
 
-		it "should have a friended id" do
-			friendship = Friendship.new(@attr.merge(:friended_id => ''))
-			friendship.should_not be_valid
+    it "should have a friended id" do
+      friendship = Friendship.new(@attr.merge(:friended_id => ''))
+      friendship.should_not be_valid
 
-		end
+    end
 
-		it "should be unique" do
-			friendship1 = Friendship.create(@attr)
-			friendship2 = Friendship.new(@attr)
-			friendship2.should_not be_valid
-		end
+    it "should be unique" do
+      friendship1 = Friendship.create(@attr)
+      friendship2 = Friendship.new(@attr)
+      friendship2.should_not be_valid
+    end
 
-	end
+  end
 
-	describe "dependencies" do
-		before(:each) do
-			@user1 = FactoryGirl.create(:user)
-			@user2 = FactoryGirl.create(:user)
-			@friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
-		end
+  describe "dependencies" do
+    before(:each) do
+      @user1 = FactoryGirl.create(:user)
+      @user2 = FactoryGirl.create(:user)
+      @friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
+    end
 
-		it "should have a friender" do
-			@friendship.should respond_to(:friender)
+    it "should have a friender" do
+      @friendship.should respond_to(:friender)
 
-		end
+    end
 
-		it "should have a friended" do
-			@friendship.should respond_to(:friended)
+    it "should have a friended" do
+      @friendship.should respond_to(:friended)
 
-		end
+    end
 
-		it "should be destroyed with the user" do
-			@user1.destroy
-			Friendship.find_by_friender_id(@user1.id).should be_blank
-		end
+    it "should be destroyed with the user" do
+      @user1.destroy
+      Friendship.find_by_friender_id(@user1.id).should be_blank
+    end
 
-	end
+  end
 
-	describe "attributes" do
+  describe "attributes" do
 
-		describe "check if a method is mutual" do
-			before(:each) do
-				@user1 = FactoryGirl.create(:user)
-				@user2 = FactoryGirl.create(:user)
-				@friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
-			end
-
-
-			it "should respond to a mutual? method" do
-				@friendship.should respond_to(:mutual?)
-			end
-
-			it "should be false if the friendship is not mutual" do
-				Friendship.find_by_friender_id_and_friended_id(@user1.id, @user2.id).mutual?.should == false
-
-			end
-
-			it "should be true if the friendship is mutual" do
-				@friendship.make_mutual
-				Friendship.find_by_friender_id_and_friended_id(@user1.id, @user2.id).mutual?.should == true
-			end
+    describe "check if a method is mutual" do
+      before(:each) do
+        @user1 = FactoryGirl.create(:user)
+        @user2 = FactoryGirl.create(:user)
+        @friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
+      end
 
 
-		end
+      it "should respond to a mutual? method" do
+        @friendship.should respond_to(:mutual?)
+      end
 
-		describe "make a friendship mutual" do
-			before(:each) do
-				@user1 = FactoryGirl.create(:user)
-				@user2 = FactoryGirl.create(:user)
-				@friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
-			end
+      it "should be false if the friendship is not mutual" do
+        Friendship.find_by_friender_id_and_friended_id(@user1.id, @user2.id).mutual?.should == false
 
-			it "should respond to a make_mutual method" do
-				@friendship.should respond_to(:make_mutual)
+      end
 
-			end
-
-			it "should create a reverse friendship" do
-				@friendship.make_mutual
-				Friendship.find_by_friender_id_and_friended_id(@user1.id, @user2.id).mutual?.should == true
-			end
-
-		end
-
-		describe "reverse friendship" do
-			before(:each) do
-				@user1 = FactoryGirl.create(:user)
-				@user2 = FactoryGirl.create(:user)
-				@friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
-			end
-
-			it "should respond to a reverse friendship" do
-				@friendship.should respond_to(:reverse)
-
-			end
-
-			it "should give the reverse friendship" do
-				@user2.accept(@friendship)
-				@friendship.reverse.should == Friendship.find_by_friender_id_and_friended_id(@user2.id, @user1.id)
-			end
-
-		end
+      it "should be true if the friendship is mutual" do
+        @friendship.make_mutual
+        Friendship.find_by_friender_id_and_friended_id(@user1.id, @user2.id).mutual?.should == true
+      end
 
 
-	end
+    end
 
-	describe "reverse_friendships" do
-		before(:each) do
-			@user1 = FactoryGirl.create(:user)
-			@user2 = FactoryGirl.create(:user)
-			@friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
-		end
+    describe "make a friendship mutual" do
+      before(:each) do
+        @user1 = FactoryGirl.create(:user)
+        @user2 = FactoryGirl.create(:user)
+        @friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
+      end
 
-		it "should be destroyed with the user" do
-			@user2.destroy
-			Friendship.find_by_friended_id(@user2.id).should be_blank
+      it "should respond to a make_mutual method" do
+        @friendship.should respond_to(:make_mutual)
 
-		end
+      end
 
-	end
+      it "should create a reverse friendship" do
+        @friendship.make_mutual
+        Friendship.find_by_friender_id_and_friended_id(@user1.id, @user2.id).mutual?.should == true
+      end
 
-	describe "if there is a friendship and reverse_friendship with the same users" do
-		before(:each) do
-			@friender = FactoryGirl.create(:user)
-			@friended = FactoryGirl.create(:user)
-			@friender.friend(@friended)
-			
-		end
+    end
 
-		it "should automatically make the friendship mutual if there is a reverse friendship" do
-			@friended.friend(@friender)
-			friendship = Friendship.find_by_friender_id_and_friended_id(@friender.id, @friended.id)
-			reverse_friendship = friendship.reverse			
-			friendship.confirmed?.should == true
-			reverse_friendship.confirmed?.should == true
-		end
+    describe "reverse friendship" do
+      before(:each) do
+        @user1 = FactoryGirl.create(:user)
+        @user2 = FactoryGirl.create(:user)
+        @friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
+      end
 
-	end
+      it "should respond to a reverse friendship" do
+        @friendship.should respond_to(:reverse)
 
-	
+      end
+
+      it "should give the reverse friendship" do
+        @user2.accept(@friendship)
+        @friendship.reverse.should == Friendship.find_by_friender_id_and_friended_id(@user2.id, @user1.id)
+      end
+
+    end
+
+
+  end
+
+  describe "reverse_friendships" do
+    before(:each) do
+      @user1 = FactoryGirl.create(:user)
+      @user2 = FactoryGirl.create(:user)
+      @friendship = Friendship.create(:friender_id => @user1.id, :friended_id => @user2.id)
+    end
+
+    it "should be destroyed with the user" do
+      @user2.destroy
+      Friendship.find_by_friended_id(@user2.id).should be_blank
+
+    end
+
+  end
+
+  describe "if there is a friendship and reverse_friendship with the same users" do
+    before(:each) do
+      @friender = FactoryGirl.create(:user)
+      @friended = FactoryGirl.create(:user)
+      @friender.friend(@friended)
+
+    end
+
+    it "should automatically make the friendship mutual if there is a reverse friendship" do
+      @friended.friend(@friender)
+      friendship = Friendship.find_by_friender_id_and_friended_id(@friender.id, @friended.id)
+      reverse_friendship = friendship.reverse
+      friendship.confirmed?.should == true
+      reverse_friendship.confirmed?.should == true
+    end
+
+  end
+
+  describe "email" do
+
+    describe "if friendee wants to get emails" do
+
+      it "should start an asynchronous email job" do
+        lambda do
+          FactoryGirl.create(:friendship)
+        end.should change(EmailWorker.jobs, :size).by(1)
+      end
+
+    end
+
+    describe "if friendee does not want to get emails" do
+
+      it "should not start an asyncrhonous email job" do
+        lambda do
+          friended = FactoryGirl.create(:user, :friend_request_email => false)
+          FactoryGirl.create(:friendship, :friended_id => friended.id)
+        end.should_not change(EmailWorker.jobs, :size)
+
+      end
+
+    end
+
+  end
+
+
 
 end

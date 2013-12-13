@@ -56,7 +56,7 @@ class Match < ActiveRecord::Base
   end
 
   def notify_by_email
-    MatchMailer.match_notify(self).deliver if self.player2.match_notify_email
+     EmailWorker.perform_async(MATCH, self.id) if self.player2.match_notify_email
   end
 
 

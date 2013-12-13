@@ -22,12 +22,17 @@ DEFAULT_FAIRNESS = 3
 #edit user param
 INTRO = 0
 
-
+#Emails
 VALID_EMAIL = /[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 FACEBOOK_VALID_EMAIL = /^([\w!.%+\-])+@([\w\-])+(?:\.[\w\-]+)+$/
 
 DEFAULT_FROM = "olympos.help@gmail.com"
 
+MATCH = 0
+INVITATION = 1
+FRIENDSHIP = 2
+
+#Match scoring
 WINNING_SCORE = 11
 MAX_PERIODS = 5
 MAX_PERIODS_TO_WIN = 3

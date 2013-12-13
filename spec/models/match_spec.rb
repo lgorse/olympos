@@ -108,8 +108,8 @@ describe Match do
       end
 
       # it 'should show the winner if there is one' do
-      # 	match = Match.create(@attr)
-      # 	match.winner_id.should == @user1.id
+      #   match = Match.create(@attr)
+      #   match.winner_id.should == @user1.id
       # end
 
     end
@@ -247,13 +247,13 @@ describe Match do
 
     # describe "winners" do
 
-    # 	it "should have a winner attribute" do
-    # 		@match.should respond_to(:winner)
-    # 	end
+    #   it "should have a winner attribute" do
+    #     @match.should respond_to(:winner)
+    #   end
 
-    # 	it "should return the winning player" do
-    # 		@match.winner.should == @winner
-    # 	end
+    #   it "should return the winning player" do
+    #     @match.winner.should == @winner
+    #   end
 
     # end
 
@@ -277,19 +277,18 @@ describe Match do
       end
 
       describe "if the user wants to get e-mails" do
-        it "should send an e-mail to the recipient" do
+        it "should create an asynchonous email job" do
           lambda do
             match = FactoryGirl.create(:match, :player2_id => @recipient_wants_emails.id)
-          end.should change(ActionMailer::Base.deliveries, :count).by(1)
+          end.should change(EmailWorker.jobs, :size).by(1)
         end
-
       end
 
       describe "if the user does not want to get e-mails" do
         it "should not send an e-mail to the recipient" do
           lambda do
             match = FactoryGirl.create(:match, :player2_id => @recipient_no_emails.id)
-          end.should_not change(ActionMailer::Base.deliveries, :count)
+          end.should_not change(EmailWorker.jobs, :size)
         end
 
       end

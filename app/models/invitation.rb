@@ -35,7 +35,7 @@ class Invitation < ActiveRecord::Base
 
 
 	def send_email
-		InviteMailer.invite_email(self).deliver
+		EmailWorker.perform_async(INVITATION, self.id)
 	end
 
 	private

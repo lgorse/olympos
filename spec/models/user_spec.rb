@@ -362,7 +362,7 @@ describe User do
             it "should not send the email" do
               lambda do
                 @user.friend(@friended)
-              end.should_not change(ActionMailer::Base.deliveries, :count)
+              end.should_not change(EmailWorker.jobs, :count)
 
             end
 
@@ -373,10 +373,10 @@ describe User do
               @friended = FactoryGirl.create(:user)
             end
 
-            it "should send the email" do
+            it "should start an asynchronous email job" do
               lambda do
                 @user.friend(@friended)
-              end.should change(ActionMailer::Base.deliveries, :count).by(1)
+              end.should change(EmailWorker.jobs, :count).by(1)
 
             end
 
@@ -631,6 +631,18 @@ describe User do
     describe "notify of message " do
 
       describe 'if recipient wants to be notified' do
+        before(:each) do
+      @sender = FactoryGirl.create(:user)
+      @recipient = FactoryGirl.create(:user)
+      @receipt = @sender.send_message(@recipient, "Hi bro", "Someone likes you")
+    end
+
+    it "should send the email asynchronously" do
+      lambda do
+        @sender.message_email_notify(@receipt, [@recipient])
+      end.should change(MessageEmailWorker.jobs, :size).by(1)
+
+    end
         it "should return the recipient email" do
           @user.message_notify('hi').should == @user.email
         end

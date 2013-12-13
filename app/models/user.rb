@@ -122,7 +122,6 @@ class User < ActiveRecord::Base
     def friend(friendee)
       unless self.id == friendee.id
         friendship = self.friendships.create(:friended_id => friendee.id)
-        friendship.email_request
         friendship
       end
     end
@@ -180,7 +179,7 @@ class User < ActiveRecord::Base
     end
 
     def message_email_notify(receipt, recipients)
-      recipients.each{|recipient| CustomMessageMailer.send_email(receipt, recipient).deliver if recipient.message_notify_email}
+      recipients.each{|recipient| MessageEmailWorker.perform_async(receipt.id, recipient.id) if recipient.message_notify_email}
     end
 
     def recommended_players(zip_param, country_param, request, distance)

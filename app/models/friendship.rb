@@ -25,6 +25,8 @@ class Friendship < ActiveRecord::Base
 
   before_create :confirm_if_reverse_exists
 
+  after_create :email_request
+
   scope :mutual, -> {where(confirmed: true)}
   scope :not_accepted, -> {where(confirmed: false)}
 
@@ -45,7 +47,7 @@ class Friendship < ActiveRecord::Base
 
   
   def email_request
-    FriendshipMailer.friend_request(self).deliver if self.friended.friend_request_email
+    EmailWorker.perform_async(FRIENDSHIP, self.id) if self.friended.friend_request_email
   end
 
   private

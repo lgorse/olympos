@@ -24,6 +24,9 @@ gem 'carmen-rails', '~> 1.0.0'
 gem 'geocoder'
 gem 'gmaps4rails'
 
+gem 'redis'
+gem 'sidekiq'
+
 group :development do
 	gem 'rspec-rails'
 	gem 'autotest'

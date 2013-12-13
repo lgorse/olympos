@@ -2,6 +2,20 @@ require "spec_helper"
 
 describe InviteMailer do
 	describe "e-mail" do
+
+		describe "asynchronously" do
+			before(:each) do
+				@invitation = FactoryGirl.create(:email_invitation)
+			end
+
+			it "should send the message asynchronously" do
+				lambda do
+					EmailWorker.new.perform(INVITATION, @invitation.id)
+				end.should change(ActionMailer::Base.deliveries, :count).by(1)
+
+			end
+
+		end
 		
 		describe "delivery" do
 			before(:each) do

@@ -1,6 +1,17 @@
 require "spec_helper"
 
 describe FriendshipMailer do
+
+	describe "asynchronous" do
+
+		it "should send an email"  do
+			@friendship = FactoryGirl.create(:friendship)
+			lambda do
+				EmailWorker.new.perform(FRIENDSHIP, @friendship.id)
+			end.should change(ActionMailer::Base.deliveries, :count).by(1)
+		end
+
+	end
 	describe "delivery" do
 		before(:each) do
 			@friendship = FactoryGirl.create(:friendship)

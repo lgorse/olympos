@@ -1,6 +1,21 @@
 require "spec_helper"
 
 describe CustomMessageMailer do
+	describe "Custom email worker" do
+		before(:each) do
+			@sender = FactoryGirl.create(:user)
+			@recipient = FactoryGirl.create(:user)
+			@receipt = @sender.send_message(@recipient, "Hi bro", "Someone likes you")
+		end
+
+		it "should send the email asynchronously" do
+			lambda do
+				MessageEmailWorker.new.perform(@receipt.id, @recipient.id)
+			end.should change(ActionMailer::Base.deliveries, :count).by(1)
+
+		end
+
+	end
 	describe "delivery" do
 		before(:each) do
 			@sender = FactoryGirl.create(:user)

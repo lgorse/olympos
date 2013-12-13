@@ -77,9 +77,15 @@ describe ConversationsController do
 				it "should send an email" do
 					lambda do
 						put :update, :id => @conversation.id, :body => @attr[:body]
-					end.should change(ActionMailer::Base.deliveries, :count).by(1)
-
+					end.should change(MessageEmailWorker.jobs, :size).by(1)
 				end
+
+				# it "should send the email remotely" do
+				# 	lambda do
+				# 		put :update, :id => @conversation.id, :body => @attr[:body]
+				# 	end.should change(ActionMailer::Base.deliveries, :count).by(1)
+
+				# end
 			end
 
 			describe 'if recipient does not want to receive an e-mail' do

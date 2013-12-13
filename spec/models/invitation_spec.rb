@@ -146,15 +146,11 @@ describe Invitation do
 		end
 
 		describe "by email" do
-			before(:each) do
-				@user = FactoryGirl.create(:user)
-				@email = "test@invitee.com"
-			end
-
+			
 			it "should send an email" do
 				lambda do
-					@user.invite(@email, EMAIL)
-				end.should change(ActionMailer::Base.deliveries, :count).by(1)
+					@invitation = FactoryGirl.create(:email_invitation)
+				end.should change(EmailWorker.jobs, :size).by(1)
 
 			end
 
