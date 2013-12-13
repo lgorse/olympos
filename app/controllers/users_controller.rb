@@ -68,7 +68,6 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		flash.now[:failure] = "Yes, I will, Yes."
 		if params[:id] == @current_user.id
 			@user = @current_user
 		else

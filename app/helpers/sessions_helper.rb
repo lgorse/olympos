@@ -41,8 +41,8 @@ module SessionsHelper
 		if @current_user && @current_user.authenticate(params[:session][:password])
 			valid_user_signin
 		else
-			render 'sessions/new'
 			flash.now[:error] = "invalid e-mail or password"
+			render 'sessions/new'
 		end
 	end
 

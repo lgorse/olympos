@@ -19,9 +19,9 @@ module Olympos
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
-     #Don't precompile assets
+    #Don't precompile assets
     config.assets.initialize_on_precompile = false
-    
+
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -35,8 +35,8 @@ module Olympos
     # config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.default_locale = :en
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -67,23 +67,29 @@ module Olympos
     #Default URL for action mailer
     config.action_mailer.default_url_options = { :host => "#{Rails.root}" }
     config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address  =>"smtp.gmail.com",
-    :port     => 587,
-    :domain   =>  'gmail.com',
-    :user_name    => 'olympos.help@gmail.com',
-    :password   => '3times69',
-    :authentication => 'plain',
+    config.action_mailer.smtp_settings = {
+      :address  =>"smtp.gmail.com",
+      :port     => 587,
+      :domain   =>  'gmail.com',
+      :user_name    => 'olympos.help@gmail.com',
+      :password   => '3times69',
+      :authentication => 'plain',
     :enable_starttls_auto => true }
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      "#{html_tag}".html_safe
+    }
   end
+
+
 end
 
 module AssetsInitializers
   class Railtie < Rails::Railtie
     initializer "assets_initializers.initialize_rails",
-                :group => :assets do |app|
-      require "#{Rails.root}/config/initializers/facebook_config.rb" 
-      require "#{Rails.root}/config/initializers/koala.rb" 
+    :group => :assets do |app|
+      require "#{Rails.root}/config/initializers/facebook_config.rb"
+      require "#{Rails.root}/config/initializers/koala.rb"
       require "#{Rails.root}/config/initializers/constants.rb"
     end
   end

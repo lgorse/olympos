@@ -1,6 +1,7 @@
 $(function(){
 	$(document).tooltip();
 	$(".nag").hide_on_click();
+	$("form[data-remote='true']").default_form_method();
 
 });
 
@@ -38,12 +39,40 @@ function to_bool(phrase){
 }
 
 function getURLParameter(name) {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+	return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }
 
 $.fn.hide_on_click = function(){
 	$(this).click(function(){
 		$(this).find(".flash").css('visibility', 'hidden');
+
+	});
+}
+
+
+$.fn.default_form_method = function(){
+	$(this).bind("ajax:error", function(evt, xhr, status, error){
+		var $form = $(this), errors, errorText;
+		try{
+			errors = $.parseJSON(xhr.responseText);
+			
+		}catch(err){
+			errors = {message: "Please reload the page and try again"};
+		}
+		errorText = "<div class = 'error_explanation round'><h3 class = round>There were errors with the submission:</h3> \n<ul >";
+		for ( error in errors ) {
+			errorText += "<li class = 'round'>" + error + ': ' + errors[error] + "</li> ";
+		}
+
+		errorText += "</ul></div>";
+		$form.find('.error_wrapper').html(errorText);
+
+	})
+	.bind('ajax:success', function(evt, data, status, xhr){
+		var $form = $(this);
+		$form.find('.error_explanation').empty();
+		 $form.find('input:text,textarea').val('');
+		 $(this).find('input:radio').prop('checked', false);
 
 	});
 }

@@ -2,10 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
-  activerecord:
-    attributes:
-      match:
-        player1_score: "Player 1 Score"
-        player2_score: "Player 2 Score"
+ activerecord:
+  attributes:
+   match:
+    player2_id: "Opponent"
+    winner_id: "Winner"
 

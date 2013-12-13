@@ -21,7 +21,11 @@ class MatchesController < ApplicationController
 				format.js {@user = @current_user}
 			end
 		else
-			render 'new'
+			respond_to do |format|
+				format.html {render 'new'}
+				format.js {render :json => @match.errors, :status => :unprocessable_entity}
+			end
+			
 		end
 	end
 

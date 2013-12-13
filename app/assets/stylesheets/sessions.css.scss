@@ -19,3 +19,25 @@
 
 }
 
+.new_session{
+
+	width: 300px;
+	.flash{
+		background: #f06a73;
+		color: white;
+		width: 200px;
+		height: 30px;
+		text-align: center;
+		vertical-align: middle;
+		margin: 10px auto 10px 10px;
+
+		.flash_text{
+			vertical-align: middle;
+			display: inline-block;
+			color: white;
+
+		}
+
+	}
+}
+

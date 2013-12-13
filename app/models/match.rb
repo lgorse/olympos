@@ -28,9 +28,9 @@ class Match < ActiveRecord::Base
     :winner_id
 
   validates :player1_id, :presence => true
-  validates :player2_id, :presence => true
-  validates :winner_id, :presence => true
-  validates :play_date, :presence => true
+  validates :player2_id, :presence => {:message => "Opponent can't be blank"}
+  validates :winner_id, :presence => {:message => "Winner can't be blank"}
+  validates :play_date, :presence => true 
 
   validates_with ValidScore, :unless => lambda{|obj| obj.player1_score.blank? || obj.player2_score.blank?}
 

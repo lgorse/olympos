@@ -1,4 +1,4 @@
-<%= form_for(:session, :url => :sessions) do |session|%>
+<%= form_for(:session, :url => :sessions, html: {:class => "new_session"}) do |session|%>
   <%= render 'layouts/flash', :flash => flash %>
   <ul>
     <%= hidden_field_tag :redirect_url, home_users_path%>
