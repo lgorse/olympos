@@ -67,7 +67,6 @@ class User < ActiveRecord::Base
   after_validation :geocode, :if => lambda{|obj| obj.zip_changed? || obj.country_changed?}
 
   reverse_geocoded_by :lat, :long do |obj, results|
-
     if geo = results.first
       obj.city = geo.city
     end
