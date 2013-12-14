@@ -10,7 +10,7 @@ module SessionsHelper
 		if params[:redirect_url]
 			redirect_to params[:redirect_url]
 		else
-		redirect_to home_users_path
+		redirect_to search_users_path
 	end
 	end
 

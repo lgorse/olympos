@@ -28,12 +28,18 @@
 }
 
 .player_search{
-	width: 675px;
+	width: 600px;
 	margin: auto;
 	margin-bottom: 10px;
+	
 
 	.search_form{
 		margin-bottom: 10px;
+		
+
+		label{
+			font-size: 14px;
+		}
 	}
 
 	.player_search_commentary{

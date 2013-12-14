@@ -1,8 +1,18 @@
-<div id = "session_signup"></div>
-<h1>Hello session</h1>
-<%= render 'fb_scripts/fb_login' %>
-<h1>Or</h1>
-<%= render 'session_form' %>
-<%= link_to 'Sign up with Email', new_user_path %>
-<p>or</p>
-<%= render 'fb_scripts/fb_signup' %>
+<div class = "explain_wrapper">
+  <div class = "app_explain">
+    <h1><%= "Welcome to #{APP_NAME}" %></h1>
+    <h2>Find awesome squash partners in your area</h2>
+  </div>
+</div>
+<div class = "signup_wrapper">
+  <div id = "session_signup" class = "round">
+    <%= render 'fb_scripts/fb_login' %>
+    <%= render 'session_form' %>
+    <h3>Don't have an account?</h3>
+    <div class = "new_user_signup">
+    <%= render 'fb_scripts/fb_signup' %>
+    <%= link_to 'Sign up with Email', new_user_path %>
+</div>
+    </div>
+  </div>
+</div>

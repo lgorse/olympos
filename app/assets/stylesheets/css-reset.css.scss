@@ -19,18 +19,23 @@ time, mark, audio, video {
     padding:0;
     border:0;
     outline:0;
-    font-size: 14px;
+    font-size: 13px;
     font-family: "Helvetica Neue", arial, sans-serif;
     vertical-align:baseline;
     background:transparent;
+    
+
+    h1{
+        font-size: 200%;
+    }
+
+    h2{
+        font-size: 150%;
+    }
 
     h3{
         font-size: 110%;
         padding-bottom: 5px;
-    }
-
-    h2{
-        font-size: 200%;
     }
 
     h4{
@@ -54,7 +59,7 @@ li{
 html, body{
         height: 100%;
         width: 100%;
-        min-width: 1300px;
+        //min-width: 1300px;
     
 
     }

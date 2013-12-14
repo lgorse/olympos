@@ -1,15 +1,17 @@
+@import 'variables';
 .header{
  	height: 45px;
  	width: 100%;
- 	border-bottom: 1px solid #C2C2CF;
+ 	border-bottom: $border_default;
  	position: fixed;
  	z-index: 3;
  	background: white;
- 	padding-top: 10px;
+ 	padding-top: 5px;
 
 
  	a{
  		vertical-align: middle;
+ 		font-size: 14px;
  	}
 
  	.header_container{
@@ -32,6 +34,7 @@
  		margin-left: 50px;
  		float: left;
  		display: inline-block;
+ 		height: 100%;
 
  		a{
  			font-size: 120%;
@@ -49,13 +52,15 @@
  		position: relative;
 
  		a{
+ 			vertical-align: middle;
  			margin-right: 10px;
+ 			display: inline-block;
  		}
 
  		.user_settings{
  			height: 100%;
- 			width: 100%;
- 			display: inline;
+ 			
+ 			display: inline-block;
 
  			.my_profile_button{
  			vertical-align: middle;
@@ -66,7 +71,7 @@
 
 
  			a{
- 				display: inline;
+ 				display: inline-block;
  				margin-right: 10px;
 
  				img{
@@ -80,8 +85,8 @@
 
  		.nav_menu{
  			display: none;
- 			position: relative;
- 			top: 5px;
+ 			position: absolute;
+ 			top: 45px;
  			left: 135px;
  			width: 150px;
  			
@@ -117,3 +122,12 @@
  }
 
 
+.notification{
+	position: absolute;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	padding: 2px 4px;
+	font-size: 85%;
+	top: 5px;
+}

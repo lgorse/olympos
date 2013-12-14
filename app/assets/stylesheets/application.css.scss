@@ -19,7 +19,7 @@
  */
 
  .main_container{
- 	top: 55px;
+ 	top: 51px;
  }
 
 .main_activity, .main_container{
@@ -27,6 +27,8 @@
 	width: 100%;
 	margin: 0px;
 	position: absolute;
+	background: #efeeeb;
+ 	
 
 
 }
@@ -47,15 +49,7 @@
 	font-size: 80%;
 }
 
-.notification{
-	position: absolute;
-	background-color: red;
-	color: white;
-	font-weight: bold;
-	padding: 3px;
-	font-size: 75%;
-	top: -5px;
-}
+
 
 span.vertical_align{
 	display: inline-block;

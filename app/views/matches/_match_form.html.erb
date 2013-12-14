@@ -1,7 +1,7 @@
 <%= form_for @match, :remote => true do |match| %>
   <h3>Enter your latest match</h3>
   <div class = "error_wrapper">
-  <%= render 'layouts/error_messages', :object => match.object %></div>
+    <%= render 'layouts/error_messages', :object => match.object %></div>
   <%= match.hidden_field :player1_id, :value => @current_user.id%>
   <table>
     <tr>
