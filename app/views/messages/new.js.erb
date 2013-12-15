@@ -5,8 +5,9 @@ $(function(){
 	var recipient = [{id: recipient_id, name: recipient_name}];
 	var message_dialog = $(".dialog_new_message").dialog({
 		modal: true,
-		width: 450,
-		resizable: false
+		width: 385,
+		resizable: false,
+		title: 'New Message'
 	});
 	$("form.new_message").find("#recipient_name").message_autocomplete("<%= @current_user.id %>", recipient_id.length ? recipient: '');
 	

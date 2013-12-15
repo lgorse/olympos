@@ -13,12 +13,22 @@
 	margin: 0px auto;
 	height: 100%;
 	overflow: hidden;
+	
 }
 
 .conversation_show_column, .conversation_index_column{
 	height: 100%;
 	float: left;
 	padding: 15px;
+
+}
+
+.conversation_index_column{
+	width: 410px;
+}
+
+.conversation_show_column{
+	width: 500px;
 }
 
 .conversation_index_column{
@@ -28,6 +38,9 @@
 
 ul.conversation_list{
 	margin-left: 30px;
+	background-color: white;
+	padding: 5px;
+
 	.new_message{
 		margin-bottom: 15px;
 		padding-left: 20px;

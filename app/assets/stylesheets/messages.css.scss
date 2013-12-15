@@ -1,44 +1,74 @@
 // Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.dialog_new_message{
+	width: 100%;
+}
+.new_message_form{
+	width: 100%;
+	margin: auto;
+	form.new_message{
+		width: 100%;
 
-form.new_message{
-	display: inline-block;
-	
-	label[for="To:"]{
-		font-weight: bold;
-		margin-bottom: 5px;
+		.token-input-list-facebook{
+			width: 100%;
+			
+		}
+
+
+		label[for="To:"]{
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+
+
+		textarea{
+		//margin: 10px auto 10px;
+		width: 98%;
+
 	}
 
-	textarea{
-		margin: 10px auto 10px;
+	input[type="submit"]{
+		float: right;
+
 	}
 
 }
+}
 
 .message_list{
+	background-color: white;
+	padding: 10px;
 
-	.conversation_participants{
-		margin-top: 10px;
-		min-height: 40px;
-		width: 400px;
-		
-		
-	}
+	.conversation_form_wrapper{
+		width: 95%;
+		margin: auto;
 
-	.edit_conversation{
-		width: 400px;
-		height: 120px;
+		.conversation_participants{
+			margin-top: 10px;
+			min-height: 40px;
+			width: 100%;
 
-		textarea{
-			width: 400px;
-			height: 75px;
-			resize: none;
+
 		}
 
-		input[name='commit']{
-			float: right;
+		.edit_conversation{
+			width: 100%;
+			height: 120px;
 
+
+
+			textarea{
+				width: 99%;
+				height: 75px;
+				resize: none;
+			}
+
+			input[type='submit']{
+				float: right;
+
+			}
 		}
 
 	}
@@ -92,6 +122,7 @@ form.new_message{
 		background:-o-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
 		background:-ms-linear-gradient(top,#6F97B6 0%,#3F729B 100%);
 		background:linear-gradient(top,#6F97B6 0%,#3F729B 100%);
+		box-shadow: none;
 	}
 
 	input:hover{

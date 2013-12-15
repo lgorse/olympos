@@ -5,6 +5,6 @@
     <%= text_field_tag :recipient_name %>
   </div>
   <%= msg.hidden_field :recipient_id, :value => params[:receiver] %>
-  <%= msg.text_area :body, :placeholder => "Write message here", :value => params[:message_type] ? message_prefill(params[:message_type]) : ''  %>
+  <%= msg.text_area :body, :placeholder => "Write message here", :value => params[:message_type] ? message_prefill(params[:message_type]) : '', :resize => false  %>
   <%= msg.submit "Send message" %>
 <% end %>

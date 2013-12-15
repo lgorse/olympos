@@ -61,3 +61,8 @@ span.vertical_align{
 	margin: auto;
 }
 
+input[type='submit']{
+			@include default_submit;
+
+		}
+

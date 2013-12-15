@@ -1,8 +1,6 @@
 
 $.fn.message_autocomplete = function(sender_id, recipient){
-	recipient_input = $(this);
-	console.log(recipient);
-	
+	recipient_input = $(this);	
 		recipient_input.tokenInput(
 			'/users/'+sender_id+'/friendships/friendships',
 			{minChars: 0,
