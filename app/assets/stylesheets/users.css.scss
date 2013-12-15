@@ -28,18 +28,9 @@
 			}
 		}
 
-		input[name='commit']{
-			padding: 3px 10px;
-			color: $soft_font;
-			background: #47BC60;
-			background: -moz-linear-gradient(top, #47BC60 0%, #39A64E 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color(0%, #47BC60), color(100%, #39A64E));
-			background:-webkit-linear-gradient(top, white 0%,#F0F0F0 100%);
-			background:-o-linear-gradient(top,#47BC60 0%,#39A64E 100%);
-			background:-ms-linear-gradient(top,#47BC60 0%,#39A64E 100%);
-			background:linear-gradient(top, white 0%,#F0F0F0 100%);
-			border: $border_default;
-			box-shadow: $shadow_default;
+		input[type='submit']{
+			@include default_submit;
+
 		}
 
 
@@ -63,7 +54,7 @@
 		width: 600px;
 	}
 
-	.user_details{
+	.user_profile_info{
 		display: block;
 		
 	}
@@ -194,8 +185,8 @@
 	display: block;
 	position: relative;
 	width: 100px;
-	margin: 0px auto;
-	top: -27px;
+	margin: auto;
+	top: -35px;
 
 }
 
@@ -214,19 +205,129 @@
 }
 
 .user_details, .edit_user_wrapper{
+	width: 600px;
+	border: $border_default;
+	padding: 15px 30px;
+	margin: auto;
+	background: white;
 
-	.user_picture{
-		max-height: 200px;
-		width: 150px;
-		
-		.user_profile_pic{
-			max-height: 200px;
-			max-width: 150px;
-			display: inline;
-			margin: 0px auto;
+	.edit_user_title{
+		margin-bottom: 20px;
 
+	h2{
+		text-align: center;
+		margin-bottom: 5px;	
+		color: $soft_font;	
+	}
+
+	h3{
+		text-align: center;
+		font-style: italic;
+		color: $soft_font;
+	}
+}
+
+	p{
+				width: 200px;
+				height: 100%;
+				display: inline-block;
+				color: $soft_font;
+				font-weight: bold;
+				vertical-align: top;
+			}
+
+	.photo_wrapper{
+		padding: 15px 30px;
+
+		h3{
+			display: inline-block;
+			vertical-align: top;
+			width: 200px;
 		}
 
+		
+		.user_picture{
+				display: inline-block;
+			max-height: 200px;
+			width: 150px;
+			margin: 10px auto;
+
+
+			.user_profile_pic{
+				max-height: 200px;
+				max-width: 150px;
+				display: inline;
+				margin: 0px auto;
+				border: $border_default;
+
+			}
+
+		}
+	}
+
+	.edit_user{
+		h3{
+			border-top: $border_default;
+			padding: 15px;
+		}
+		li{
+			min-height: 20px;
+			border-top: $border_default;
+			padding: 15px 30px;
+
+			label, input{
+				font-size: 110%;
+				vertical-align: middle;
+			
+			}
+
+			
+		}
+
+		.skill_rate_prompt{
+				width: 200px;
+				display: inline-block;
+			}
+
+		.rating_wrapper{
+			display: inline-block;
+			width: auto;
+
+			
+			label{
+				display: none;
+			}
+		}
+
+		input[type='checkbox']{
+			width: 15px;
+			height: 15px;
+		}
+
+		input[type="submit"]{
+			float: right;
+			@include default_submit;
+		}
+	}
+
+	.delete_user_wrapper{
+		margin-top: 20px;
+
+		a, p{
+			display: inline-block;
+			font-size: 90%;
+		}
+
+		p{
+			color: $border_default;
+			font-style:  italic;
+			width: auto;
+
+				height: 100%;
+				display: inline-block;
+				font-weight: normal;
+				vertical-align: baseline;
+		}
 	}
 
 }

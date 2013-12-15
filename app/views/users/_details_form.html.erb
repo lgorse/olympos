@@ -1,8 +1,13 @@
+<div class = "edit_user_title">
+<h2>Tell us about yourself</h2>
+<h3>This will lead to better matchups</h3>
+</div>
 <div class = "photo_wrapper">
+  <p>Profile Photo</p>
   <%= render 'users/user_photo_partials/user_profile_picture', :user => @current_user %>
 </div>
 <%= form_for @current_user do |user| %>
-  <%= hidden_field_tag :redirect_url, home_users_path%>
+ 
   <ul>
     <% if @current_user.first_rating.blank? %>
       <li>
@@ -10,19 +15,22 @@
       </li>
     <% end %>
     <li>
-      <%= user.label :intro, "Introduce yourself" %>
+      <p>
+      <%= user.label :intro, "Introduce yourself" %></p>
       <%= user.text_area :intro, :placeholder => "Max 260 characters", :size => "35x3", :resize => false  %>
     </li>
     <li>
-      <%= user.label :zip, "Your location" %>
+      <p>
+      <%= user.label :zip, "Your location" %></p>
       <%= user.text_field :zip, :value => @current_user.zip.blank? ? Geocoder.search([request.location.latitude,request.location.longitude]).first.postal_code : @current_user.zip  %>
     </li>
     <li>
-      <%= user.label :country %>
+      <p>
+      <%= user.label :country %></p>
       <%= user.country_select :country, {priority: %w(US)} %>
     </li>
     <li>
-      <%= user.submit 'Done' %>
+      <%= user.submit 'Find Players' %>
     </li>
   </ul>
 <% end %>
