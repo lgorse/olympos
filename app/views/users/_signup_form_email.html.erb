@@ -1,4 +1,6 @@
+<div class = "new_user_wrapper">
 <%= form_for @current_user do |user| %>
+<h2><%= "Sign up for #{APP_NAME}" %></h2>
   <%= render 'layouts/error_messages', :object => user.object %>
   <ul>
     <li>
@@ -26,7 +28,8 @@
       <%= user.label :gender, 'Female', :value => FEMALE %>
     </li>
     <li>
-      <%= user.submit 'Sign up' %>
+      <%= user.submit 'Sign up', :class => 'round' %>
     </li>
   </ul>
 <% end %>
+</div>

@@ -1,3 +1,5 @@
+@import 'variables';
+
 .map_wrapper{
 	width: 800px;
 	margin: auto;
@@ -28,9 +30,12 @@
 }
 
 .player_search{
-	width: 600px;
+	width: 560px;
 	margin: auto;
 	margin-bottom: 10px;
+	background: white;
+	padding: 15px;
+	border: $border_default;
 	
 
 	.search_form{

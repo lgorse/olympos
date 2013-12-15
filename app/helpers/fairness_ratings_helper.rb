@@ -1,27 +1,22 @@
 module FairnessRatingsHelper
 
-	def rating_explain(i)
+	def fairness_rating_explain(i)
 		case i
 		when 5
-			'Your opponent was cordial and fair in every interaction. </b>
-			When there was a disagreement, he argued thoughfully.</b>
-			He was gracious in victory and defeat.'
+			'Fair in victory and defeat.
+			 Pointed out own fouls and where needed argued points cordially.'
 		when 4
-			'Your opponent was cordial and fair in every interaction. 
-			He called out your fouls more often than he acknowledged yours.
-			He was gracious in victory and defeat.'
+			'Overall pleasant experience.
+			 Argued points where necessary but always cordially.'
 		when 3
-			'Your opponent was sometimes brusque and did not attempt to make you at ease.
-			He called out your fouls more often than he acknowledged yours.
-			He was gracious in victory and defeat.'
+			'Good experience.
+			 Pointed out your fouls more than their own.'
 		when 2
-			'Your opponent was rude or taciturn
-			He was unfair in managing fouls.
-			He was frustrated in defeat'
+			'Taciturn player.
+			 Refused to acknowledge own fouls.'
 		when 1
-			'Your opponent was rude.
-			He became aggressive when discussing fouls.
-			He was rude or mocking in victory and defeat'
+			"Should not be on #{APP_NAME}.
+			 Rude, dishonest player."
 		else
 		end
 	end

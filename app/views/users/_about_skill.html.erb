@@ -1,0 +1,11 @@
+<div class = "rating_about_header">
+<h3>Rating your skill helps us match you with the right partner</h3>
+</div>
+<table class = "rating_explained">
+  <% 5.downto(1) do |i| %>
+    <tr>
+      <td><%= render 'layouts/ratings/show_rating', :star_size => "stars", :rating_type => "Skill", :rating => i %></td>
+      <td><%= simple_format skill_rating_explain(i) %></td>
+    </tr>
+  <% end %>
+</table>

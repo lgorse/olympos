@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 	def home
 
 
+
 	end
 
 	def index
@@ -68,8 +69,9 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		if params[:id] == @current_user.id
+		if params[:id].to_i == @current_user.id
 			@user = @current_user
+			flash.now[:notice] = "Click on the racquets labeled 'Skills' to set your Squash level." if @current_user.first_rating.blank?
 		else
 			@user = User.find(params[:id])
 		end
@@ -97,6 +99,9 @@ class UsersController < ApplicationController
 		set_coordinates(params[:zip], params[:user] ? params[:user][:country] : '')
 		@nearby_users = recommended_players(params[:distance])
 		organize_unique_players_from_nearby_users(@nearby_users)
+	end
+
+	def about_skill
 	end
 
 end

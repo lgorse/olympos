@@ -45,4 +45,25 @@ module UsersHelper
     @current_user.localize_by_request_location(request) if @current_user.a_location_attribute_is_missing
   end
 
+  def skill_rating_explain(i)
+    case i
+    when 5
+      '<b>Pro.</b>
+       You have trouble finding players you can\'t beat.'
+    when 4
+      '<b>Expert.</b>
+       You give the pros a good fight; you beat most players you encounter.'
+    when 3
+      '<b>Intermediate.</b>
+       You have a good grasp of the game and win 50% of your matches.'
+    when 2
+      '<b>Beginner.</b>
+       You know the rules and just need practice.'
+    when 1
+      '<b>Novice.</b>
+       You are learning the rules and lose every game.'
+    else
+    end
+  end
+
 end

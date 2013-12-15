@@ -1,0 +1,9 @@
+$(function(){
+$(".about_skill_wrapper").html("<%= escape_javascript render 'users/about_skill' %>");
+	var about_dialog = $(".dialog_about_skill").dialog({
+		modal: true,
+		width: 600,
+		resizable: false
+	});
+	$(".ui-button").blur();
+});

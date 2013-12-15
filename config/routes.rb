@@ -6,7 +6,7 @@ Olympos::Application.routes.draw do
 
 	resources :users do
 		collection do
-			get :map, :search
+			get :map, :search, :about_skill
 		end
 		resources :friendships, only: [:friendships, :requests, :pending] do
 			collection do

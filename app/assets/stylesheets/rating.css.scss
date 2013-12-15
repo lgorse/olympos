@@ -1,4 +1,4 @@
-
+@import 'variables';
 
 $starWidth: 25px;
 $starOffset: 0 -43px;
@@ -38,13 +38,13 @@ $total: $numStars * $steps;
 
 	
 	&.yellow{
-			background: url(/assets/rating/star_full.png) repeat-x top left;
-		}
+		background: url(/assets/rating/star_full.png) repeat-x top left;
+	}
 
-		&.blue{
-			background: url(/assets/rating/star_blue.png) repeat-x top left;
+	&.blue{
+		background: url(/assets/rating/star_blue.png) repeat-x top left;
 
-		}
+	}
 	
 
 	@for $i from 0 through ($total){
@@ -70,9 +70,9 @@ $total: $numStars * $steps;
 	}
 
 	&.blue{
-			background-image: url(/assets/rating/star_blue.png);
+		background-image: url(/assets/rating/star_blue.png);
 
-		}
+	}
 	
 }
 
@@ -101,13 +101,13 @@ $small_star: 20px;
 	}
 
 	&.yellow{
-			background: url(/assets/rating/star_full.png) repeat-x top left;
-		}
+		background: url(/assets/rating/star_full.png) repeat-x top left;
+	}
 
-		&.blue{
-			background: url(/assets/rating/star_blue.png) repeat-x top left;
+	&.blue{
+		background: url(/assets/rating/star_blue.png) repeat-x top left;
 
-		}
+	}
 
 	@for $i from 0 through ($total){
 		&.filled_#{$i} {@include small_filled($i);
@@ -120,12 +120,12 @@ $small_star: 20px;
 
 .rating_wrapper{
 	display: block;
-width: 100%;
+	width: 100%;
 	
-			
+
 }
 
-.rating_label, .rating{
+.rating_label, .rating, .rate_skill{
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -143,22 +143,94 @@ width: 100%;
 	}
 
 	.rating_label{
-font-size: 85%;	
+		font-size: 85%;	
 	}
 
 }
 
 .user_profile{
-.user_info{
-	.rating_wrapper{
-		height: 25px;
+	.user_info{
+		.rating_wrapper{
+			height: 25px;
+		}
+
+		.rating_label{
+			font-size: 90%;	
+			width: 55px;
+
+		}
+
+		.rate_skill{
+			margin-bottom: 5px;
+		}
+
+	}
+}
+
+.help_rating{
+	margin-left: 10px;
+	height: 100%;
+	vertical-align: middle;
+	display: inline-block;
+
+
+}
+
+.rating_about_header{
+	text-align: center;
+	margin-bottom: 10px;
+	overflow: hidden;
+
+	p{
+		margin-bottom: 5px;
+		margin-left: 20px;
+		display: inline-block;
+		position: relative;
+		height: 100%;
+		text-align: center;
+		font-style: italic;
+	}
+
+	p:before,
+	p:after{
+		content: '\a0';
+		border-top: $border_default;
+		width: 100%;
+		position: absolute;
+		top: 51%;
+		vertical-align: middle;
+		margin: 0px 10px 0px 10px;
+		
+
+	}
+
+	p:before{
+		right: 100%;
+	}
+
+	p:after{
+		left: 100%;
+	}
+
+	
+}
+
+
+
+
+
+
+.rating_explained{
+	tr{
+
+	}
+	td{
+		padding: 5px;
+		text-align: top;
+		vertical-align: top;
 	}
 
 	.rating_label{
-		font-size: 90%;	
-		width: 55px;
-
+		display: none;
 	}
-
-}
 }

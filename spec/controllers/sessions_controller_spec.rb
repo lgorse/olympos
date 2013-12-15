@@ -39,7 +39,7 @@ describe SessionsController do
 			end
 
 			it "should redirect to the index page" do
-				response.should redirect_to home_users_path
+				response.should redirect_to search_users_path
 			end
 
 			it 'should create a session with the user id' do

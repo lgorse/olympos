@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'variables';
+
 .unconfirmed_matches{
 	left: 50px;
 
@@ -10,6 +12,7 @@
 .match_list{
 	width: 425px;
 	margin: auto;
+	background: white;
 	
 
 	
@@ -72,6 +75,7 @@
 
 		.opponent{
 			margin-right: 20px;
+			vertical-align: baseline;
 
 		}
 
@@ -82,7 +86,7 @@
 
 		.prompt_text{
 			font-size: 85%;
-			color: #76787A;
+			color: $grey_font;
 			margin-left: 5px;
 
 			a{
@@ -95,6 +99,7 @@
 .edit_match{
 	display: inline-block;
 
+
 	input[type=submit]{
 		font-size: 90%;
 		padding: 0px 3px;
@@ -104,6 +109,10 @@
 .new_match{
 	width: 465px;
 	margin: auto auto 10px;
+	background: white;
+	padding: 15px 30px;
+	border: $border_default;
+
 	label{
 	font-size: 14px;
 }

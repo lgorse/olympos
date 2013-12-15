@@ -1,3 +1,13 @@
-<div class = "rate_skill" id = "<%= @current_user.first_rating %>">
-  <%= user.hidden_field :first_rating, :value => @current_user.first_rating, :class => "rating" %>
+<div class = "skill_rate_prompt">
+	<p>Click on racquets to set your skill level</p>
+	
+</div>
+<div class = "rating_wrapper">
+	<%= user.label :first_rating, "Skills:", :class => "rating_label" %>
+	<div class = "rate_skill" id = "<%= @current_user.first_rating %>">
+		<%= user.hidden_field :first_rating, :value => @current_user.first_rating, :class => "rating" %>
+	</div>
+	<div class = "help_rating">
+		<%= link_to "?", about_skill_users_path, :remote => true %>
+	</div>
 </div>

@@ -1,4 +1,4 @@
-<%= form_for @match, :remote => true do |match| %>
+<%= form_for @match, :remote => true, :html => {:class => "round new_match"} do |match| %>
   <h3>Enter your latest match</h3>
   <div class = "error_wrapper">
     <%= render 'layouts/error_messages', :object => match.object %></div>

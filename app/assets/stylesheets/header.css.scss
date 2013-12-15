@@ -1,125 +1,122 @@
 @import 'variables';
 .header{
- 	height: 45px;
- 	width: 100%;
- 	border-bottom: $border_default;
- 	position: fixed;
- 	z-index: 3;
- 	background: white;
- 	padding-top: 5px;
+	height: 45px;
+	width: 100%;
+	border-bottom: $border_default;
+	position: fixed;
+	z-index: 3;
+	background: white;
+	padding-top: 5px;
 
 
- 	a{
- 		vertical-align: middle;
- 		font-size: 14px;
- 	}
+	a{
+		vertical-align: middle;
+		font-size: 14px;
+		vertical-align: middle;
+		margin-right: 10px;
+		height: auto;
+	}
 
- 	.header_container{
- 		min-width: 950px;
- 		position: relative;
- 		height: 100%;
- 		
- 		width: 80%;
- 		
- 		margin: auto;
- 		
+	.header_container{
+		min-width: 950px;
+		position: relative;
+		height: 100%;
+		
+		width: 80%;
+		
+		margin: auto;
+		
 
- 	}
+	}
 
- 	nav{
- 		display: inline-block;
- 	}
+	nav{
+		display: inline-block;
+	}
 
- 	.header_left{
- 		margin-left: 50px;
- 		float: left;
- 		display: inline-block;
- 		height: 100%;
+	.header_left{
+		margin-left: 50px;
+		float: left;
+		display: inline-block;
+		height: 100%;
 
- 		a{
- 			font-size: 120%;
- 			vertical-align: middle;
- 			margin-right: 10px;
+		a{
+			font-size: 120%;
+			
 
- 		}
- 	}
+		}
+	}
 
- 	.header_right{
- 		height: 100%;
- 		float: right;
- 		margin-right: 50px;
- 		display: inline-block;
- 		position: relative;
-
- 		a{
- 			vertical-align: middle;
- 			margin-right: 10px;
- 			display: inline-block;
- 		}
-
- 		.user_settings{
- 			height: 100%;
- 			
- 			display: inline-block;
-
- 			.my_profile_button{
- 			vertical-align: middle;
- 			margin: 0px auto;
- 			display: inline-block;
- 			margin-right: 5px;
- 		}
-
-
- 			a{
- 				display: inline-block;
- 				margin-right: 10px;
-
- 				img{
- 					margin-right: 5px;
- 					display: inline;
- 					
- 				}
- 			}
- 			
- 		}
-
- 		.nav_menu{
- 			display: none;
- 			position: absolute;
- 			top: 45px;
- 			left: 135px;
- 			width: 150px;
- 			
- 			background: white;
- 			border: black 1px solid;
-
- 			li{
- 				
- 				height: 25px;
- 				border-bottom: 1px solid black;
- 				text-align: center;
- 				
-
- 				a{
- 					padding-top: 5px;
- 					display: block;
-
- 				}
- 			}
-
- 			li.logout{
- 				border-bottom: 0px;
- 			}
+	.header_right{
+		height: 100%;
+		float: right;
+		margin-right: 50px;
+		display: inline-block;
+		position: relative;
 
 
 
- 		}
+		.user_settings{
+			height: 100%;
+			
+			display: inline-block;
 
- 		
- 	}
+			.my_profile_button{
+				vertical-align: middle;
+				margin: 0px auto;
+				display: inline-block;
+				margin-right: 5px;
+			}
 
 
- }
+			a{
+				
+
+				img{
+					margin-right: 5px;
+					display: inline;
+					
+				}
+			}
+			
+		}
+
+		.nav_menu{
+			display: none;
+			position: absolute;
+			top: 45px;
+			left: 135px;
+			width: 150px;
+			
+			background: white;
+			border: black 1px solid;
+
+			li{
+				
+				height: 25px;
+				border-bottom: 1px solid black;
+				text-align: center;
+				
+
+				a{
+					padding-top: 5px;
+					display: block;
+
+				}
+			}
+
+			li.logout{
+				border-bottom: 0px;
+			}
+
+
+
+		}
+
+		
+	}
+
+
+}
 
 
 .notification{
