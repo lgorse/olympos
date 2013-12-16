@@ -9,11 +9,7 @@
       <%= render 'layouts/date_summary', :time_object => match.play_date.to_time %>
       <div class = "match_main_line">
         <div class = "match_info">
-          <% if match.winner == @user %>
-            <%= "#{you_for_current_user(@user)} won against " %>
-          <% else %>
-            <%= "#{you_for_current_user(@user)} lost against " %>
-          <% end %>
+          <%= win_or_lose(match, @user) %>
           <%= link_to opponent.fullname, opponent, :class => "opponent" %>
         </div>
         <div class = "match_confirmation">

@@ -5,9 +5,8 @@ class InviteMailer < ActionMailer::Base
 
   def invite_email(invitation)
    @invitation = invitation
-   @inviter = @invitation.inviter
-   @first_name = @inviter.firstname
-   @subject = "#{@inviter.firstname} invited you to join #{APP_NAME}"
+   @user = @invitation.inviter
+   @subject = "#{@user.firstname} invited you to join #{APP_NAME}"
    @host = parse_host
    mail(:to => @invitation.email, :subject => @subject)
    

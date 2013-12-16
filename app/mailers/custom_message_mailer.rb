@@ -5,11 +5,11 @@ class CustomMessageMailer < ActionMailer::Base
 
   def send_email(receipt, recipient)
   	@message = receipt.message
-  	@sender = @message.sender
+  	@user = @message.sender
   	@recipient = recipient
   	@conversation = @message.conversation
   	@host = parse_host
-  	mail(:to => @recipient.email, :subject => "#{@sender.firstname} sent you a message on #{APP_NAME}")
+  	mail(:to => @recipient.email, :subject => "#{@user.firstname} sent you a message on #{APP_NAME}")
   end
 
 

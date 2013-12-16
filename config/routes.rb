@@ -1,61 +1,62 @@
 Olympos::Application.routes.draw do
 
-	root :to => 'sessions#new'
+  root :to => 'sessions#new'
 
-	resources :sessions, :conversations, :messages, :clubs
+  resources :sessions, :conversations, :messages, :clubs
 
-	resources :users do
-		collection do
-			get :map, :search, :about_skill
-		end
-		resources :friendships, only: [:friendships, :requests, :pending] do
-			collection do
-			 get :friendships, :requests, :pending
-			end
-		end
-		
-		member do
-			get :details
-			get :change_picture
-		end
+  resources :users do
+    collection do
+      get :map, :search, :about_skill
+    end
+    resources :friendships, only: [:friendships, :requests, :pending] do
+      collection do
+        get :friendships, :requests, :pending
+      end
+    end
 
-		get 'fb', on: :new
+    member do
+      get :details
+      get :change_picture
+    end
 
-		collection do
-			get :home
-		end
+    get 'fb', on: :new
 
-		resources :matches, only: [:index, :update]
+    collection do
+      get :home
+    end
 
-	end
+    resources :matches, only: [:index, :update]
 
-	
-	resources :invitations do
-		collection do
-			get :ussquash
-		end
-	end
-
-	resources :friendships, only: [:index, :create, :destroy] do
-		collection do
-			post :accept
-		end
-		member do
-			delete :reject
-		end
-	end
-
-	resources :matches, except: [:index, :update]
-
-	resources :fairness_ratings do
-		collection do
-			get :about
-		end
-	end
+  end
 
 
-	
+  resources :invitations do
+    collection do
+      get :ussquash
+    end
+  end
 
-	match '/logout' => 'sessions#destroy'
+  resources :friendships, only: [:index, :create, :destroy] do
+    collection do
+      post :accept
+    end
+    member do
+      delete :reject
+    end
+  end
+
+  resources :matches, except: [:index, :update]
+
+  resources :fairness_ratings do
+    collection do
+      get :about
+    end
+  end
+
+  match '/logout' => 'sessions#destroy'
+
+  if Rails.env.development?
+    mount MailPreview => 'mail_view'
+  end
 
 end

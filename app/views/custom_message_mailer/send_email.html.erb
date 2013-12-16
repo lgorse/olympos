@@ -1,9 +1,4 @@
-<h1><%= "Hello Message" %></h1>
-<h2><%= "#{@sender.firstname} has sent you a message on #{APP_NAME}" %></h2>
-<% if @sender.facebook? %>
-  <%= image_tag @sender.fb_pic_large, :class => "user_profile_pic fb round", :height => "200" %>
-<% else %>
-  <%= image_tag @sender.photo.url(:large), :class => "user_profile_pic custom round"  %>
-<% end %>
-<p><%= @message.body %></p>
-<%= link_to "Respond to #{@sender.firstname}", conversation_url(@conversation, :redirect_url => conversation_path(@conversation.id), :host => @host) %>
+<h2><%= "#{@user.fullname} sent you a message on #{APP_NAME}" %></h2>
+<%= render 'layouts/mailers/tag_line' %>
+<h3><%= link_to "View #{@user.firstname}\'s message", conversations_url(:redirect_url => conversations_path, :host => @host) %></h3>
+<%= render 'layouts/mailers/sender_profile' %>

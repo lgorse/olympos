@@ -1,9 +1,9 @@
-<h1>Hello match</h1>
-<h3><%= "#{@sender.firstname} recorded your last match" %></h3>
-<% if @sender.facebook? %>
-  <%= image_tag @sender.fb_pic_large, :class => "user_profile_pic fb round", :height => "200" %>
-<% else %>
-  <%= image_tag @sender.photo.url(:large), :class => "user_profile_pic custom round"  %>
-<% end %>
-<h3><%= "#{@sender.fullname}" %></h3>
-<%= link_to "Visit #{@sender.firstname}\'s profile", user_url(@sender, :redirect_url => user_matches_path(@sender), :host => @host) %>
+<h2><%= if @match.winner == @user
+ "#{@user.fullname} won a squash match against you"
+ else
+ 	"#{@user.fullname} lost a squash match against you"
+ end %></h2>
+<%= render 'layouts/mailers/tag_line' %>  	
+        
+<h3>How could this be?? <%= link_to "Confirm your match with #{@user.firstname}", user_matches_url(@recipient, :redirect_url => user_matches_path(@recipient), :host => @host) %></h3>
+<%= render 'layouts/mailers/sender_profile' %>

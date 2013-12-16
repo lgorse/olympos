@@ -20,6 +20,7 @@ gem 'aws-sdk'
 
 gem 'mailboxer'
 gem 'carmen-rails', '~> 1.0.0'
+gem 'mail_view'
 
 gem 'geocoder'
 gem 'gmaps4rails'

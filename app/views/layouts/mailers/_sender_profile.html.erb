@@ -1,0 +1,15 @@
+<div style="height:200px">
+	<div style="display: inline-block;">
+<% if @user.facebook? %>
+  <%= image_tag @user.fb_pic_large, :class => "user_profile_pic fb round", :height => "200" %>
+<% else %>
+  <%= image_tag @user.photo.url(:large), :class => "user_profile_pic custom round"  %>
+<% end %>
+</div>
+<div style="display: inline-block; vertical-align: top; margin-left: 10px;">
+<p style="vertical-align:top;"><%= "#{@user.firstname} has played #{pluralize(@user.matches.count, "match")}" %></p>
+<p style="vertical-align:top;"><%= "#{pluralize(@user.friendships.count, "friends")} on #{APP_NAME}" %></p>
+<p style="vertical-align:top;"><%= "#{@user.firstname} can play around #{@user.city}" %></p>
+<%= link_to "Visit #{@user.firstname}\'s profile", user_url(@user, :redirect_url => user_path(@user), :host => @host),{:style => "vertical-align: top; "} %>
+</div>
+</div>

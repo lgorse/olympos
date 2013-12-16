@@ -1,4 +1,5 @@
 module FacebookHelper
+	
 
 	def base64_url_decode str
 		encoded_str = str.gsub('-','+').gsub('_','/')
@@ -17,6 +18,7 @@ module FacebookHelper
 				get_graph_from_cookie
 			rescue => e
 				print "ERROR #{e.message}"
+				get_graph_from_app
 			end
 		else
 			get_graph_from_app

@@ -27,4 +27,12 @@ module MatchesHelper
 			end
 		end
 	end
+
+	def win_or_lose(match, user)
+		if match.winner == user
+           "#{you_for_current_user(@user)} won against "
+          else
+            "#{you_for_current_user(@user)} lost against "
+          end
+	end
 end
