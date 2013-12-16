@@ -1,3 +1,4 @@
 $(function(){
-	$(".pending_friendship_list").html("<%= escape_javascript(render 'users/mini_summary_list', :friendship_list => @friends_pending) %>");
+	$(".pending_friendship_list").
+	html("<%= escape_javascript(render 'users/mini_summary_list', :friendship_list => @friends_pending, :empty_prompt => 'No friendship requests') %>");
 });

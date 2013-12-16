@@ -6,7 +6,7 @@
       <li class = "friendships_sent"><%= link_to 'Friendships sent', requests_user_friendships_path(@current_user), :remote => true %></li>
     </ul>
     <div class = "pending_friendship_list">
-      <%= render 'users/mini_summary_list', :friendship_list => @current_user.friends_pending  %>
+      <%= render 'users/mini_summary_list', :friendship_list => @current_user.friends_pending, :empty_prompt => "No friendship requests received"  %>
     </div>
   </div>
   <div class = "invitation_column round">
