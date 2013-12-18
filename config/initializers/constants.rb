@@ -21,6 +21,7 @@ DEFAULT_FAIRNESS = 3
 
 #edit user param
 INTRO = 0
+LOCATION = 1
 
 #Emails
 VALID_EMAIL = /[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
