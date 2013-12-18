@@ -145,6 +145,28 @@
 
 		}
 
+		a.location_prompt{
+			color: $light_prompt;
+			margin-left: 10px;
+			font-size: 85%;
+
+		}
+
+		.edit_user{
+
+			#user_zip{
+				width: 60px;
+			}
+
+			#user_country{
+				width: 120px;
+			}
+
+			input[type="submit"]{
+				margin-left: 10px;
+			}
+		}
+
 		
 	}
 
