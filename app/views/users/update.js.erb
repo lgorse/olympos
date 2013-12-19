@@ -19,7 +19,8 @@ function render_info2(){
 }
 
 function render_user_location(){
-	$(".user_location").
+	var wrapper = $(".user_info .user_location");
+	wrapper.
 	html("<%= escape_javascript(render 'users/user_profile_partials/user_location') %>");
 }
 

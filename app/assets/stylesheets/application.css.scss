@@ -64,5 +64,24 @@ span.vertical_align{
 input[type='submit']{
 			@include default_submit;
 
+			&:hover{
+				@include default_submit_hover;
+				
+			}
+
 		}
 
+input[type='text'], textarea, input[type='password']{
+	box-shadow: none;
+	border: 1px solid $dark_grey;
+
+
+}
+
+
+
+select{
+	
+	border: 1px solid $dark_grey;
+	
+}

@@ -1,9 +1,11 @@
 $grey: #CCC;
 $light_grey: #C2C2CF;
+$dark_grey: #9e9e9e;
 $soft_font: #333;
 $grey_font: #76787A;
 $border_default: 1px solid $grey;
 $shadow_default: 1px 1px 1px $grey;
+
 
 $notify_red: #c01113;
 $light_prompt: #7AAAD1;
@@ -20,4 +22,10 @@ $light_prompt: #7AAAD1;
 			background:linear-gradient(top, white 0%,#F0F0F0 100%);
 			border: $border_default;
 			box-shadow: $shadow_default;
+}
+
+@mixin default_submit_hover{
+	border: 1px solid $dark_grey;
+	box-shadow: 1px 1px 1px $dark_grey;
+
 }

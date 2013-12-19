@@ -19,6 +19,7 @@ function intro_edit(){
 }
 
 function location_edit(){
-	$(".user_location").
+	var wrapper = $(".user_info .user_location");
+	wrapper.
 	html("<%= escape_javascript(render 'users/user_edit_partials/edit_location_form') %>");
 }
