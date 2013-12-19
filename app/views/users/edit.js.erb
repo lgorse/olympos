@@ -14,12 +14,14 @@ $(function(){
 
 function intro_edit(){
 	$(".user_info2").
-	html("<%= escape_javascript(render 'users/user_edit_partials/edit_intro_form') %>");
+	html("
+<%= escape_javascript(render 'users/user_edit_partials/edit_intro_form') %>");
 	$("textarea#user_intro").focus();
 }
 
 function location_edit(){
 	var wrapper = $(".user_info .user_location");
 	wrapper.
-	html("<%= escape_javascript(render 'users/user_edit_partials/edit_location_form') %>");
+	html("
+<%= escape_javascript(render 'users/user_edit_partials/edit_location_form') %>");
 }

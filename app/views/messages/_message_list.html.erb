@@ -1,6 +1,6 @@
 <h2>Conversation between:</h2>
 <div class = "conversation_form_wrapper">
-<div class = "conversation_participants"><%= conversation_participant_list %></div>
-<%= render 'conversations/conversation_form' %>
+  <div class = "conversation_participants"><%= conversation_participant_list %></div>
+  <%= render 'conversations/conversation_form' %>
 </div>
 <%= render :partial => 'messages/message', :collection => @conversation.messages, :as => :message  %>

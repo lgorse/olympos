@@ -1,32 +1,7 @@
 <div class = "user_summary round">
   <div class = "user_summary_left">
-    <div class = "user_photo">
-      <% if user.facebook? %>
-        <% user.set_fb_small_pic(@graph) %>
-        <%= link_to (image_tag user.fb_pic_small, :width => 75), user %>
-      <% else %>
-        <%= link_to (image_tag user.photo.url(:small), :width => 75), user %>
-      <% end %>
-    </div>
-    <div class = "user_interact"><%= render 'friendships/message_friend_button', :user => user %></div>
-  </div>
-  <div class = "user_summary_right">
-    <div class =  "user_summary_info">
-      <%= link_to truncate(user.fullname, :length => 20), user, :class => "user_name" %>
-      <div class = "user_ratings">
-        <%= render 'layouts/ratings/show_rating', :rating => user.first_rating, :star_size => "small_stars",  :rating_type => "Skill" %>
-        <%= render 'layouts/ratings/show_rating', :rating => user.fairness, :star_size => "small_stars",
-      :rating_type => "Fairness" %>
-      </div>
-      <div class = 'user_location'>
-        <%= link_to user.city, search_users_path(:zip => user.zip, :user => {:country => user.country}) %>
-      </div>
-    </div>
-    <div class = "user_intro">
-      <% unless user.intro.blank? %>
-        <%= truncate(user.intro, :length => 100, :omission => '') %>
-        <%= link_to "...", user if user.intro.size > 150 %>
-      <% end %>
+    <%= render 'users/user_summary_partials/user_summary_left', :user => user %>
+    <div class = "user_summary_right">
+      <%= render 'users/user_summary_partials/user_summary_right', :user => user %>
     </div>
   </div>
-</div>

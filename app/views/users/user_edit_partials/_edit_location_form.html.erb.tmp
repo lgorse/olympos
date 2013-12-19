@@ -1,0 +1,10 @@
+<%= form_for @current_user, :remote => true do |user| %>
+  <%= hidden_field_tag :edit_type, LOCATION %>
+  <li>
+    <%= user.label :zip, "Zip code" %>
+    <%= user.text_field :zip, :value => @current_user.zip.blank? ? Geocoder.search([request.location.latitude,request.location.longitude]).first.postal_code : @current_user.zip %>
+  </li>
+  <%= user.label :country %>
+  <%= user.country_select :country, {priority: %w(US)} %>
+</li>
+<%= user.submit "OK" %>

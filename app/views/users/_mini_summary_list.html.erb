@@ -1,7 +1,7 @@
 <ul>
-	<% if friendship_list.blank? %>
-	<p class= "empty_prompt"><%= empty_prompt %></p>
-	<% else %>
-  <%= render :partial => 'users/user_summary_partials/user_mini_summary', :collection => friendship_list, :as => :user %>
+  <% if friendship_list.blank? %>
+    <p class= "empty_prompt"><%= empty_prompt %></p>
+  <% else %>
+    <%= render :partial => 'users/user_summary_partials/user_mini_summary', :collection => friendship_list, :as => :user %>
   <% end %>
 </ul>

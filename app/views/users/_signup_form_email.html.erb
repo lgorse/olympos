@@ -1,35 +1,35 @@
 <div class = "new_user_wrapper">
-<%= form_for @current_user do |user| %>
-<h2><%= "Sign up for #{APP_NAME}" %></h2>
-  <%= render 'layouts/error_messages', :object => user.object %>
-  <ul>
-    <li>
-      <%= user.text_field :firstname, :placeholder => "First name" %>
-    </li>
-    <li>
-      <%= user.text_field :lastname, :placeholder => "Last name" %>
-    </li>
-    <li>
-      <%= user.text_field :email, :placeholder => "E-mail" %>
-    </li>
-    <li>
-      <%= user.password_field :password, :placeholder => "Password" %>
-    </li>
-    <li>
-      <%= user.label :birthday %>
-      <%= user.select :birthdate, (13.years.ago.year.downto(95.years.ago.year)).to_a   %>
-      <p>You must be 13 or older to sign up</p>
-    </li>
-    <li>
-      <%= user.label :gender %>
-      <%= user.radio_button :gender, MALE %>
-      <%= user.label :gender, 'Male', :value => MALE %>
-      <%= user.radio_button :gender, FEMALE %>
-      <%= user.label :gender, 'Female', :value => FEMALE %>
-    </li>
-    <li>
-      <%= user.submit 'Sign up', :class => 'round' %>
-    </li>
-  </ul>
-<% end %>
+  <%= form_for @current_user do |user| %>
+    <h2><%= "Sign up for #{APP_NAME}" %></h2>
+    <%= render 'layouts/error_messages', :object => user.object %>
+    <ul>
+      <li>
+        <%= user.text_field :firstname, :placeholder => "First name" %>
+      </li>
+      <li>
+        <%= user.text_field :lastname, :placeholder => "Last name" %>
+      </li>
+      <li>
+        <%= user.text_field :email, :placeholder => "E-mail" %>
+      </li>
+      <li>
+        <%= user.password_field :password, :placeholder => "Password" %>
+      </li>
+      <li>
+        <%= user.label :birthday %>
+        <%= user.select :birthdate, (13.years.ago.year.downto(95.years.ago.year)).to_a   %>
+        <p>You must be 13 or older to sign up</p>
+      </li>
+      <li>
+        <%= user.label :gender %>
+        <%= user.radio_button :gender, MALE %>
+        <%= user.label :gender, 'Male', :value => MALE %>
+        <%= user.radio_button :gender, FEMALE %>
+        <%= user.label :gender, 'Female', :value => FEMALE %>
+      </li>
+      <li>
+        <%= user.submit 'Sign up', :class => 'round' %>
+      </li>
+    </ul>
+  <% end %>
 </div>

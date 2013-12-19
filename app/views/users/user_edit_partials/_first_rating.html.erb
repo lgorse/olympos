@@ -1,13 +1,12 @@
 <%= form_for user, :html => {:title => "Rate your skills so we can match you to other users"} do |user| %>
-
-<div class = "rating_wrapper">
-	<%= user.label :first_rating, "Skills:", :class => "rating_label" %>
-	<div class = "rate_skill" id = "<%= @current_user.first_rating %>">
-		<%= user.hidden_field :first_rating, :value => @current_user.first_rating, :class => "rating" %>
-		<%= hidden_field_tag :edit_type, FIRST_RATING %>
-	</div>
-	<div class = "help_rating">
-		<%= link_to "?", about_skill_users_path, :remote => true %>
-	</div>
-</div>
+  <div class = "rating_wrapper">
+    <%= user.label :first_rating, "Skills:", :class => "rating_label" %>
+    <div class = "rate_skill" id = "<%= @current_user.first_rating %>">
+      <%= user.hidden_field :first_rating, :value => @current_user.first_rating, :class => "rating" %>
+      <%= hidden_field_tag :edit_type, FIRST_RATING %>
+    </div>
+    <div class = "help_rating">
+      <%= link_to "?", about_skill_users_path, :remote => true %>
+    </div>
+  </div>
 <% end %>

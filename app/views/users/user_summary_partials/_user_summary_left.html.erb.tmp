@@ -1,0 +1,4 @@
+<div class = "user_photo">
+  <%= render 'users/user_photo_partials/summary_photo',:user => user %>
+</div>
+<div class = "user_interact"><%= render 'friendships/message_friend_button', :user => user %></div>

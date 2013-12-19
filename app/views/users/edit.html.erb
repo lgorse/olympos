@@ -1,14 +1,13 @@
 <div class = "edit_user_wrapper">
-	<div class = "edit_user_title">
-<h2>Edit your Profile</h2></div>
+  <div class = "edit_user_title">
+    <h2>Edit your Profile</h2></div>
   <div class = "photo_wrapper">
-  	<h3>Profile Photo</h3>
+    <h3>Profile Photo</h3>
     <%= render 'users/user_photo_partials/user_profile_picture', :user => @current_user %>
   </div>
   <%= render "edit_user_form" %>
   <div class = "delete_user_wrapper">
-  <%= link_to "Unsubscribe", @current_user, :method => :delete, :confirm => "This is not undoable. We actually delete you from our database forever", :class => "delete_user" %>
-<p>Note: you will lose all your connections and matches</p>
+    <%= link_to "Unsubscribe", @current_user, :method => :delete, :confirm => "This is not undoable. We actually delete you from our database forever", :class => "delete_user" %>
+    <p>Note: you will lose all your connections and matches</p>
+  </div>
 </div>
-</div>
-

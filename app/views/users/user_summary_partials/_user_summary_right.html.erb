@@ -1,0 +1,17 @@
+<div class =  "user_summary_info">
+  <%= link_to truncate(user.fullname, :length => 20), user, :class => "user_name" %>
+  <div class = "user_ratings">
+    <%= render 'layouts/ratings/show_rating', :rating => user.first_rating, :star_size => "small_stars",  :rating_type => "Skill" %>
+    <%= render 'layouts/ratings/show_rating', :rating => user.fairness, :star_size => "small_stars",
+      :rating_type => "Fairness" %>
+  </div>
+  <div class = 'user_location'>
+    <%= link_to user.city, search_users_path(:zip => user.zip, :user => {:country => user.country}) %>
+  </div>
+</div>
+<div class = "user_intro">
+  <% unless user.intro.blank? %>
+    <%= truncate(user.intro, :length => 100, :omission => '') %>
+    <%= link_to "...", user if user.intro.size > 150 %>
+  <% end %>
+</div>
