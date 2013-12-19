@@ -1,7 +1,5 @@
-<div class = "skill_rate_prompt">
-	<p>Set your skill level below:</p>
-	
-</div>
+<%= form_for user, :html => {:title => "Rate your skills so we can match you to other users"} do |user| %>
+
 <div class = "rating_wrapper">
 	<%= user.label :first_rating, "Skills:", :class => "rating_label" %>
 	<div class = "rate_skill" id = "<%= @current_user.first_rating %>">
@@ -12,3 +10,4 @@
 		<%= link_to "?", about_skill_users_path, :remote => true %>
 	</div>
 </div>
+<% end %>

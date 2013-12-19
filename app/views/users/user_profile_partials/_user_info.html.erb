@@ -1,9 +1,12 @@
 <div class = "user_ratings">
   <% if current_user?(@user) && @user.first_rating.blank? %>
-    <%= form_for @user, :html => {:title => "Rate your skills so we can match you to other users"} do |user| %>
+    <div class = "skill_rate_prompt">
+  <p>Set your skill level below:</p>
+  
+</div>
 
-      <%= render 'layouts/ratings/first_rating', :user => user %>
-    <% end %>
+      <%= render 'users/user_edit_partials/first_rating', :user => @user %>
+    
   <% else %>
     <%= render 'layouts/ratings/show_rating', :star_size => "stars", :rating => @user.first_rating,
   :rating_type => "Skill" %>

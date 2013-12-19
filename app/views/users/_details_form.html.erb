@@ -11,7 +11,9 @@
   <ul>
     <% if @current_user.first_rating.blank? %>
       <li>
-        <%= render 'layouts/ratings/first_rating', :user => user %>
+        <p>
+      <%= user.label :first_rating, "Rate your skill level" %></p>
+        <%= render 'users/user_edit_partials/first_rating', :user => @current_user %>
       </li>
     <% end %>
     <li>
@@ -30,7 +32,7 @@
       <%= user.country_select :country, {priority: %w(US)} %>
     </li>
     <li>
-      <%= user.submit 'Find Players' %>
+      <%= user.submit 'Let\'s go!' %>
     </li>
   </ul>
 <% end %>
