@@ -6,6 +6,7 @@
 	<%= user.label :first_rating, "Skills:", :class => "rating_label" %>
 	<div class = "rate_skill" id = "<%= @current_user.first_rating %>">
 		<%= user.hidden_field :first_rating, :value => @current_user.first_rating, :class => "rating" %>
+		<%= hidden_field_tag :edit_type, FIRST_RATING %>
 	</div>
 	<div class = "help_rating">
 		<%= link_to "?", about_skill_users_path, :remote => true %>

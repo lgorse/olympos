@@ -6,6 +6,8 @@ $(function(){
 		case "<%= LOCATION %>":
 		render_user_location();
 		break;
+		case "<%= FIRST_RATING %>":
+		render_user_first_rating();
 		default :
 
 	}
@@ -22,5 +24,10 @@ function render_user_location(){
 	var wrapper = $(".user_info .user_location");
 	wrapper.
 	html("<%= escape_javascript(render 'users/user_profile_partials/user_location') %>");
+}
+
+function render_user_first_rating(){
+	var wrapper = $(".user_info .skill_rate_prompt");
+	wrapper.remove();
 }
 
