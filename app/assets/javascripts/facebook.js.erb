@@ -136,7 +136,7 @@ function signup_user_to_app(response){
 
 function log_user_into_fb(response){
 	if ($("#session_signup").length){
-		$(".custom_login").replaceWith('<a href="#" id = "fb_signup" class="fb round">Log in through Facebook</a>');
+		$(".custom_login").append('<a href="#" id = "fb_signup" class="fb round">Log in through Facebook</a>');
 		$("#fb_signup").click(function(e){
 			e.preventDefault();
 			FB.login(function(login_response){

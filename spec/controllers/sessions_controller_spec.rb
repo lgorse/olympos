@@ -20,7 +20,7 @@ describe SessionsController do
 
 			it "should redirect the user to his home page" do
 				get :new
-				response.should redirect_to home_users_path
+				response.should redirect_to search_users_path
 			end
 
 		end
